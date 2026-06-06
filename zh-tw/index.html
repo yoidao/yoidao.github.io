@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>有道智雲 API 錯誤碼查詢 - 翻譯介面 202/411/108 報錯排查 + 簽章(v3)與競品對照</title>
+<meta name="description" content="呼叫有道智雲翻譯 API 報錯？輸入或點選錯誤碼（101 缺參 / 102 語言 / 103 過長 / 108 應用ID / 110 實例未綁 / 202 簽章驗證失敗 / 203 IP / 206 時間戳 / 207 重放 / 401 欠費 / 411 限流），查 L1 官方含義 + L2 深度真因（v3 簽章 sha256(appKey+input+salt+curtime+appSecret) 的 input 截斷/編碼/順序四坑、curtime 秒級UTC、salt 用 UUID 防重放、依服務綁定實例、QPS 退避），並看有道 vs 百度 / 騰訊雲 / 阿里雲 / Google / DeepL 翻譯 API 橫向對照與 2026 免費額度/QPS 估算。">
+<link rel="canonical" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "有道智雲 API 錯誤碼查詢",
+   "url": "https://yoidao.github.io/zh-tw/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "zh-Hant",
+   "description": "呼叫有道智雲翻譯 API 報錯？輸入或點選錯誤碼（101 缺參 / 102 語言 / 103 過長 / 108 應用ID / 110 實例未綁 / 202 簽章驗證失敗 / 203 IP / 206 時間戳 / 207 重放 / 401 欠費 / 411 限流），查 L1 官方含義 + L2 深度真因（v3 簽章 sha256(appKey+input+salt+curtime+appSecret) 的 input 截斷/編碼/順序四坑、curtime 秒級UTC、salt 用 UUID 防重放、依服務綁定實例、QPS 退避），並看有道 vs 百度 / 騰訊雲 / 阿里雲 / Google / DeepL 翻譯 API 橫向對照與 2026 免費額度/QPS 估算。",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "zh-Hant",
+   "url": "https://yoidao.github.io/zh-tw/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "有道智雲 API 報 101 錯誤碼怎麼解決？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "缺少必填的參數。先確保必填參數齊全，再確認參數書寫（大小寫）是否正確。 v3 文字翻譯必填 8 項：q、from、to、appKey、salt、sign、signType、curtime。少任一個、或欄位名大小寫寫錯都會判 101。v1 老介面沒有 curtime / signType，遷 v3 最常漏這兩個。 對照官方參數表逐個核對必填項；確認 signType=v3、curtime 必傳且為秒級時間戳。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智雲 API 報 102 錯誤碼怎麼解決？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不支援的語言類型。 有道用 zh-CHS（簡體）、zh-CHT（繁體）、en、ja、ko 等代碼；寫成 zh / zh-CN / cn 不被辨識。strict=true 且 from→to 方向不支援時也會報。 對照官方「支援語言」表用準確代碼；不確定方向就 from=auto，並把 strict 留預設 false。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智雲 API 報 103 錯誤碼怎麼解決？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "翻譯文字過長。 單次請求字元數超限（大模型 / 文件類介面 i 限 5000 字元），常因整篇長文未切分就提交。 按句 / 段切分後分批請求；長文件走文件翻譯介面而非文字翻譯。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智雲 API 報 108 錯誤碼怎麼解決？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "應用ID無效。註冊帳號、登入控制台建立應用並完成服務綁定後，可獲得應用ID與應用金鑰。 appKey 複製漏字 / 帶空白；或應用建了但沒綁定對應服務實例。部分情境下簽章逾時（curtime 與伺服器時間相差過大、超約 120s 有效期）也會表現為鑑權失敗。 控制台核對 appKey（去空白）；確認應用已綁定本介面的服務實例；保證 curtime 為當前秒級時間。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智雲 API 報 110 錯誤碼怎麼解決？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "無相關服務的有效實例：應用沒有綁定服務實例，可新建並綁定。註：翻譯結果發音需 TTS 實例，要單獨在控制台建立語音合成實例並綁定後才能用。 一個應用要分別綁定它用到的每種服務實例——文字翻譯、語音合成（TTS）、OCR 各自獨立。只綁了翻譯卻帶 voice 取發音 → 110。 控制台為應用依服務逐個綁定實例（翻譯 / 語音合成 / OCR）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智雲 API 報 111 錯誤碼怎麼解決？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "開發者帳號無效。 帳號未完成開發者認證、狀態異常或被風控。 登入控制台確認帳號狀態與實名 / 開發者認證；必要時開工單。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">語言：<a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <strong>繁體中文</strong></nav>
+<h1>有道智雲 API 錯誤碼 / 翻譯介面報錯排查查詢</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_tw.webp"><img src="/img/cover_tw.png" alt="有道智雲 API 錯誤碼查詢工具示意圖" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>圖：有道智雲 API 錯誤碼查詢（L1 官方含義 + L2 深度真因 + 競品對照）</figcaption></figure>
+<p>呼叫<strong>有道智雲</strong>翻譯 / 詞典 / OCR / TTS 介面回傳了 <code>errorCode</code>？先想清三件事——<strong>是用戶端可自查的參數 / 簽章問題，還是伺服端 / 計費問題</strong>、<strong>簽章字串順序與編碼對不對</strong>、<strong>QPS 有沒有超</strong>。輸入或點選你拿到的<strong>錯誤碼或關鍵字</strong>（如 <code>202</code>、<code>411</code>、<code>108</code>、<code>簽章</code>、<code>限流</code>、<code>時間戳</code>），先看 <strong>L1 官方含義</strong>，再看 <strong>L2 深度真因與排查</strong>，最後對照競品與真實情境。需要官方接入文件可到 <a href="https://yoidao.com/">有道智雲 API 錯誤碼 / 接入指南</a>。</p>
+<input id="q" placeholder="輸入錯誤碼或關鍵字，例如 202 / 411 / 108 / 簽章 / 時間戳 / 限流" autocomplete="off">
+<button id="go">查詢</button>
+<div id="out"></div>
+<h2>第一步：按錯誤碼區間分流（L1·先分清誰的鍋）</h2>
+<p>有道智雲的 <code>errorCode</code> 大致分四段，先按段定位、別瞎試：① <strong>1xx 參數類</strong>（101 缺參 / 102 語種 / 103 過長 / 113 q 空 / 116 strict）——用戶端自查必填與取值；② <strong>2xx 鑑權與簽章類</strong>（108 應用ID / 202 簽章 / 203 IP / 205 平台 / 206 時間戳 / 207 重放）——查簽章字串與憑證；③ <strong>3xx/5xx 伺服端類</strong>（303 / 500 / 902000）——帶 <code>request_id</code> 重試或開工單；④ <strong>4xx 帳號/計費/限流類</strong>（401 欠費 / 411 / 412 限流）——查餘額與 QPS。更完整的接入對照見 <a href="https://yoidao.com/sign">有道 API 簽章(v3)產生與 202 排查</a>。</p>
+<div class="cat"><div class="catbox"><b>參數類</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>用戶端自查：必填欄位齊全（q/from/to/appKey/sign/signType/curtime/salt），語種代碼用 zh-CHS / en / auto，q 非空且不超長，strict 取 true/false。</div></div><div class="catbox"><b>鑑權 / 簽章類</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>簽章字串 appKey+input+salt+curtime+appSecret 做 SHA256；curtime 秒級 UTC、salt 用 UUID 防重放；IP 白名單與應用平台類型對齊。</div></div><div class="catbox"><b>服務 / 實例類</b><span class="cs">110 · 310</span><div>一個應用要依服務逐個綁定實例（翻譯 / 語音合成 TTS / OCR 各自獨立）；領域化翻譯需先在控制台開通。</div></div><div class="catbox"><b>帳號 / 計費 / 限流類</b><span class="cs">401 · 411 · 412</span><div>餘額 / 字元資源包別用盡（401 欠費停服）；QPS（基礎約 100）超限會 411，用戶端做權杖桶限速 + 指數退避。</div></div><div class="catbox"><b>結果 / 解密 / 其它類</b><span class="cs">201 · 303 · 500 · 902000</span><div>伺服端類異常帶 request_id 重試或開工單；加密介面核對 DES / BASE64 / URLDecode 順序。</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有道智雲 API 錯誤碼排查決策流程圖" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">有道智雲 errorCode 排查流程（先按區間分流，再定位用戶端 / 伺服端）</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">收到 errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">按區間分流</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">用戶端可自查 →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx 參數 · 2xx 鑑權簽章</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">伺服端 / 計費 →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx 異常 · 4xx 欠費/限流</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">五類錯誤碼（逐項看官方含義 / 深度真因）</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① 參數類</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② 鑑權 / 簽章</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ 帳號 / 限流</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ 服務 / 實例</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>圖1：有道智雲 errorCode 排查決策流程——先按區間分流，再定位用戶端 / 伺服端</figcaption></figure>
+<h2>第二步：最高頻兩個坑 → 深度真因（L2·簽章 202 與限流 411）</h2>
+<p>關鍵認知：<strong>90% 的有道 API 報錯卡在「簽章 202」和「限流 411」上</strong>。202 不是金鑰錯，多半是 <strong>v3 簽章字串</strong>沒拼對——<code>sign = sha256(應用ID + input + salt + curtime + 應用金鑰)</code>，其中 <code>input</code> 在 q 長度&gt;20 時取「前 10 字元 + q 長度 + 後 10 字元」（按 Unicode 字元、非位元組），≤20 取 q 本身；再疊加 UTF-8 編碼、順序、首尾空白幾個坑。411 則是 QPS 超了方案上限，要用戶端限速 + 退避。下圖是呼叫前自檢面板示意；再往下是競品橫向對照與 2026 估算。</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有道智雲 API 呼叫前自檢面板示意圖" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">呼叫前簽章 / 參數自檢面板示意（綠=已確認 / 紅=易忽略待查）</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">自檢項</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">判斷</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">狀態</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">必填欄位齊全（含 signType=v3、curtime）</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 個必填</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已確認</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">語種代碼合法（zh-CHS / en / auto）</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">對照支援表</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已確認</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">簽章順序 appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·小寫</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已確認</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">input 長文字截斷（前10+長度+後10·按字元）</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">易錯</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">待查</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime 秒級 UTC + salt 用 UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">防 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已確認</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ 方案上限（基礎約 100）</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">易觸 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">待查</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">註：紅 = 最易被忽略的兩點——長文字 input 截斷（202 根因）與 QPS 限流（411）；上線前務必按真實並發壓一遍。</text></svg><figcaption>圖2：呼叫前簽章 / 參數自檢面板示意（綠=已確認 / 紅=易忽略待查）</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_tw.webp"><img src="/img/board_tw.png" alt="有道智雲 API 呼叫前簽章/參數自檢面板紅綠項示意圖" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>圖：先核簽章字串與 curtime / salt，再看 QPS 與實例綁定——簽章 202 與限流 411 最易忽略</figcaption></figure>
+<h2>全部錯誤碼對照表（L1 官方含義 · L2 深度真因）</h2>
+<table id="tbl"></table>
+<h2>競品翻譯 API 橫向對照（簽章 / 錯誤碼 / 免費額度 · 公開口徑）</h2>
+<table class="cmp"><tr><th>服務</th><th>簽章 / 鑑權</th><th>錯誤碼風格</th><th>免費額度（估算）</th><th>QPS / 頻率（估算）</th></tr><tr><td>有道智雲</td><td>SHA256 · v3（appKey+input+salt+curtime+secret）</td><td>3 位數字（101 / 202 / 411）</td><td>各服務有體驗額度</td><td>基礎約 100 QPS（可疊加）</td></tr><tr><td>百度翻譯開放平台</td><td>MD5 32 位小寫（appid+q+salt+金鑰）</td><td>5 萬段（52001 / 54001 / 54003 / 58001）</td><td>標準版免費</td><td>標準 1 / 高級 10 / 尊享 100</td></tr><tr><td>騰訊雲 TMT</td><td>TC3-HMAC-SHA256</td><td>字串（RequestLimitExceeded / NoFreeAmount）</td><td>每月 500 萬字元</td><td>預設 5 次 / 秒</td></tr><tr><td>阿里雲機器翻譯</td><td>HMAC（RPC / ROA 通用簽章）</td><td>字串（如 InvalidApiKey）</td><td>每月免費額度（依版本）</td><td>依 QPS 配額</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP 狀態 + reason（403 / 429）</td><td>每月前 50 萬字元（v2）</td><td>依專案配額</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key 請求標頭</td><td>HTTP（403 / 456 / 429）</td><td>Free 50 萬字元 / 月</td><td>依方案配額</td></tr></table><section class="i4data">
+<h2>翻譯 API 錯誤處理與額度對照（2026 估算）</h2>
+<p>以下為綜合各家官方開放平台文件（有道智雲、百度翻譯、騰訊雲、阿里雲、Google、DeepL）的 <strong>2026 估算</strong>（非各廠商承諾值、非一手實測，僅供參考；額度與 QPS 隨官方政策調整）：</p>
+<table>
+<tr><th>維度</th><th>估算 / 對照</th></tr>
+<tr><td>簽章演算法（鑑權方式）</td><td>有道 <strong>SHA256(v3)</strong> · 百度 <strong>MD5</strong> · 騰訊 <strong>TC3-HMAC-SHA256</strong> · 阿里 HMAC · Google API Key · DeepL Auth-Key 標頭</td></tr>
+<tr><td>免費額度（每月 · 估算）</td><td>騰訊 <strong>500 萬字元</strong> &gt; Google / DeepL 各 <strong>50 萬字元</strong> &gt; 百度標準版免費（QPS=1）；有道各服務有體驗額度，以控制台為準</td></tr>
+<tr><td>QPS / 頻率上限（估算）</td><td>有道基礎約 <strong>100</strong>（可疊加）· 百度 標準 1 / 高級 10 / 尊享 100 · 騰訊預設 <strong>5 次/秒</strong></td></tr>
+<tr><td>單次文字長度上限（估算）</td><td>有道大模型 / 文件介面 <strong>i ≤ 5000 字元</strong> · 騰訊單次 &lt; 6000 字元（超長走文件 / 批次介面）</td></tr>
+<tr><td>最高頻錯誤碼（社群經驗 · 估算）</td><td><strong>202 簽章</strong> &gt; <strong>411 限流</strong> &gt; 108 / 110 綁定 &gt; 206 時間戳 佔報錯大頭</td></tr>
+</table>
+<p><small>估算口徑：信源基線 + 時間外推（綜合有道智雲 / 百度 / 騰訊雲 / 阿里雲 / Google / DeepL 官方開放平台文件 2026 抓取），隨各家政策與版本會變；請以各家最新官方控制台為準。</small></p>
+</section>
+<h2>真實情境速判</h2>
+<ul class="scenes"><li>本機能調、上雲 / 容器後大面積 206：容器時鐘漂移導致 curtime 失效（簽章約 120s 有效）→ 開 NTP 校時、容器同步宿主時鐘，別快取舊 curtime。</li><li>翻譯英文正常、翻譯長中文偶發 202：truncate 把多位元組中文按「位元組」切了 → input 必須按 Unicode 字元數（q&gt;20 取前 10 字元 + q 長度 + 後 10 字元）。</li><li>salt 寫死或自增、第二次呼叫就 207：salt 必須每次隨機（UUID）並刷新 curtime，失敗重試要重新簽章、不能原樣重送。</li><li>壓測瞬時並發大面積 411：基礎 QPS 約 100，超了被限流 → 用戶端權杖桶限速 + 指數退避，或控制台疊加購買 QPS。</li><li>新建應用直接取翻譯發音報 110：翻譯實例綁了、語音合成（TTS）實例沒綁 → 控制台為應用依服務逐個綁定實例。</li><li>呼叫突然全部 401：字元資源包 / 餘額用盡欠費停服 → 儲值或購買資源包並設餘額告警，關鍵鏈路備兜底通道。</li><li>從百度遷來的同坑：簽章拼接前就對 q 做了 URL encode → 有道 v3 用 input（截斷規則）參與簽章、不是先對 q 編碼；應先簽章、發請求時再對 q 做 URL encode。</li></ul><div class="related"><h2>相關</h2><ul><li><a href="https://yoidao.com/">有道智雲 API 錯誤碼 / 接入指南</a></li><li><a href="https://yoidao.com/sign">有道翻譯 API 簽章(v3)產生與 202 排查</a></li><li><a href="https://yoydao.com/">有道 API 開發者工具（姊妹站）</a></li></ul></div></main>
+<footer>錯誤碼與 v3 簽章演算法整理自有道智雲 AI 開放平台官方文件（ai.youdao.com）；競品簽章 / 錯誤碼 / 免費額度對照綜合自百度翻譯開放平台、騰訊雲機器翻譯、阿里雲、Google Cloud Translation、DeepL 官方文件。2026 免費額度 / QPS / 單價為估算、非各廠商承諾值、非一手實測，僅供參考，請以各家最新官方控制台為準。<br>開放原始碼 · MIT License</footer>
+</div>
+<script src="/zh-tw/codes.js"></script><script src="/app.js"></script>
+</body></html>
