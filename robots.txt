@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yoidao.github.io/sitemap.xml
