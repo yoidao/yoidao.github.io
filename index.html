@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>有道智云 API 错误码查询 - 翻译接口 202/411/108 报错排查 + 签名(v3)与竞品对照</title>
+<meta name="description" content="调有道智云翻译 API 报错？输入或点选错误码（101 缺参 / 102 语言 / 103 过长 / 108 应用ID / 110 实例未绑 / 202 签名校验失败 / 203 IP / 206 时间戳 / 207 重放 / 401 欠费 / 411 限流），查 L1 官方含义 + L2 深度真因（v3 签名 sha256(appKey+input+salt+curtime+appSecret) 的 input 截断/编码/顺序四坑、curtime 秒级UTC、salt 用 UUID 防重放、按服务绑定实例、QPS 退避），并看有道 vs 百度 / 腾讯云 / 阿里云 / Google / DeepL 翻译 API 横向对照与 2026 免费额度/QPS 估算。">
+<link rel="canonical" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "有道智云 API 错误码查询",
+   "url": "https://yoidao.github.io/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "zh-Hans",
+   "description": "调有道智云翻译 API 报错？输入或点选错误码（101 缺参 / 102 语言 / 103 过长 / 108 应用ID / 110 实例未绑 / 202 签名校验失败 / 203 IP / 206 时间戳 / 207 重放 / 401 欠费 / 411 限流），查 L1 官方含义 + L2 深度真因（v3 签名 sha256(appKey+input+salt+curtime+appSecret) 的 input 截断/编码/顺序四坑、curtime 秒级UTC、salt 用 UUID 防重放、按服务绑定实例、QPS 退避），并看有道 vs 百度 / 腾讯云 / 阿里云 / Google / DeepL 翻译 API 横向对照与 2026 免费额度/QPS 估算。",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "zh-Hans",
+   "url": "https://yoidao.github.io/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "有道智云 API 报 101 错误码怎么解决？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "缺少必填的参数。先确保必填参数齐全，再确认参数书写（大小写）是否正确。 v3 文本翻译必填 8 项：q、from、to、appKey、salt、sign、signType、curtime。少任意一个、或字段名大小写写错都会判 101。v1 老接口没有 curtime / signType，迁 v3 最常漏这两个。 对照官方参数表逐个核对必填项；确认 signType=v3、curtime 必传且为秒级时间戳。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API 报 102 错误码怎么解决？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不支持的语言类型。 有道用 zh-CHS（简体）、zh-CHT（繁体）、en、ja、ko 等代码；写成 zh / zh-CN / cn 不被识别。strict=true 且 from→to 方向不支持时也会报。 对照官方「支持语言」表用准确代码；不确定方向就 from=auto，并把 strict 留默认 false。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API 报 103 错误码怎么解决？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "翻译文本过长。 单次请求字符数超限（大模型 / 文档类接口 i 限 5000 字符），常因整篇长文未切分就提交。 按句 / 段切分后分批请求；长文档走文档翻译接口而非文本翻译。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API 报 108 错误码怎么解决？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "应用ID无效。注册账号、登录控制台创建应用并完成服务绑定后，可获得应用ID与应用密钥。 appKey 复制漏字 / 带空格；或应用建了但没绑定对应服务实例。部分场景下签名超时（curtime 与服务器时间相差过大、超约 120s 有效期）也会表现为鉴权失败。 控制台核对 appKey（去空格）；确认应用已绑定本接口的服务实例；保证 curtime 为当前秒级时间。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API 报 110 错误码怎么解决？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "无相关服务的有效实例：应用没有绑定服务实例，可新建并绑定。注：翻译结果发音需 TTS 实例，要单独在控制台创建语音合成实例并绑定后才能用。 一个应用要分别绑定它用到的每种服务实例——文本翻译、语音合成（TTS）、OCR 各自独立。只绑了翻译却带 voice 取发音 → 110。 控制台为应用按服务逐个绑定实例（翻译 / 语音合成 / OCR）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API 报 111 错误码怎么解决？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "开发者账号无效。 账号未完成开发者认证、状态异常或被风控。 登录控制台确认账号状态与实名 / 开发者认证；必要时提交工单。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">语言：<strong>简体中文</strong> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a></nav>
+<h1>有道智云 API 错误码 / 翻译接口报错排查查询</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_zh.webp"><img src="/img/cover_zh.png" alt="有道智云 API 错误码查询工具示意图" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>图：有道智云 API 错误码查询（L1 官方含义 + L2 深度真因 + 竞品对照）</figcaption></figure>
+<p>调用<strong>有道智云</strong>翻译 / 词典 / OCR / TTS 接口返回了 <code>errorCode</code>？先想清三件事——<strong>是客户端可自查的参数 / 签名问题，还是服务端 / 计费问题</strong>、<strong>签名串顺序与编码对不对</strong>、<strong>QPS 有没有超</strong>。输入或点选你拿到的<strong>错误码或关键词</strong>（如 <code>202</code>、<code>411</code>、<code>108</code>、<code>签名</code>、<code>限流</code>、<code>时间戳</code>），先看 <strong>L1 官方含义</strong>，再看 <strong>L2 深度真因与排查</strong>，最后对照竞品与真实场景。需要官方接入文档可到 <a href="https://yoidao.com/">有道智云 API 错误码 / 接入指南</a>。</p>
+<input id="q" placeholder="输入错误码或关键词，例如 202 / 411 / 108 / 签名 / 时间戳 / 限流" autocomplete="off">
+<button id="go">查询</button>
+<div id="out"></div>
+<h2>第一步：按错误码区间分流（L1·先分清谁的锅）</h2>
+<p>有道智云的 <code>errorCode</code> 大致分四段，先按段定位、别瞎试：① <strong>1xx 参数类</strong>（101 缺参 / 102 语种 / 103 过长 / 113 q 空 / 116 strict）——客户端自查必填与取值；② <strong>2xx 鉴权与签名类</strong>（108 应用ID / 202 签名 / 203 IP / 205 平台 / 206 时间戳 / 207 重放）——查签名串与凭证；③ <strong>3xx/5xx 服务端类</strong>（303 / 500 / 902000）——带 <code>request_id</code> 重试或提工单；④ <strong>4xx 账号/计费/限流类</strong>（401 欠费 / 411 / 412 限流）——查余额与 QPS。更完整的接入对照见 <a href="https://yoidao.com/sign">有道 API 签名(v3)生成与 202 排查</a>。</p>
+<div class="cat"><div class="catbox"><b>参数类</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>客户端自查：必填字段齐全（q/from/to/appKey/sign/signType/curtime/salt），语种代码用 zh-CHS / en / auto，q 非空且不超长，strict 取 true/false。</div></div><div class="catbox"><b>鉴权 / 签名类</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>签名串 appKey+input+salt+curtime+appSecret 做 SHA256；curtime 秒级 UTC、salt 用 UUID 防重放；IP 白名单与应用平台类型对齐。</div></div><div class="catbox"><b>服务 / 实例类</b><span class="cs">110 · 310</span><div>一个应用要按服务逐个绑定实例（翻译 / 语音合成 TTS / OCR 各自独立）；领域化翻译需先在控制台开通。</div></div><div class="catbox"><b>账号 / 计费 / 限流类</b><span class="cs">401 · 411 · 412</span><div>余额 / 字符资源包别用尽（401 欠费停服）；QPS（基础约 100）超限会 411，客户端做令牌桶限速 + 指数退避。</div></div><div class="catbox"><b>结果 / 解密 / 其它类</b><span class="cs">201 · 303 · 500 · 902000</span><div>服务端类异常带 request_id 重试或提工单；加密接口核对 DES / BASE64 / URLDecode 顺序。</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有道智云 API 错误码排查决策流程图" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">有道智云 errorCode 排查流程（先按区间分流，再定位客户端 / 服务端）</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">收到 errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">按区间分流</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">客户端可自查 →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx 参数 · 2xx 鉴权签名</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">服务端 / 计费 →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx 异常 · 4xx 欠费/限流</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">五类错误码（逐项看官方含义 / 深度真因）</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① 参数类</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② 鉴权 / 签名</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ 账号 / 限流</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ 服务 / 实例</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>图1：有道智云 errorCode 排查决策流程——先按区间分流，再定位客户端 / 服务端</figcaption></figure>
+<h2>第二步：最高频两个坑 → 深度真因（L2·签名 202 与限流 411）</h2>
+<p>关键认知：<strong>90% 的有道 API 报错卡在「签名 202」和「限流 411」上</strong>。202 不是密钥错，多半是 <strong>v3 签名串</strong>没拼对——<code>sign = sha256(应用ID + input + salt + curtime + 应用密钥)</code>，其中 <code>input</code> 在 q 长度&gt;20 时取「前 10 字符 + q 长度 + 后 10 字符」（按 Unicode 字符、非字节），≤20 取 q 本身；再叠加 UTF-8 编码、顺序、首尾空格几个坑。411 则是 QPS 超了套餐上限，要客户端限速 + 退避。下图是调用前自检面板示意；再往下是竞品横向对照与 2026 估算。</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有道智云 API 调用前自检面板示意图" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">调用前签名 / 参数自检面板示意（绿=已确认 / 红=易忽略待查）</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">自检项</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">判断</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">状态</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">必填字段齐全（含 signType=v3、curtime）</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 个必填</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已确认</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">语种代码合法（zh-CHS / en / auto）</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">对照支持表</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已确认</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">签名串顺序 appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·小写</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已确认</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">input 长文本截断（前10+长度+后10·按字符）</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">易错</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">待查</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime 秒级 UTC + salt 用 UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">防 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">已确认</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ 套餐上限（基础约 100）</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">易触 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">待查</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">注：红 = 最易被忽略的两点——长文本 input 截断（202 根因）与 QPS 限流（411）；上线前务必按真实并发压一遍。</text></svg><figcaption>图2：调用前签名 / 参数自检面板示意（绿=已确认 / 红=易忽略待查）</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_zh.webp"><img src="/img/board_zh.png" alt="有道智云 API 调用前签名/参数自检面板红绿项示意图" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>图：先核签名串与 curtime / salt，再看 QPS 与实例绑定——签名 202 与限流 411 最易忽略</figcaption></figure>
+<h2>全部错误码对照表（L1 官方含义 · L2 深度真因）</h2>
+<table id="tbl"></table>
+<h2>竞品翻译 API 横向对照（签名 / 错误码 / 免费额度 · 公开口径）</h2>
+<table class="cmp"><tr><th>服务</th><th>签名 / 鉴权</th><th>错误码风格</th><th>免费额度（估算）</th><th>QPS / 频率（估算）</th></tr><tr><td>有道智云</td><td>SHA256 · v3（appKey+input+salt+curtime+secret）</td><td>3 位数字（101 / 202 / 411）</td><td>各服务有体验额度</td><td>基础约 100 QPS（可叠加）</td></tr><tr><td>百度翻译开放平台</td><td>MD5 32 位小写（appid+q+salt+密钥）</td><td>5 万段（52001 / 54001 / 54003 / 58001）</td><td>标准版免费</td><td>标准 1 / 高级 10 / 尊享 100</td></tr><tr><td>腾讯云 TMT</td><td>TC3-HMAC-SHA256</td><td>字符串（RequestLimitExceeded / NoFreeAmount）</td><td>每月 500 万字符</td><td>默认 5 次 / 秒</td></tr><tr><td>阿里云机器翻译</td><td>HMAC（RPC / ROA 通用签名）</td><td>字符串（如 InvalidApiKey）</td><td>每月免费额度（按版本）</td><td>按 QPS 配额</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP 状态 + reason（403 / 429）</td><td>每月前 50 万字符（v2）</td><td>按项目配额</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key 请求头</td><td>HTTP（403 / 456 / 429）</td><td>Free 50 万字符 / 月</td><td>按计划配额</td></tr></table><section class="i4data">
+<h2>翻译 API 错误处理与额度对照（2026 估算）</h2>
+<p>以下为综合各家官方开放平台文档（有道智云、百度翻译、腾讯云、阿里云、Google、DeepL）的 <strong>2026 估算</strong>（非各厂商承诺值、非一手实测，仅供参考；额度与 QPS 随官方政策调整）：</p>
+<table>
+<tr><th>维度</th><th>估算 / 对照</th></tr>
+<tr><td>签名算法（鉴权方式）</td><td>有道 <strong>SHA256(v3)</strong> · 百度 <strong>MD5</strong> · 腾讯 <strong>TC3-HMAC-SHA256</strong> · 阿里 HMAC · Google API Key · DeepL Auth-Key 头</td></tr>
+<tr><td>免费额度（每月 · 估算）</td><td>腾讯 <strong>500 万字符</strong> &gt; Google / DeepL 各 <strong>50 万字符</strong> &gt; 百度标准版免费（QPS=1）；有道各服务有体验额度，以控制台为准</td></tr>
+<tr><td>QPS / 频率上限（估算）</td><td>有道基础约 <strong>100</strong>（可叠加）· 百度 标准 1 / 高级 10 / 尊享 100 · 腾讯默认 <strong>5 次/秒</strong></td></tr>
+<tr><td>单次文本长度上限（估算）</td><td>有道大模型 / 文档接口 <strong>i ≤ 5000 字符</strong> · 腾讯单次 &lt; 6000 字符（超长走文档 / 批量接口）</td></tr>
+<tr><td>最高频错误码（社区经验 · 估算）</td><td><strong>202 签名</strong> &gt; <strong>411 限流</strong> &gt; 108 / 110 绑定 &gt; 206 时间戳 占报错大头</td></tr>
+</table>
+<p><small>估算口径：信源基线 + 时间外推（综合有道智云 / 百度 / 腾讯云 / 阿里云 / Google / DeepL 官方开放平台文档 2026 抓取），随各家政策与版本会变；请以各家最新官方控制台为准。</small></p>
+</section>
+<h2>真实场景速判</h2>
+<ul class="scenes"><li>本地能调、上云 / 容器后大面积 206：容器时钟漂移导致 curtime 失效（签名约 120s 有效）→ 开 NTP 校时、容器同步宿主时钟，别缓存旧 curtime。</li><li>翻译英文正常、翻译长中文偶发 202：truncate 把多字节中文按「字节」切了 → input 必须按 Unicode 字符数（q&gt;20 取前 10 字符 + q 长度 + 后 10 字符）。</li><li>salt 写死或自增、第二次调用就 207：salt 必须每次随机（UUID）并刷新 curtime，失败重试要重新签名、不能原样重发。</li><li>压测瞬时并发大面积 411：基础 QPS 约 100，超了被限流 → 客户端令牌桶限速 + 指数退避，或控制台叠加购买 QPS。</li><li>新建应用直接取翻译发音报 110：翻译实例绑了、语音合成（TTS）实例没绑 → 控制台为应用按服务逐个绑定实例。</li><li>调用突然全部 401：字符资源包 / 余额用尽欠费停服 → 充值或购买资源包并设余额告警，关键链路备兜底渠道。</li><li>从百度迁来的同坑：签名拼接前就对 q 做了 URL encode → 有道 v3 用 input（截断规则）参与签名、不是先对 q 编码；应先签名、发请求时再对 q 做 URL encode。</li></ul><div class="related"><h2>相关</h2><ul><li><a href="https://yoidao.com/">有道智云 API 错误码 / 接入指南</a></li><li><a href="https://yoidao.com/sign">有道翻译 API 签名(v3)生成与 202 排查</a></li><li><a href="https://yoydao.com/">有道 API 开发者工具（姊妹站）</a></li></ul></div></main>
+<footer>错误码与 v3 签名算法整理自有道智云 AI 开放平台官方文档（ai.youdao.com）；竞品签名 / 错误码 / 免费额度对照综合自百度翻译开放平台、腾讯云机器翻译、阿里云、Google Cloud Translation、DeepL 官方文档。2026 免费额度 / QPS / 单价为估算、非各厂商承诺值、非一手实测，仅供参考，请以各家最新官方控制台为准。<br>开源项目 · MIT License</footer>
+</div>
+<script src="/codes.js"></script><script src="/app.js"></script>
+</body></html>
