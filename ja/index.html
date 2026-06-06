@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>有道智云 API エラーコード検索 - 翻訳 API 202 / 411 / 108 の対処 + v3 署名と競合比較</title>
+<meta name="description" content="有道智云（Youdao Zhiyun）翻訳 API が errorCode を返す？コード（101 必須欠落 / 102 言語 / 103 長すぎ / 108 アプリID / 110 インスタンス未紐付け / 202 署名検証失敗 / 203 IP / 206 タイムスタンプ / 207 リプレイ / 401 残高不足 / 411 レート制限）を検索し、L1 公式の意味 + L2 根本原因（v3 署名 sha256(appKey+input+salt+curtime+appSecret) の input 切り出し / エンコード / 順序の落とし穴、秒単位 UTC の curtime、UUID salt によるリプレイ防止、サービスごとのインスタンス紐付け、QPS バックオフ）を確認、有道 vs 百度 / 騰訊 / 阿里 / Google / DeepL の比較と 2026 無料枠・QPS 推計も。">
+<link rel="canonical" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "有道智云 API エラーコード検索",
+   "url": "https://yoidao.github.io/ja/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "ja",
+   "description": "有道智云（Youdao Zhiyun）翻訳 API が errorCode を返す？コード（101 必須欠落 / 102 言語 / 103 長すぎ / 108 アプリID / 110 インスタンス未紐付け / 202 署名検証失敗 / 203 IP / 206 タイムスタンプ / 207 リプレイ / 401 残高不足 / 411 レート制限）を検索し、L1 公式の意味 + L2 根本原因（v3 署名 sha256(appKey+input+salt+curtime+appSecret) の input 切り出し / エンコード / 順序の落とし穴、秒単位 UTC の curtime、UUID salt によるリプレイ防止、サービスごとのインスタンス紐付け、QPS バックオフ）を確認、有道 vs 百度 / 騰訊 / 阿里 / Google / DeepL の比較と 2026 無料枠・QPS 推計も。",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "ja",
+   "url": "https://yoidao.github.io/ja/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "有道智云 API のエラー 101 はどう直す？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "必須パラメータが不足。まず必須項目を揃え、次に記述（大文字小文字）を確認。 v3 テキスト翻訳の必須は 8 項：q、from、to、appKey、salt、sign、signType、curtime。いずれか欠落や項目名の大小ミスで 101。v1 には curtime / signType が無く、移行時に最も漏れやすい。 公式パラメータ表で必須項目を一つずつ確認；signType=v3 と curtime（秒単位）を必ず付与。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API のエラー 102 はどう直す？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "対応していない言語タイプ。 有道は zh-CHS（簡体）、zh-CHT（繁体）、en、ja、ko 等。zh / zh-CN / cn は不可。strict=true で from→to 方向が非対応でもエラー。 公式「対応言語」表の正確なコードを使用；不明なら from=auto、strict は既定 false。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API のエラー 103 はどう直す？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "翻訳テキストが長すぎる。 1 リクエストの文字数が上限超過（大模型 / ドキュメント系の i は 5000 文字）。長文を分割せず投入しがち。 文 / 段落で分割しバッチ化；長文はドキュメント翻訳エンドポイントへ。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API のエラー 108 はどう直す？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "アプリ ID が無効。アカウント登録、コンソールでアプリ作成とサービス紐付け後に ID と密鑰を取得。 appKey のコピー欠け / 空白混入；またはアプリがサービスインスタンス未紐付け。署名タイムアウト（curtime とサーバ時刻の差が約 120 秒超）も認証失敗として現れることがある。 コンソールで appKey を確認（空白除去）；本エンドポイントのインスタンス紐付けを確認；curtime を現在の秒に。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API のエラー 110 はどう直す？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "有効なサービスインスタンスが無い：アプリがインスタンス未紐付け、新規作成し紐付け可。注：翻訳結果の発音には TTS インスタンスが必要、コンソールで音声合成インスタンスを別途作成・紐付け。 アプリは使う各サービスのインスタンスを個別に紐付け（テキスト翻訳・音声合成 TTS・OCR は別）。翻訳のみ紐付けで voice 発音を取ると 110。 コンソールでサービスごとに紐付け（翻訳 / 音声合成 / OCR）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "有道智云 API のエラー 111 はどう直す？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "開発者アカウントが無効。 開発者認証未完了、状態異常、またはリスク制御。 コンソールでアカウント状態と認証を確認；必要ならチケット。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">言語：<a href="/">简体中文</a> · <a href="/en/">English</a> · <strong>日本語</strong> · <a href="/zh-tw/">繁體中文</a></nav>
+<h1>有道智云 API エラーコード / 翻訳エラー検索</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_ja.webp"><img src="/img/cover_ja.png" alt="有道智云 API エラーコード検索ツールの図" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>図：有道智云 API エラーコード検索（L1 公式の意味 + L2 根本原因 + 競合比較）</figcaption></figure>
+<p><strong>有道智云</strong>の翻訳 / 辞書 / OCR / TTS 呼び出しで <code>errorCode</code> が返った？まず 3 つを固めます——<strong>クライアント側のパラメータ / 署名の問題か、サーバ / 課金の問題か</strong>、<strong>署名文字列の順序とエンコードは正しいか</strong>、<strong>QPS を超えていないか</strong>。受け取った<strong>コードまたはキーワード</strong>（例：<code>202</code>、<code>411</code>、<code>108</code>、<code>署名</code>、<code>レート制限</code>、<code>タイムスタンプ</code>）を検索し、まず <strong>L1 公式の意味</strong>、次に <strong>L2 根本原因と対処</strong>、最後に競合比較と実例を確認。公式の接続ドキュメントは <a href="https://yoidao.com/">有道智云 API エラーコード / 接続ガイド</a> へ。</p>
+<input id="q" placeholder="コードかキーワードを入力（例：202 / 411 / 108 / 署名 / タイムスタンプ）" autocomplete="off">
+<button id="go">検索</button>
+<div id="out"></div>
+<h2>ステップ1：エラーコードの帯で切り分け（L1・誰のせいか）</h2>
+<p>有道智云の <code>errorCode</code> は概ね 4 帯。まず帯で位置づけ、当てずっぽうにしない：① <strong>1xx パラメータ</strong>（101 欠落 / 102 言語 / 103 長すぎ / 113 q 空 / 116 strict）——クライアント側で必須と値を確認；② <strong>2xx 認証・署名</strong>（108 アプリID / 202 署名 / 203 IP / 205 プラットフォーム / 206 タイムスタンプ / 207 リプレイ）——署名文字列と資格情報を確認；③ <strong>3xx/5xx サーバ側</strong>（303 / 500 / 902000）——<code>request_id</code> 付きで再試行かチケット；④ <strong>4xx アカウント/課金/レート制限</strong>（401 残高不足 / 411 / 412）——残高と QPS を確認。詳しい接続比較は <a href="https://yoidao.com/sign">有道 API 署名(v3)生成と 202 のトラブルシュート</a>。</p>
+<div class="cat"><div class="catbox"><b>パラメータ</b><span class="cs">101 . 102 . 103 . 113 . 116</span><div>クライアント側で確認：必須項目が揃っているか（q/from/to/appKey/sign/signType/curtime/salt）、言語コードは zh-CHS / en / auto、q は空でなく長さ内、strict は true/false。</div></div><div class="catbox"><b>認証 / 署名</b><span class="cs">108 . 111 . 202 . 203 . 205 . 206 . 207</span><div>署名文字列 appKey+input+salt+curtime+appSecret を SHA256；curtime は秒単位 UTC、salt は UUID でリプレイ防止；IP 許可リストとアプリのプラットフォーム種別を一致させる。</div></div><div class="catbox"><b>サービス / インスタンス</b><span class="cs">110 . 310</span><div>1 つのアプリは使う各サービスのインスタンスを個別に紐付け（翻訳 / 音声合成 TTS / OCR は別々）；領域翻訳はコンソールで先に有効化。</div></div><div class="catbox"><b>アカウント / 課金 / レート制限</b><span class="cs">401 . 411 . 412</span><div>残高 / 文字パックを切らさない（401 は残高不足で停止）；QPS（基本約 100）超過で 411——トークンバケットのレート制限 + 指数バックオフを。</div></div><div class="catbox"><b>結果 / 復号 / その他</b><span class="cs">201 . 303 . 500 . 902000</span><div>サーバ側の異常は request_id 付きで再試行かチケット；暗号化エンドポイントは DES / BASE64 / URLDecode の順序を確認。</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有道智云 API エラーコード切り分けフロー" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">有道 errorCode 切り分け（まず帯、次にクライアント / サーバ）</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode 受領</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">帯で切り分け</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">クライアントで自己確認 →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx パラメータ . 2xx 認証/署名</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">サーバ / 課金 →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx 異常 . 4xx 残高/制限</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">5 つのエラーコード群（公式の意味 / 根本原因を見る）</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">1. パラメータ</text><text x="32" y="234" fill="#555" font-size="11">101 . 102 . 103 . 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">2. 認証 / 署名</text><text x="206" y="234" fill="#555" font-size="11">108 . 202 . 206 . 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">3. アカウント / 制限</text><text x="380" y="234" fill="#555" font-size="11">401 . 411 . 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">4. サービス / インスタンス</text><text x="554" y="234" fill="#555" font-size="11">110 . 303 . 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>図1：有道智云 errorCode 切り分けフロー——まず帯、次にクライアント / サーバ</figcaption></figure>
+<h2>ステップ2：最頻の二大落とし穴 → 根本原因（L2・署名 202 とレート制限 411）</h2>
+<p>要点：<strong>有道 API エラーの 9 割は「202 署名」と「411 レート制限」で詰まる</strong>。202 は鍵の誤りより、<strong>v3 署名文字列</strong>の組み立てミスが大半——<code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>。<code>input</code> は q が 20 文字超なら「先頭 10 文字 + q の長さ + 末尾 10 文字」（バイトでなく Unicode 文字数で数える）、20 以下なら q そのもの。さらに UTF-8 エンコード・順序・前後の空白の罠が重なる。411 はプランの QPS 超過——クライアント側でレート制限とバックオフを。下図は呼び出し前のセルフチェック盤。さらに下に競合比較と 2026 推計。</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="有道智云 API 呼び出し前セルフチェック盤" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">呼び出し前 署名 / パラメータ セルフチェック盤（緑＝確認済み / 赤＝見落としやすい）</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">チェック項目</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">判断</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">状態</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">必須項目が揃う（signType=v3, curtime 含む）</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">必須 8 項</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">確認済み</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">言語コードが有効（zh-CHS / en / auto）</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">対応表で確認</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">確認済み</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">署名順序 appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256・小文字</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">確認済み</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">長文の input 切り出し（先頭10+長さ+末尾10・文字）</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">間違えやすい</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">要確認</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime 秒単位 UTC + salt は UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">206/207 を防ぐ</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">確認済み</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ プラン上限（基本約 100）</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">411 に当たる</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">要確認</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">注：赤＝最も見落とされる二点——長文の input 切り出し（202 の根因）と QPS 制限（411）。本番前に実際の同時実行で負荷試験を。</text></svg><figcaption>図2：呼び出し前の署名 / パラメータ セルフチェック盤（緑＝確認済み / 赤＝見落としやすい）</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_ja.webp"><img src="/img/board_ja.png" alt="有道智云 API 呼び出し前 署名/パラメータ セルフチェック盤の緑/赤項目の図" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>図：先に署名文字列と curtime / salt、次に QPS とインスタンス紐付け——署名 202 とレート制限 411 が最も見落とされる</figcaption></figure>
+<h2>全エラーコード対照表（L1 公式の意味・L2 根本原因）</h2>
+<table id="tbl"></table>
+<h2>競合翻訳 API 比較（署名 / エラーコード / 無料枠・公開ドキュメント）</h2>
+<table class="cmp"><tr><th>サービス</th><th>署名 / 認証</th><th>エラーコード形式</th><th>無料枠（推計）</th><th>QPS / 頻度（推計）</th></tr><tr><td>有道智云</td><td>SHA256 . v3（appKey+input+salt+curtime+secret）</td><td>3 桁数字（101 / 202 / 411）</td><td>サービスごとに体験枠</td><td>基本約 100 QPS（追加可）</td></tr><tr><td>百度翻訳</td><td>MD5 32 桁小文字（appid+q+salt+密鑰）</td><td>5 万番台（52001 / 54001 / 54003 / 58001）</td><td>標準版無料</td><td>標準 1 / 上級 10 / 尊享 100</td></tr><tr><td>騰訊云 TMT</td><td>TC3-HMAC-SHA256</td><td>文字列（RequestLimitExceeded / NoFreeAmount）</td><td>毎月 500 万文字</td><td>既定 5 回 / 秒</td></tr><tr><td>阿里云 機械翻訳</td><td>HMAC（RPC / ROA 共通署名）</td><td>文字列（例 InvalidApiKey）</td><td>毎月無料枠（版による）</td><td>QPS 配分による</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP ステータス + reason（403 / 429）</td><td>毎月先頭 50 万文字（v2）</td><td>プロジェクト配分</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key ヘッダ</td><td>HTTP（403 / 456 / 429）</td><td>Free 50 万文字 / 月</td><td>プラン配分</td></tr></table><section class="i4data">
+<h2>翻訳 API のエラー処理と枠の対照（2026 推計）</h2>
+<p>以下は各社の公式オープンプラットフォームドキュメント（有道智云、百度、騰訊云、阿里云、Google、DeepL）から合成した <strong>2026 年の推計</strong>です（各社の確約値でも一次測定でもなく、参考用。枠と QPS は各社方針で変動）：</p>
+<table>
+<tr><th>項目</th><th>推計 / 対照</th></tr>
+<tr><td>署名アルゴリズム（認証）</td><td>有道 <strong>SHA256(v3)</strong> . 百度 <strong>MD5</strong> . 騰訊 <strong>TC3-HMAC-SHA256</strong> . 阿里 HMAC . Google API Key . DeepL Auth-Key ヘッダ</td></tr>
+<tr><td>無料枠（毎月・推計）</td><td>騰訊 <strong>500 万文字</strong> &gt; Google / DeepL 各 <strong>50 万文字</strong> &gt; 百度 標準版無料（QPS=1）；有道はサービスごとに体験枠、コンソール準拠</td></tr>
+<tr><td>QPS / 頻度上限（推計）</td><td>有道 基本約 <strong>100</strong>（追加可）. 百度 標準 1 / 上級 10 / 尊享 100 . 騰訊 既定 <strong>5 回/秒</strong></td></tr>
+<tr><td>1 回の文字数上限（推計）</td><td>有道 大模型 / ドキュメント <strong>i ≤ 5000 文字</strong> . 騰訊 1 回 &lt; 6000 文字（超長文はドキュメント / バッチ）</td></tr>
+<tr><td>最頻エラーコード（コミュニティ・推計）</td><td><strong>202 署名</strong> &gt; <strong>411 レート制限</strong> &gt; 108 / 110 紐付け &gt; 206 タイムスタンプ が大半</td></tr>
+</table>
+<p><small>推計の根拠：信頼できる出典 + 時間外挿（有道智云 / 百度 / 騰訊云 / 阿里云 / Google / DeepL の公式ドキュメント 2026 取得）。各社の方針とバージョンで変動。各社の最新公式コンソールを基準に。</small></p>
+</section>
+<h2>実例・クイック判定</h2>
+<ul class="scenes"><li>ローカルは通る、クラウド / コンテナ移行後に大量 206：コンテナの時計ずれで curtime が無効（署名は約 120 秒有効）→ NTP で時刻同期、コンテナをホスト時計に同期、古い curtime をキャッシュしない。</li><li>英語は正常、長い中国語で時々 202：truncate がマルチバイト中国語を「バイト」で切っている → input は Unicode 文字数で数える（q>20 は先頭 10 文字 + q の長さ + 末尾 10 文字）。</li><li>salt を固定 / 連番にして 2 回目で 207：salt は毎回ランダム（UUID）にして curtime を更新；再試行は必ず再署名し、そのまま再送しない。</li><li>負荷試験で大量 411：基本 QPS は約 100、超えると制限 → クライアントでトークンバケットのレート制限 + 指数バックオフ、またはコンソールで QPS を追加購入。</li><li>新規アプリで翻訳の発音を取って 110：翻訳インスタンスは紐付け済みだが音声合成（TTS）インスタンス未紐付け → コンソールでサービスごとに紐付け。</li><li>急に全部 401：文字パック / 残高が尽きて停止 → チャージかパック購入と残高アラート設定、重要経路には代替チャネルを。</li><li>百度から持ち込んだ同じ罠：署名作成前に q を URL エンコード → 有道 v3 は input（切り出し規則）を署名に使う、先に q をエンコードしない；先に署名、送信時に q を URL エンコード。</li></ul><div class="related"><h2>関連</h2><ul><li><a href="https://yoidao.com/">有道智云 API エラーコード / 接続ガイド</a></li><li><a href="https://yoidao.com/sign">有道 API 署名(v3)生成と 202 トラブルシュート</a></li><li><a href="https://yoydao.com/">有道 API 開発者ツール（姉妹サイト）</a></li></ul></div></main>
+<footer>エラーコードと v3 署名アルゴリズムは有道智云 AI オープンプラットフォーム公式ドキュメント（ai.youdao.com）より整理。競合の署名 / エラーコード / 無料枠の比較は百度翻訳オープンプラットフォーム、騰訊云 TMT、阿里云、Google Cloud Translation、DeepL の公式ドキュメントから。2026 の無料枠 / QPS / 単価は推計であり、各社の確約値でも一次測定でもありません。参考用、各社の最新公式コンソールを基準にしてください。<br>オープンソース · MIT License</footer>
+</div>
+<script src="/ja/codes.js"></script><script src="/app.js"></script>
+</body></html>
