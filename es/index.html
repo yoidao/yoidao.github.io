@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Códigos de error de la API de Youdao Zhiyun - resolver 202/411/108 de la API de traducción + firma v3 y rivales</title>
+<meta name="description" content="¿La API de traducción de Youdao (Zhiyun) devuelve un errorCode? Busca el código (101 falta parámetro / 102 idioma / 103 demasiado largo / 108 ID de app / 110 instancia sin vincular / 202 firma fallida / 203 IP / 206 timestamp / 207 repetición / 401 saldo / 411 límite de tasa) para ver el significado oficial L1 y la causa raíz L2: la firma v3 sha256(appKey+input+salt+curtime+appSecret), los fallos de truncado/codificación/orden del input, curtime UTC en segundos, salt UUID anti-repetición, vinculación de instancia por servicio y backoff de QPS, con una comparación Youdao vs Baidu/Tencent/Alibaba/Google/DeepL y estimaciones 2026 de cuota gratuita y QPS.">
+<link rel="canonical" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Búsqueda de códigos de error de la API de Youdao Zhiyun",
+   "url": "https://yoidao.github.io/es/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "es",
+   "description": "¿La API de traducción de Youdao (Zhiyun) devuelve un errorCode? Busca el código (101 falta parámetro / 102 idioma / 103 demasiado largo / 108 ID de app / 110 instancia sin vincular / 202 firma fallida / 203 IP / 206 timestamp / 207 repetición / 401 saldo / 411 límite de tasa) para ver el significado oficial L1 y la causa raíz L2: la firma v3 sha256(appKey+input+salt+curtime+appSecret), los fallos de truncado/codificación/orden del input, curtime UTC en segundos, salt UUID anti-repetición, vinculación de instancia por servicio y backoff de QPS, con una comparación Youdao vs Baidu/Tencent/Alibaba/Google/DeepL y estimaciones 2026 de cuota gratuita y QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "es",
+   "url": "https://yoidao.github.io/es/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "¿Cómo resolver el error 101 de la API de Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Falta un parámetro obligatorio. Asegura los obligatorios y revisa la escritura (mayúsculas/minúsculas). v3 exige 8: q、from、to、appKey、salt、sign、signType、curtime. Falta uno o un nombre mal escrito = 101; v1 no tenía curtime / signType (lo más omitido al migrar). Coteja la tabla oficial de parámetros; confirma signType=v3 y curtime (timestamp en segundos) presentes."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo resolver el error 102 de la API de Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tipo de idioma no admitido. Youdao usa zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn no se reconocen. Con strict=true y dirección no admitida también falla. Usa el código exacto de la tabla oficial; si dudas, from=auto y strict por defecto (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo resolver el error 103 de la API de Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Texto a traducir demasiado largo. Se supera el límite de caracteres por petición (interfaces de modelo/documento i ≤ 5000) al enviar un texto largo sin trocear. Trocea por frase / párrafo y envía por lotes; los documentos largos van por la interfaz de traducción de documentos."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo resolver el error 108 de la API de Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ID de app no válido. Registra la cuenta, crea la app en la consola y vincula el servicio para obtener appKey y appSecret. appKey con caracteres perdidos / espacios; o app sin la instancia del servicio. A veces la firma caduca (curtime muy lejos de la hora del servidor, ~120s) y se ve como fallo de auth. Verifica el appKey (sin espacios); confirma la instancia vinculada; asegura curtime en segundos actual."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo resolver el error 110 de la API de Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sin instancia válida del servicio: la app no vinculó instancia, créala y vincúlala. La pronunciación requiere instancia TTS aparte. Cada app vincula una instancia por servicio — traducción / TTS / OCR independientes. Vincular solo traducción y pedir voice → 110. Vincula en la consola cada instancia por servicio (traducción / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "¿Cómo resolver el error 111 de la API de Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Cuenta de desarrollador no válida. Cuenta sin verificación de desarrollador, estado anómalo o bajo control de riesgo. Revisa el estado y la verificación real / de desarrollador en la consola; abre ticket si hace falta."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Idioma: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <strong>Español</strong> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Códigos de error de la API de Youdao Zhiyun / diagnóstico de la API de traducción</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_es.webp"><img src="/img/cover_es.png" alt="ilustración de la herramienta de búsqueda de códigos de error de la API de Youdao Zhiyun" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Fig: búsqueda de códigos de error de la API de Youdao Zhiyun (L1 oficial + L2 causa raíz + comparación)</figcaption></figure>
+<p>¿La interfaz de traducción / diccionario / OCR / TTS de <strong>Youdao Zhiyun</strong> devolvió un <code>errorCode</code>? Aclara tres cosas primero: <strong>¿es un problema de parámetro/firma que el cliente puede revisar, o del servidor/facturación?</strong>, <strong>¿el orden y la codificación de la cadena de firma son correctos?</strong> y <strong>¿se superó el QPS?</strong>. Escribe el <strong>código de error o palabra clave</strong> (p. ej. <code>202</code>, <code>411</code>, <code>108</code>, <code>firma</code>, <code>límite</code>, <code>timestamp</code>): primero el <strong>significado oficial L1</strong>, luego la <strong>causa raíz y el diagnóstico L2</strong>, y por último la comparación con rivales y casos reales. La documentación oficial está en <a href="https://yoidao.com/">la guía de integración / códigos de error de Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="Escribe un código o palabra clave, p. ej. 202 / 411 / 108 / firma / timestamp / límite" autocomplete="off">
+<button id="go">Buscar</button>
+<div id="out"></div>
+<h2>Paso 1: clasifica por rango de código (L1, primero de quién es el fallo)</h2>
+<p>El <code>errorCode</code> de Youdao Zhiyun se divide en cuatro tramos; ubícalo por tramo antes de probar a ciegas: ① <strong>1xx parámetros</strong> (101 falta / 102 idioma / 103 largo / 113 q vacío / 116 strict) — revisa obligatorios y valores en el cliente; ② <strong>2xx auth y firma</strong> (108 ID / 202 firma / 203 IP / 205 plataforma / 206 timestamp / 207 repetición) — revisa la cadena de firma y credenciales; ③ <strong>3xx/5xx servidor</strong> (303 / 500 / 902000) — reintenta con <code>request_id</code> o abre ticket; ④ <strong>4xx cuenta/facturación/límite</strong> (401 saldo / 411 / 412) — revisa saldo y QPS. Más detalle en <a href="https://yoidao.com/sign">generación de firma v3 y diagnóstico del 202</a>.</p>
+<div class="cat"><div class="catbox"><b>Parámetros</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>Revisión en el cliente: campos obligatorios completos (q/from/to/appKey/sign/signType/curtime/salt), códigos de idioma zh-CHS / en / auto, q no vacío ni demasiado largo, strict en true/false.</div></div><div class="catbox"><b>Auth / firma</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>Firma SHA256 de appKey+input+salt+curtime+appSecret; curtime UTC en segundos, salt UUID anti-repetición; lista blanca de IP alineada con el tipo de plataforma.</div></div><div class="catbox"><b>Servicio / instancia</b><span class="cs">110 · 310</span><div>Cada app vincula una instancia por servicio (traducción / TTS / OCR independientes); la traducción por dominio se activa antes en la consola.</div></div><div class="catbox"><b>Cuenta / facturación / límite</b><span class="cs">401 · 411 · 412</span><div>No agotes saldo / paquete de caracteres (401 corta el servicio); superar el QPS (base ~100) da 411: aplica token bucket + backoff exponencial.</div></div><div class="catbox"><b>Resultado / descifrado / otros</b><span class="cs">201 · 303 · 500 · 902000</span><div>Errores de servidor: reintenta con request_id o abre ticket; en interfaces cifradas revisa el orden DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagrama de decisión del diagnóstico de códigos de error de la API de Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Flujo de diagnóstico del errorCode (primero por tramo, luego cliente / servidor)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">Llega errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">Clasifica por tramo</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">Cliente puede revisar →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx parámetros · 2xx auth-firma</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Servidor / facturación →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx excepción · 4xx saldo/límite</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Cinco categorías (mira oficial L1 / causa raíz L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Parámetros</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Auth / firma</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Cuenta / límite</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Servicio / instancia</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Fig 1: flujo de diagnóstico del errorCode de Youdao Zhiyun — primero por tramo, luego cliente / servidor</figcaption></figure>
+<h2>Paso 2: los dos fallos más frecuentes → causa raíz (L2: firma 202 y límite 411)</h2>
+<p>Clave: <strong>el 90% de los errores de la API de Youdao se atascan en «firma 202» y «límite 411»</strong>. El 202 no suele ser una clave incorrecta, sino una <strong>cadena de firma v3</strong> mal construida — <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, donde <code>input</code> con q&gt;20 toma «primeros 10 caracteres + longitud de q + últimos 10 caracteres» (por caracteres Unicode, no bytes), y ≤20 toma q. Súmale codificación UTF-8, orden y espacios. El 411 es QPS por encima del plan: aplica limitación de tasa + backoff en el cliente. Abajo, el panel de autoverificación y luego la comparación y las estimaciones 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ilustración del panel de autoverificación antes de llamar a la API de Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Panel de autoverificación de firma / parámetros (verde = confirmado / rojo = fácil de olvidar)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Ítem</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Juicio</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Estado</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Campos obligatorios completos (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 obligatorios</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Confirmado</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Códigos de idioma válidos (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">vs tabla</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Confirmado</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Orden de firma appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·minús.</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Confirmado</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Truncado de input largo (10+long+10·por caracteres)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">error común</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Revisar</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC en segundos + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">evita 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Confirmado</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ límite del plan (base ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">provoca 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Revisar</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Nota: en rojo, los dos más olvidados — truncado del input largo (causa del 202) y límite de QPS (411); antes de producción, haz una prueba de carga con concurrencia real.</text></svg><figcaption>Fig 2: panel de autoverificación de firma / parámetros antes de llamar (verde = confirmado / rojo = fácil de olvidar)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_es.webp"><img src="/img/board_es.png" alt="ilustración del panel de autoverificación de firma/parámetros de la API de Youdao Zhiyun" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Fig: revisa primero la cadena de firma con curtime / salt, luego QPS y vinculación de instancia — el 202 y el 411 son los más olvidados</figcaption></figure>
+<h2>Tabla completa de códigos de error (L1 oficial · L2 causa raíz)</h2>
+<table id="tbl"></table>
+<h2>Comparación de APIs de traducción rivales (firma / códigos / cuota gratuita · datos públicos)</h2>
+<table class="cmp"><tr><th>Servicio</th><th>Firma / auth</th><th>Estilo de código</th><th>Cuota gratuita (est.)</th><th>QPS / frecuencia (est.)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 dígitos (101 / 202 / 411)</td><td>Cuota de prueba por servicio</td><td>Base ~100 QPS (ampliable)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 minús. (appid+q+salt+clave)</td><td>5 dígitos (52001 / 54001 / 54003 / 58001)</td><td>Estándar gratis</td><td>Estándar 1 / Avanzado 10 / Premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>Cadena (RequestLimitExceeded / NoFreeAmount)</td><td>5 M caracteres/mes</td><td>5 por segundo por defecto</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (firma común RPC / ROA)</td><td>Cadena (p. ej. InvalidApiKey)</td><td>Cuota gratis mensual (por versión)</td><td>Por cuota de QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>Estado HTTP + reason (403 / 429)</td><td>500k caracteres/mes (v2)</td><td>Por cuota del proyecto</td></tr><tr><td>DeepL API</td><td>Cabecera DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k caracteres/mes</td><td>Por plan</td></tr></table><section class="i4data">
+<h2>Manejo de errores y cuotas de APIs de traducción (estimación 2026)</h2>
+<p>Estimación <strong>2026</strong> a partir de la documentación oficial de cada plataforma (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): no son valores garantizados ni medidos de primera mano, solo de referencia; las cuotas y el QPS cambian según la política oficial:</p>
+<table>
+<tr><th>Dimensión</th><th>Estimación / comparación</th></tr>
+<tr><td>Algoritmo de firma (auth)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL cabecera Auth-Key</td></tr>
+<tr><td>Cuota gratuita (mes · est.)</td><td>Tencent <strong>5 M caracteres</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu estándar gratis (QPS=1); Youdao con cuota de prueba por servicio, según consola</td></tr>
+<tr><td>Límite de QPS / frecuencia (est.)</td><td>Youdao base ~<strong>100</strong> (ampliable) · Baidu estándar 1 / avanzado 10 / premium 100 · Tencent <strong>5/s</strong></td></tr>
+<tr><td>Longitud máx. por texto (est.)</td><td>Youdao modelo / documento <strong>i ≤ 5000</strong> · Tencent &lt; 6000 por petición (más largo por documento / lote)</td></tr>
+<tr><td>Códigos más frecuentes (comunidad · est.)</td><td><strong>202 firma</strong> &gt; <strong>411 límite</strong> &gt; 108 / 110 vinculación &gt; 206 timestamp dominan los fallos</td></tr>
+</table>
+<p><small>Base de la estimación: fuentes de referencia + extrapolación temporal (docs oficiales 2026 de Youdao / Baidu / Tencent / Alibaba / Google / DeepL); cambia según política y versión; consulta la consola oficial vigente.</small></p>
+</section>
+<h2>Diagnóstico rápido por escenario real</h2>
+<ul class="scenes"><li>Funciona en local, pero al subir a la nube/contenedor aparecen muchos 206: deriva del reloj del contenedor que invalida curtime (firma válida ~120s) → activa NTP y sincroniza el reloj con el host; no caches curtime viejos.</li><li>El inglés traduce bien, pero el chino largo da 202 a veces: el truncado cortó el texto multibyte por «bytes» → input debe contar caracteres Unicode (q&gt;20: 10 primeros + longitud + 10 últimos).</li><li>salt fijo o autoincremental y a la segunda llamada un 207: el salt debe ser aleatorio (UUID) cada vez y refrescar curtime; al reintentar, vuelve a firmar.</li><li>Picos de concurrencia en pruebas de carga → muchos 411: QPS base ~100 superado → token bucket + backoff en el cliente, o compra más QPS en la consola.</li><li>App nueva que llama a la pronunciación y da 110: la instancia de traducción está vinculada pero la de TTS no → vincula cada instancia por servicio en la consola.</li><li>De repente todo da 401: paquete de caracteres / saldo agotado → recarga y configura alertas de saldo; ten un canal de respaldo en rutas críticas.</li><li>El mismo fallo al migrar de Baidu: codificaste q con URL encode antes de firmar → Youdao v3 firma con input (regla de truncado), no con q codificado; firma primero y codifica q al enviar.</li></ul><div class="related"><h2>Relacionado</h2><ul><li><a href="https://yoidao.com/">Guía de integración / códigos de error de Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">Generación de firma v3 y diagnóstico del 202</a></li><li><a href="https://yoydao.com/">Herramientas de desarrollador de la API de Youdao (sitio hermano)</a></li></ul></div></main>
+<footer>Códigos de error y algoritmo de firma v3 recopilados de la documentación oficial de la plataforma abierta de IA de Youdao Zhiyun (ai.youdao.com); comparación de firma/códigos/cuota de rivales basada en docs oficiales de Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation y DeepL. Las cuotas/QPS/precios 2026 son estimaciones, no valores garantizados ni medidos de primera mano; solo de referencia, consulta la consola oficial vigente de cada proveedor. Página en español: localización LLM desde el 母版 zh/en (no oficial, pendiente de revisión nativa).<br>Proyecto de código abierto · Licencia MIT</footer>
+</div>
+<script src="/es/codes.js"></script><script src="/app.js"></script>
+</body></html>
