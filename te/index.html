@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="te"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Youdao Zhiyun API ఎర్రర్ కోడ్ శోధన - అనువాద API యొక్క 202/411/108 సరిచేయండి + v3 సంతకం & పోటీదారులు</title>
+<meta name="description" content="Youdao (Zhiyun) అనువాద API errorCode తిరిగి ఇచ్చిందా? కోడ్‌ను శోధించండి (101 పారామితి లేదు / 102 భాష / 103 చాలా పొడవు / 108 యాప్ ID / 110 ఇన్‌స్టెన్స్ బైండ్ కాలేదు / 202 సంతకం విఫలం / 203 IP / 206 టైమ్‌స్టాంప్ / 207 రీప్లే / 401 బ్యాలెన్స్ / 411 రేటు పరిమితి) — L1 అధికారిక అర్థం మరియు L2 మూల కారణం: v3 సంతకం sha256(appKey+input+salt+curtime+appSecret), input కట్/ఎన్‌కోడింగ్/క్రమ ఉచ్చులు, సెకన్లలో UTC curtime, రీప్లే-నిరోధక UUID salt, సేవకొక్క ఇన్‌స్టెన్స్ బైండింగ్ మరియు QPS backoff; Youdao vs Baidu/Tencent/Alibaba/Google/DeepL పోలిక మరియు 2026 ఉచిత కోటా & QPS అంచనాలతో.">
+<link rel="canonical" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Youdao Zhiyun API ఎర్రర్ కోడ్ శోధన",
+   "url": "https://yoidao.github.io/te/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "te",
+   "description": "Youdao (Zhiyun) అనువాద API errorCode తిరిగి ఇచ్చిందా? కోడ్‌ను శోధించండి (101 పారామితి లేదు / 102 భాష / 103 చాలా పొడవు / 108 యాప్ ID / 110 ఇన్‌స్టెన్స్ బైండ్ కాలేదు / 202 సంతకం విఫలం / 203 IP / 206 టైమ్‌స్టాంప్ / 207 రీప్లే / 401 బ్యాలెన్స్ / 411 రేటు పరిమితి) — L1 అధికారిక అర్థం మరియు L2 మూల కారణం: v3 సంతకం sha256(appKey+input+salt+curtime+appSecret), input కట్/ఎన్‌కోడింగ్/క్రమ ఉచ్చులు, సెకన్లలో UTC curtime, రీప్లే-నిరోధక UUID salt, సేవకొక్క ఇన్‌స్టెన్స్ బైండింగ్ మరియు QPS backoff; Youdao vs Baidu/Tencent/Alibaba/Google/DeepL పోలిక మరియు 2026 ఉచిత కోటా & QPS అంచనాలతో.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "te",
+   "url": "https://yoidao.github.io/te/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API ఎర్రర్ 101 ను ఎలా పరిష్కరించాలి?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "తప్పనిసరి పారామితి లేదు. ముందు తప్పనిసరివి పూర్తి చేయి, తర్వాత స్పెల్లింగ్ (కేస్) తనిఖీ చేయి. v3 కు 8 అవసరం: q、from、to、appKey、salt、sign、signType、curtime. ఒకటి లేకపోయినా లేదా పేరు తప్పు = 101; v1 లో curtime / signType లేవు (మైగ్రేషన్‌లో అత్యధికంగా మరచిపోతారు). అధికారిక పారామితి పట్టికతో సరిపోల్చు; signType=v3 & curtime (సెకను timestamp) ఉన్నాయని నిర్ధారించు."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API ఎర్రర్ 102 ను ఎలా పరిష్కరించాలి?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "మద్దతు లేని భాషా రకం. Youdao zh-CHS / zh-CHT / en / ja / ko… వాడుతుంది; zh / zh-CN / cn గుర్తించబడవు; strict=true & మద్దతు లేని దిశలో కూడా విఫలం. అధికారిక పట్టిక నుండి ఖచ్చితమైన కోడ్ వాడు; సందేహమైతే from=auto & strict డిఫాల్ట్ (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API ఎర్రర్ 103 ను ఎలా పరిష్కరించాలి?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "అనువాద వచనం చాలా పొడవు. ఒక్కో అభ్యర్థనకు అక్షర పరిమితి దాటింది (మోడల్/పత్ర ఇంటర్‌ఫేస్ i ≤ 5000). వాక్యం / పేరా ప్రకారం విభజించి బ్యాచ్‌గా పంపు; పొడవైన పత్రాలు పత్ర-అనువాద ఇంటర్‌ఫేస్."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API ఎర్రర్ 108 ను ఎలా పరిష్కరించాలి?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "చెల్లని యాప్ ID. ఖాతా నమోదు చేయి, కన్సోల్‌లో యాప్ సృష్టించి సేవను బైండ్ చేయి—appKey & appSecret లభిస్తాయి. appKey లో పోయిన అక్షరాలు / ఖాళీలు; లేదా సేవ ఇన్‌స్టెన్స్ లేని యాప్; కొన్నిసార్లు సంతకం గడువు ముగిసింది (curtime సర్వర్ సమయానికి చాలా దూరం, ~120s). appKey తనిఖీ చేయి (ఖాళీ లేకుండా); బైండ్ ఇన్‌స్టెన్స్ నిర్ధారించు; curtime ప్రస్తుత సెకను."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API ఎర్రర్ 110 ను ఎలా పరిష్కరించాలి?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "చెల్లుబాటయ్యే సేవ ఇన్‌స్టెన్స్ లేదు: యాప్ ఇన్‌స్టెన్స్ బైండ్ చేయలేదు, సృష్టించి బైండ్ చేయి. ఉచ్చారణకు ప్రత్యేక TTS ఇన్‌స్టెన్స్ అవసరం. ప్రతి యాప్ సేవకొక్క ఇన్‌స్టెన్స్ బైండ్ చేస్తుంది - అనువాదం / TTS / OCR వేరు; అనువాదం మాత్రమే బైండ్ చేసి voice అడిగితే → 110. కన్సోల్‌లో సేవకొక్క ఇన్‌స్టెన్స్ బైండ్ చేయి (అనువాదం / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API ఎర్రర్ 111 ను ఎలా పరిష్కరించాలి?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "చెల్లని డెవలపర్ ఖాతా. డెవలపర్ ధృవీకరణ లేని ఖాతా, అసాధారణ స్థితి లేదా రిస్క్ నియంత్రణ. కన్సోల్‌లో స్థితి & నిజమైన / డెవలపర్ ధృవీకరణ చూడు; అవసరమైతే టికెట్."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">భాష: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <strong>తెలుగు</strong> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Youdao Zhiyun API ఎర్రర్ కోడ్‌లు / అనువాద API నిర్ధారణ</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_te.webp"><img src="/img/cover_te.png" alt="Youdao Zhiyun API ఎర్రర్ కోడ్ శోధన సాధనం దృష్టాంతం" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>చిత్రం: Youdao Zhiyun API ఎర్రర్ కోడ్ శోధన (L1 అధికారిక + L2 మూల కారణం + పోలిక)</figcaption></figure>
+<p><strong>Youdao Zhiyun</strong> యొక్క అనువాద / నిఘంటువు / OCR / TTS ఇంటర్‌ఫేస్ <code>errorCode</code> తిరిగి ఇచ్చిందా? ముందు మూడింటిని స్పష్టం చేయండి: <strong>క్లయింట్ తనిఖీ చేయగల పారామితి/సంతక సమస్యా, లేక సర్వర్/బిల్లింగా</strong>, <strong>సంతక స్ట్రింగ్ క్రమం & ఎన్‌కోడింగ్ సరైనదా</strong>, <strong>QPS దాటిందా</strong>. <strong>ఎర్రర్ కోడ్ లేదా కీవర్డ్</strong> నమోదు చేయండి (ఉదా. <code>202</code>, <code>411</code>, <code>108</code>, <code>సంతకం</code>, <code>పరిమితి</code>, <code>టైమ్‌స్టాంప్</code>): ముందు <strong>L1 అధికారిక అర్థం</strong>, తర్వాత <strong>L2 మూల కారణం & నిర్ధారణ</strong>, చివరగా పోటీదారు పోలిక & వాస్తవ సందర్భాలు. అధికారిక పత్రం <a href="https://yoidao.com/">Youdao Zhiyun API ఇంటిగ్రేషన్ గైడ్ / ఎర్రర్ కోడ్‌లు</a>లో.</p>
+<input id="q" placeholder="కోడ్ లేదా కీవర్డ్ నమోదు చేయండి, ఉదా. 202 / 411 / 108 / సంతకం / టైమ్‌స్టాంప్ / పరిమితి" autocomplete="off">
+<button id="go">శోధించు</button>
+<div id="out"></div>
+<h2>దశ 1: కోడ్ పరిధి ప్రకారం వర్గీకరించండి (L1 - ముందు ఎవరి తప్పు)</h2>
+<p>Youdao Zhiyun యొక్క <code>errorCode</code> సుమారు నాలుగు పరిధులుగా విభజింపబడుతుంది; గుడ్డిగా ప్రయత్నించే ముందు స్థానం నిర్ధారించండి: ① <strong>1xx పారామితి</strong> (101 లేదు / 102 భాష / 103 పొడవు / 113 q ఖాళీ / 116 strict) - క్లయింట్ తప్పనిసరి & విలువలు తనిఖీ చేస్తుంది; ② <strong>2xx ప్రామాణీకరణ & సంతకం</strong> (108 ID / 202 సంతకం / 203 IP / 205 వేదిక / 206 టైమ్‌స్టాంప్ / 207 రీప్లే) - సంతక స్ట్రింగ్ & ఆధారాలను తనిఖీ చేయండి; ③ <strong>3xx/5xx సర్వర్</strong> (303 / 500 / 902000) - <code>request_id</code>తో మళ్ళీ లేదా టికెట్; ④ <strong>4xx ఖాతా/బిల్లింగ్/పరిమితి</strong> (401 బ్యాలెన్స్ / 411 / 412) - బ్యాలెన్స్ & QPS తనిఖీ చేయండి. మరిన్ని <a href="https://yoidao.com/sign">v3 సంతక సృష్టి & 202 నిర్ధారణ</a>లో.</p>
+<div class="cat"><div class="catbox"><b>పారామితి</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>క్లయింట్ తనిఖీ: తప్పనిసరి ఫీల్డ్‌లు పూర్తి (q/from/to/appKey/sign/signType/curtime/salt), భాషా కోడ్ zh-CHS / en / auto, q ఖాళీ/చాలా పొడవు కాదు, strict true/false.</div></div><div class="catbox"><b>ప్రామాణీకరణ / సంతకం</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>appKey+input+salt+curtime+appSecret యొక్క SHA256; సెకన్లలో UTC curtime, రీప్లే-నిరోధక UUID salt; IP వైట్‌లిస్ట్ వేదిక రకంతో సరిపోతుంది.</div></div><div class="catbox"><b>సేవ / ఇన్‌స్టెన్స్</b><span class="cs">110 · 310</span><div>ప్రతి యాప్ సేవకొక్క ఇన్‌స్టెన్స్ బైండ్ చేస్తుంది (అనువాదం / TTS / OCR వేరువేరు); డొమైన్ అనువాదం ముందు కన్సోల్‌లో ప్రారంభించండి.</div></div><div class="catbox"><b>ఖాతా / బిల్లింగ్ / పరిమితి</b><span class="cs">401 · 411 · 412</span><div>బ్యాలెన్స్ / అక్షర ప్యాక్ ఖాళీ చేయకండి (401 సేవను ఆపుతుంది); QPS (బేస్ ~100) దాటితే = 411: token bucket + ఎక్స్‌పొనెన్షియల్ backoff.</div></div><div class="catbox"><b>ఫలితం / డీక్రిప్షన్ / ఇతర</b><span class="cs">201 · 303 · 500 · 902000</span><div>సర్వర్ లోపాలు: request_id తో మళ్ళీ లేదా టికెట్; ఎన్‌క్రిప్టెడ్ ఇంటర్‌ఫేస్‌లో DES / BASE64 / URLDecode క్రమం తనిఖీ చేయండి.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API ఎర్రర్ కోడ్ నిర్ధారణ నిర్ణయ చిత్రం" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">errorCode నిర్ధారణ ప్రవాహం (ముందు పరిధి ప్రకారం, తర్వాత క్లయింట్ / సర్వర్)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode అందింది</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">పరిధి ప్రకారం వర్గీకరించు</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">క్లయింట్ తనిఖీ చేయగలదు →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx పారామితి · 2xx ప్రామాణ-సంతకం</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">సర్వర్ / బిల్లింగ్ →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx మినహాయింపు · 4xx బ్యాలెన్స్/పరిమితి</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">ఐదు వర్గాలు (అధికారిక L1 / కారణం L2 చూడండి)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① పారామితి</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② ప్రామాణ / సంతకం</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ ఖాతా / పరిమితి</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ సేవ / ఇన్‌స్టెన్స్</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>చిత్రం 1: Youdao Zhiyun errorCode నిర్ధారణ ప్రవాహం - ముందు పరిధి ప్రకారం, తర్వాత క్లయింట్ / సర్వర్</figcaption></figure>
+<h2>దశ 2: అత్యధికంగా వచ్చే రెండు ఉచ్చులు → మూల కారణం (L2: సంతకం 202 & పరిమితి 411)</h2>
+<p>ముఖ్యం: <strong>Youdao API లోపాలలో 90% «సంతకం 202» & «పరిమితి 411»పై చిక్కుకుంటాయి</strong>. 202 అరుదుగా తప్పు కీ; సాధారణంగా తప్పుగా నిర్మించిన <strong>v3 సంతక స్ట్రింగ్</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, ఇందులో q&gt;20 అయితే <code>input</code> «మొదటి 10 అక్షరాలు + q పొడవు + చివరి 10 అక్షరాలు» తీసుకుంటుంది (బైట్ కాదు, Unicode అక్షరం ప్రకారం), ≤20 అయితే q. దానికి UTF-8 ఎన్‌కోడింగ్, క్రమం & ఖాళీలు జతవుతాయి. 411 అంటే ప్లాన్ కంటే ఎక్కువ QPS: క్లయింట్‌లో రేటు పరిమితి + backoff. కింద స్వీయ-తనిఖీ ప్యానెల్, తర్వాత పోలిక & 2026 అంచనాలు.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API కాల్ చేసే ముందు స్వీయ-తనిఖీ ప్యానెల్ దృష్టాంతం" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">సంతకం / పారామితి స్వీయ-తనిఖీ ప్యానెల్ (ఆకుపచ్చ = నిర్ధారితం / ఎరుపు = సులభంగా తప్పిపోతుంది)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">అంశం</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">తీర్పు</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">స్థితి</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">తప్పనిసరి ఫీల్డ్‌లు పూర్తి (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 తప్పనిసరి</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">నిర్ధారితం</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">భాషా కోడ్ చెల్లుబాటు (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">పట్టికకు వ్యతిరేకం</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">నిర్ధారితం</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">సంతక క్రమం appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·చిన్న</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">నిర్ధారితం</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">పొడవైన input కట్ (10+పొడవు+10·అక్షర ప్రకారం)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">సాధారణ తప్పు</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">తనిఖీ</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC సెకను + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">206/207 నిరోధిస్తుంది</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">నిర్ధారితం</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ ప్లాన్ పరిమితి (బేస్ ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">411 కలిగిస్తుంది</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">తనిఖీ</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">గమనిక: ఎరుపు = అత్యధికంగా తప్పిపోయే రెండు - పొడవైన input కట్ (202 కారణం) & QPS పరిమితి (411); ఉత్పత్తికి ముందు వాస్తవ సమకాలికతతో లోడ్ టెస్ట్ చేయండి.</text></svg><figcaption>చిత్రం 2: కాల్ చేసే ముందు సంతకం / పారామితి స్వీయ-తనిఖీ ప్యానెల్ (ఆకుపచ్చ = నిర్ధారితం / ఎరుపు = సులభంగా తప్పిపోతుంది)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_te.webp"><img src="/img/board_te.png" alt="Youdao Zhiyun API సంతకం/పారామితి స్వీయ-తనిఖీ ప్యానెల్ దృష్టాంతం" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>చిత్రం: ముందు curtime / salt తో సంతక స్ట్రింగ్, తర్వాత QPS & ఇన్‌స్టెన్స్ బైండింగ్ - 202 & 411 అత్యధికంగా తప్పిపోతాయి</figcaption></figure>
+<h2>పూర్తి ఎర్రర్ కోడ్ పట్టిక (L1 అధికారిక · L2 మూల కారణం)</h2>
+<table id="tbl"></table>
+<h2>పోటీ అనువాద API పోలిక (సంతకం / కోడ్‌లు / ఉచిత కోటా · బహిరంగ డేటా)</h2>
+<table class="cmp"><tr><th>సేవ</th><th>సంతకం / ప్రామాణీకరణ</th><th>కోడ్ శైలి</th><th>ఉచిత కోటా (అంచనా)</th><th>QPS / ఫ్రీక్వెన్సీ (అంచనా)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 అంకెలు (101 / 202 / 411)</td><td>సేవకొక్క ట్రయల్ కోటా</td><td>బేస్ ~100 QPS (పెంచవచ్చు)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 చిన్న (appid+q+salt+కీ)</td><td>5 అంకెలు (52001 / 54001 / 54003 / 58001)</td><td>స్టాండర్డ్ ఉచితం</td><td>స్టాండర్డ్ 1 / అడ్వాన్స్‌డ్ 10 / ప్రీమియం 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>స్ట్రింగ్ (RequestLimitExceeded / NoFreeAmount)</td><td>నెలకు 50 లక్షల అక్షరాలు</td><td>డిఫాల్ట్ సెకనుకు 5</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (సాధారణ RPC / ROA సంతకం)</td><td>స్ట్రింగ్ (ఉదా. InvalidApiKey)</td><td>నెలవారీ ఉచిత కోటా (వెర్షన్ ప్రకారం)</td><td>QPS కోటా ప్రకారం</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP స్థితి + reason (403 / 429)</td><td>నెలకు 5 లక్షల అక్షరాలు (v2)</td><td>ప్రాజెక్ట్ కోటా ప్రకారం</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key హెడర్</td><td>HTTP (403 / 456 / 429)</td><td>Free నెలకు 5 లక్షల అక్షరాలు</td><td>ప్లాన్ ప్రకారం</td></tr></table><section class="i4data">
+<h2>అనువాద API లోప నిర్వహణ & కోటా (2026 అంచనా)</h2>
+<p>వేదికల అధికారిక పత్రాల (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL) నుండి <strong>2026</strong> అంచనా: హామీ ఇచ్చిన లేదా ప్రత్యక్షంగా కొలిచిన విలువలు కావు, సూచన కోసమే; కోటా & QPS అధికారిక విధానం ప్రకారం మారతాయి:</p>
+<table>
+<tr><th>పరిమాణం</th><th>అంచనా / పోలిక</th></tr>
+<tr><td>సంతక అల్గోరిథం (ప్రామాణీకరణ)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL Auth-Key హెడర్</td></tr>
+<tr><td>ఉచిత కోటా (నెల · అంచనా)</td><td>Tencent <strong>50 లక్షల అక్షరాలు</strong> &gt; Google / DeepL <strong>5 లక్షలు</strong> &gt; Baidu స్టాండర్డ్ ఉచితం (QPS=1); Youdao సేవకొక్క ట్రయల్ కోటా, కన్సోల్ ప్రకారం</td></tr>
+<tr><td>QPS / ఫ్రీక్వెన్సీ పరిమితి (అంచనా)</td><td>Youdao బేస్ ~<strong>100</strong> (పెంచవచ్చు) · Baidu స్టాండర్డ్ 1 / అడ్వాన్స్‌డ్ 10 / ప్రీమియం 100 · Tencent <strong>5/సె</strong></td></tr>
+<tr><td>ఒక్కో వచనానికి గరిష్ఠ పొడవు (అంచనా)</td><td>Youdao మోడల్ / పత్రం <strong>i ≤ 5000</strong> · Tencent ఒక్కో అభ్యర్థనకు &lt; 6000 (ఎక్కువైతే పత్రం / బ్యాచ్)</td></tr>
+<tr><td>అత్యధికంగా వచ్చే కోడ్‌లు (సంఘం · అంచనా)</td><td><strong>202 సంతకం</strong> &gt; <strong>411 పరిమితి</strong> &gt; 108 / 110 బైండింగ్ &gt; 206 timestamp లోపాలలో ముందంజ</td></tr>
+</table>
+<p><small>అంచనా ఆధారం: సూచన మూలాలు + కాల ఎక్స్‌ట్రాపోలేషన్ (Youdao / Baidu / Tencent / Alibaba / Google / DeepL యొక్క 2026 అధికారిక పత్రం); విధానం & వెర్షన్‌లో మారుతుంది; తాజా అధికారిక కన్సోల్ ప్రామాణికం.</small></p>
+</section>
+<h2>వాస్తవ సందర్భం ప్రకారం వేగవంతమైన నిర్ధారణ</h2>
+<ul class="scenes"><li>లోకల్‌లో పనిచేస్తుంది, కానీ క్లౌడ్/కంటెయినర్‌లో చాలా 206: కంటెయినర్ గడియారం జారి curtime చెల్లనిదిగా చేస్తుంది (సంతకం ~120s) → NTP ప్రారంభించు, గడియారాన్ని హోస్ట్‌తో సింక్ చేయి; పాత curtime కాష్ చేయవద్దు.</li><li>ఇంగ్లీష్ బాగా అనువదిస్తుంది, పొడవైన చైనీస్ కొన్నిసార్లు 202: truncation మల్టీబైట్‌ను «బైట్» ప్రకారం కత్తిరించింది → input Unicode అక్షరాలను లెక్కించాలి (q&gt;20: 10 + పొడవు + 10).</li><li>స్థిర/పెరిగే salt & రెండవ కాల్‌లో 207: salt ప్రతిసారీ యాదృచ్ఛికం (UUID) & curtime రిఫ్రెష్ చేయాలి; retry లో మళ్ళీ సంతకం.</li><li>లోడ్ టెస్ట్‌లో సమకాలిక శిఖరం → చాలా 411: బేస్ QPS ~100 దాటింది → క్లయింట్‌లో token bucket + backoff, లేదా కన్సోల్‌లో QPS కొనండి.</li><li>కొత్త యాప్ ఉచ్చారణ కాల్ చేసి 110 పొందుతుంది: అనువాద ఇన్‌స్టెన్స్ బైండ్, TTS కాదు → కన్సోల్‌లో సేవకొక్క ఇన్‌స్టెన్స్ బైండ్ చేయండి.</li><li>అకస్మాత్తుగా అన్నీ 401: అక్షర ప్యాక్ / బ్యాలెన్స్ ఖాళీ → రీఛార్జ్ & బ్యాలెన్స్ హెచ్చరిక సెట్ చేయండి; కీలక మార్గాల్లో బ్యాకప్ ఛానెల్.</li><li>Baidu నుండి మైగ్రేషన్‌లో అదే ఉచ్చు: సంతకానికి ముందు q ను URL-encode చేశారు → Youdao v3 input తో సంతకం చేస్తుంది (కట్ నియమం), encode చేసిన q కాదు; ముందు సంతకం, పంపేటప్పుడు q encode.</li></ul><div class="related"><h2>సంబంధితం</h2><ul><li><a href="https://yoidao.com/">Youdao Zhiyun API ఇంటిగ్రేషన్ గైడ్ / ఎర్రర్ కోడ్‌లు</a></li><li><a href="https://yoidao.com/sign">v3 సంతక సృష్టి & 202 నిర్ధారణ</a></li><li><a href="https://yoydao.com/">Youdao API డెవలపర్ టూల్స్ (సోదర సైట్)</a></li></ul></div></main>
+<footer>ఎర్రర్ కోడ్‌లు & v3 సంతక అల్గోరిథం Youdao Zhiyun AI ఓపెన్ ప్లాట్‌ఫారం అధికారిక పత్రం (ai.youdao.com) నుండి సంకలనం; పోటీదారు సంతకం/కోడ్/కోటా పోలిక Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation, DeepL అధికారిక పత్రాల ఆధారంగా. 2026 కోటా/QPS/ధరలు అంచనాలు, హామీ ఇచ్చిన లేదా ప్రత్యక్షంగా కొలిచిన విలువలు కావు; సూచన కోసమే, ప్రతి ప్రొవైడర్ యొక్క తాజా అధికారిక కన్సోల్ ప్రామాణికం. తెలుగు పేజీ: zh/en 母版 నుండి LLM స్థానికీకరణ (అనధికారిక, స్థానిక సమీక్ష పెండింగ్).<br>ఓపెన్ సోర్స్ ప్రాజెక్ట్ · MIT లైసెన్స్</footer>
+</div>
+<script src="/te/codes.js"></script><script src="/app.js"></script>
+</body></html>
