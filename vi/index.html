@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tra mã lỗi API Youdao Zhiyun - khắc phục 202/411/108 của API dịch + chữ ký v3 & đối thủ</title>
+<meta name="description" content="API dịch Youdao (Zhiyun) trả về errorCode? Tra mã (101 thiếu tham số / 102 ngôn ngữ / 103 quá dài / 108 ID ứng dụng / 110 chưa gắn instance / 202 chữ ký sai / 203 IP / 206 timestamp / 207 phát lại / 401 số dư / 411 giới hạn tần suất) để xem ý nghĩa chính thức L1 cùng nguyên nhân gốc L2: chữ ký v3 sha256(appKey+input+salt+curtime+appSecret), bẫy cắt/mã hóa/thứ tự của input, curtime UTC theo giây, salt UUID chống phát lại, gắn instance theo dịch vụ và backoff QPS, kèm so sánh Youdao vs Baidu/Tencent/Alibaba/Google/DeepL và ước tính 2026 về hạn mức miễn phí & QPS.">
+<link rel="canonical" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Tra mã lỗi API Youdao Zhiyun",
+   "url": "https://yoidao.github.io/vi/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "vi",
+   "description": "API dịch Youdao (Zhiyun) trả về errorCode? Tra mã (101 thiếu tham số / 102 ngôn ngữ / 103 quá dài / 108 ID ứng dụng / 110 chưa gắn instance / 202 chữ ký sai / 203 IP / 206 timestamp / 207 phát lại / 401 số dư / 411 giới hạn tần suất) để xem ý nghĩa chính thức L1 cùng nguyên nhân gốc L2: chữ ký v3 sha256(appKey+input+salt+curtime+appSecret), bẫy cắt/mã hóa/thứ tự của input, curtime UTC theo giây, salt UUID chống phát lại, gắn instance theo dịch vụ và backoff QPS, kèm so sánh Youdao vs Baidu/Tencent/Alibaba/Google/DeepL và ước tính 2026 về hạn mức miễn phí & QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "vi",
+   "url": "https://yoidao.github.io/vi/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Làm sao khắc phục lỗi 101 của API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Thiếu tham số bắt buộc. Đảm bảo đủ các tham số bắt buộc, rồi kiểm chính tả (chữ hoa/thường). v3 cần 8: q、from、to、appKey、salt、sign、signType、curtime. Thiếu một hoặc sai tên = 101; v1 không có curtime / signType (hay quên nhất khi chuyển). Đối chiếu bảng tham số chính thức; xác nhận có signType=v3 và curtime (timestamp theo giây)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Làm sao khắc phục lỗi 102 của API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Loại ngôn ngữ không được hỗ trợ. Youdao dùng zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn không nhận; strict=true với hướng không hỗ trợ cũng lỗi. Dùng mã chính xác từ bảng chính thức; nếu phân vân, from=auto và strict mặc định (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Làm sao khắc phục lỗi 103 của API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Văn bản dịch quá dài. Vượt giới hạn ký tự mỗi yêu cầu (giao diện mô hình/tài liệu i ≤ 5000). Chia theo câu / đoạn và gửi theo lô; tài liệu dài qua giao diện dịch tài liệu."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Làm sao khắc phục lỗi 108 của API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ID ứng dụng không hợp lệ. Đăng ký tài khoản, tạo app ở bảng điều khiển và gắn dịch vụ để có appKey và appSecret. appKey mất ký tự / có khoảng trắng; hoặc app chưa có instance dịch vụ; đôi khi chữ ký hết hạn (curtime cách giờ máy chủ quá xa, ~120s). Kiểm appKey (bỏ khoảng trắng); xác nhận instance đã gắn; curtime hiện tại theo giây."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Làm sao khắc phục lỗi 110 của API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Không có instance dịch vụ hợp lệ: app chưa gắn instance, hãy tạo và gắn. Phát âm cần instance TTS riêng. Mỗi app gắn một instance theo dịch vụ - dịch / TTS / OCR riêng; chỉ gắn dịch mà gọi voice → 110. Gắn ở bảng điều khiển từng instance theo dịch vụ (dịch / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Làm sao khắc phục lỗi 111 của API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tài khoản nhà phát triển không hợp lệ. Tài khoản chưa xác minh nhà phát triển, trạng thái bất thường hoặc bị kiểm soát rủi ro. Kiểm trạng thái và xác minh thật / nhà phát triển ở bảng điều khiển; mở ticket nếu cần."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Ngôn ngữ: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <strong>Tiếng Việt</strong> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Mã lỗi API Youdao Zhiyun / chẩn đoán API dịch</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_vi.webp"><img src="/img/cover_vi.png" alt="minh họa công cụ tra mã lỗi API Youdao Zhiyun" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Hình: tra mã lỗi API Youdao Zhiyun (L1 chính thức + L2 nguyên nhân gốc + so sánh)</figcaption></figure>
+<p>Giao diện dịch / từ điển / OCR / TTS của <strong>Youdao Zhiyun</strong> trả về <code>errorCode</code>? Làm rõ ba điều trước: <strong>là vấn đề tham số/chữ ký mà client tự kiểm tra được, hay máy chủ/thanh toán</strong>, <strong>thứ tự và mã hóa chuỗi chữ ký có đúng không</strong>, và <strong>QPS có vượt không</strong>. Nhập <strong>mã lỗi hoặc từ khóa</strong> (vd <code>202</code>, <code>411</code>, <code>108</code>, <code>chữ ký</code>, <code>giới hạn</code>, <code>timestamp</code>): trước là <strong>ý nghĩa chính thức L1</strong>, rồi <strong>nguyên nhân gốc và chẩn đoán L2</strong>, cuối là so sánh đối thủ và tình huống thực. Tài liệu chính thức tại <a href="https://yoidao.com/">hướng dẫn tích hợp / mã lỗi Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="Nhập mã hoặc từ khóa, vd 202 / 411 / 108 / chữ ký / timestamp / giới hạn" autocomplete="off">
+<button id="go">Tra cứu</button>
+<div id="out"></div>
+<h2>Bước 1: phân loại theo dải mã (L1 - trước hết lỗi của ai)</h2>
+<p><code>errorCode</code> của Youdao Zhiyun chia thành bốn dải; định vị trước khi thử mò: ① <strong>1xx tham số</strong> (101 thiếu / 102 ngôn ngữ / 103 dài / 113 q rỗng / 116 strict) - client kiểm tra bắt buộc và giá trị; ② <strong>2xx xác thực & chữ ký</strong> (108 ID / 202 chữ ký / 203 IP / 205 nền tảng / 206 timestamp / 207 phát lại) - kiểm tra chuỗi chữ ký và thông tin xác thực; ③ <strong>3xx/5xx máy chủ</strong> (303 / 500 / 902000) - thử lại với <code>request_id</code> hoặc mở ticket; ④ <strong>4xx tài khoản/thanh toán/giới hạn</strong> (401 số dư / 411 / 412) - kiểm tra số dư và QPS. Thêm tại <a href="https://yoidao.com/sign">tạo chữ ký v3 và chẩn đoán 202</a>.</p>
+<div class="cat"><div class="catbox"><b>Tham số</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>Kiểm tra client: đủ trường bắt buộc (q/from/to/appKey/sign/signType/curtime/salt), mã ngôn ngữ zh-CHS / en / auto, q không rỗng/không quá dài, strict true/false.</div></div><div class="catbox"><b>Xác thực / chữ ký</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 của appKey+input+salt+curtime+appSecret; curtime UTC theo giây, salt UUID chống phát lại; whitelist IP khớp loại nền tảng.</div></div><div class="catbox"><b>Dịch vụ / instance</b><span class="cs">110 · 310</span><div>Mỗi app gắn một instance theo dịch vụ (dịch / TTS / OCR riêng); dịch theo lĩnh vực bật trước ở bảng điều khiển.</div></div><div class="catbox"><b>Tài khoản / thanh toán / giới hạn</b><span class="cs">401 · 411 · 412</span><div>Đừng cạn số dư / gói ký tự (401 dừng dịch vụ); QPS (cơ bản ~100) vượt = 411: token bucket + backoff lũy thừa.</div></div><div class="catbox"><b>Kết quả / giải mã / khác</b><span class="cs">201 · 303 · 500 · 902000</span><div>Lỗi máy chủ: thử lại với request_id hoặc ticket; với giao diện mã hóa kiểm thứ tự DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="sơ đồ quyết định chẩn đoán mã lỗi API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Luồng chẩn đoán errorCode (trước theo dải, rồi client / máy chủ)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">Nhận errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">phân loại theo dải</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">Client kiểm được →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx tham số · 2xx xác thực-chữ ký</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Máy chủ / thanh toán →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx ngoại lệ · 4xx số dư/giới hạn</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Năm phân loại (xem chính thức L1 / nguyên nhân L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Tham số</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Xác thực / chữ ký</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Tài khoản / giới hạn</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Dịch vụ / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Hình 1: luồng chẩn đoán errorCode Youdao Zhiyun - trước theo dải, rồi client / máy chủ</figcaption></figure>
+<h2>Bước 2: hai bẫy thường gặp nhất → nguyên nhân gốc (L2: chữ ký 202 và giới hạn 411)</h2>
+<p>Mấu chốt: <strong>90% lỗi API Youdao kẹt ở «chữ ký 202» và «giới hạn 411»</strong>. 202 hiếm khi do khóa sai mà thường là <strong>chuỗi chữ ký v3</strong> ghép sai - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, trong đó <code>input</code> khi q&gt;20 lấy «10 ký tự đầu + độ dài q + 10 ký tự cuối» (theo ký tự Unicode, không phải byte), và q nếu ≤20. Thêm mã hóa UTF-8, thứ tự và khoảng trắng. 411 là QPS vượt gói: giới hạn tần suất + backoff ở client. Bên dưới là bảng tự kiểm, rồi so sánh và ước tính 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="minh họa bảng tự kiểm trước khi gọi API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Bảng tự kiểm chữ ký / tham số (xanh = đã xác nhận / đỏ = dễ bỏ sót)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Mục</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Đánh giá</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Trạng thái</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Đủ trường bắt buộc (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 bắt buộc</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Đã xác nhận</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Mã ngôn ngữ hợp lệ (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">vs bảng</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Đã xác nhận</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Thứ tự chữ ký appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·thường</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Đã xác nhận</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Cắt input dài (10+độ dài+10·theo ký tự)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">hay sai</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Cần kiểm</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC giây + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">tránh 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Đã xác nhận</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ giới hạn gói (cơ bản ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">gây 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Cần kiểm</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Lưu ý: màu đỏ = hai mục dễ bỏ sót nhất - cắt input dài (nguyên nhân 202) và giới hạn QPS (411); trước khi lên production hãy kiểm tải với mức đồng thời thực.</text></svg><figcaption>Hình 2: bảng tự kiểm chữ ký / tham số trước khi gọi (xanh = đã xác nhận / đỏ = dễ bỏ sót)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_vi.webp"><img src="/img/board_vi.png" alt="minh họa bảng tự kiểm chữ ký/tham số API Youdao Zhiyun" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Hình: kiểm chuỗi chữ ký với curtime / salt trước, rồi QPS và gắn instance - 202 và 411 dễ bỏ sót nhất</figcaption></figure>
+<h2>Bảng đầy đủ mã lỗi (L1 chính thức · L2 nguyên nhân gốc)</h2>
+<table id="tbl"></table>
+<h2>So sánh các API dịch đối thủ (chữ ký / mã / hạn mức miễn phí · dữ liệu công khai)</h2>
+<table class="cmp"><tr><th>Dịch vụ</th><th>Chữ ký / xác thực</th><th>Kiểu mã</th><th>Hạn mức miễn phí (ước)</th><th>QPS / tần suất (ước)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 chữ số (101 / 202 / 411)</td><td>Hạn mức thử theo dịch vụ</td><td>Cơ bản ~100 QPS (mua thêm được)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 thường (appid+q+salt+khóa)</td><td>5 chữ số (52001 / 54001 / 54003 / 58001)</td><td>Bản chuẩn miễn phí</td><td>Chuẩn 1 / Cao cấp 10 / Tôn quý 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>Chuỗi (RequestLimitExceeded / NoFreeAmount)</td><td>5 triệu ký tự/tháng</td><td>5 mỗi giây mặc định</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (chữ ký chung RPC / ROA)</td><td>Chuỗi (vd InvalidApiKey)</td><td>Hạn mức miễn phí hằng tháng (theo bản)</td><td>Theo hạn mức QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>Trạng thái HTTP + reason (403 / 429)</td><td>500k ký tự/tháng (v2)</td><td>Theo hạn mức dự án</td></tr><tr><td>DeepL API</td><td>Header DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k ký tự/tháng</td><td>Theo gói</td></tr></table><section class="i4data">
+<h2>Xử lý lỗi và hạn mức của các API dịch (ước tính 2026)</h2>
+<p>Ước tính <strong>2026</strong> dựa trên tài liệu chính thức của các nền tảng (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): không phải giá trị cam kết hay đo trực tiếp, chỉ để tham khảo; hạn mức và QPS thay đổi theo chính sách chính thức:</p>
+<table>
+<tr><th>Khía cạnh</th><th>Ước tính / so sánh</th></tr>
+<tr><td>Thuật toán chữ ký (xác thực)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL header Auth-Key</td></tr>
+<tr><td>Hạn mức miễn phí (tháng · ước)</td><td>Tencent <strong>5 triệu ký tự</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu chuẩn miễn phí (QPS=1); Youdao hạn mức thử theo dịch vụ, theo bảng điều khiển</td></tr>
+<tr><td>Giới hạn QPS / tần suất (ước)</td><td>Youdao cơ bản ~<strong>100</strong> (mua thêm được) · Baidu chuẩn 1 / cao cấp 10 / tôn quý 100 · Tencent <strong>5/giây</strong></td></tr>
+<tr><td>Độ dài tối đa mỗi văn bản (ước)</td><td>Youdao mô hình / tài liệu <strong>i ≤ 5000</strong> · Tencent &lt; 6000 mỗi yêu cầu (dài hơn qua tài liệu / lô)</td></tr>
+<tr><td>Mã hay gặp nhất (cộng đồng · ước)</td><td><strong>202 chữ ký</strong> &gt; <strong>411 giới hạn</strong> &gt; 108 / 110 gắn &gt; 206 timestamp chiếm phần lớn lỗi</td></tr>
+</table>
+<p><small>Cơ sở ước tính: nguồn tham chiếu + ngoại suy theo thời gian (tài liệu chính thức 2026 của Youdao / Baidu / Tencent / Alibaba / Google / DeepL); thay đổi theo chính sách và phiên bản; lấy bảng điều khiển chính thức mới nhất làm chuẩn.</small></p>
+</section>
+<h2>Chẩn đoán nhanh theo tình huống thực</h2>
+<ul class="scenes"><li>Chạy ổn ở local, nhưng nhiều 206 khi lên cloud/container: đồng hồ container lệch khiến curtime hết hiệu lực (chữ ký ~120s) → bật NTP, đồng bộ đồng hồ với host; đừng cache curtime cũ.</li><li>Tiếng Anh dịch tốt, tiếng Trung dài thỉnh thoảng 202: truncation cắt đa byte theo «byte» → input phải đếm ký tự Unicode (q&gt;20: 10 + độ dài + 10).</li><li>salt cố định hoặc tăng dần và 207 ở lần gọi thứ hai: salt phải ngẫu nhiên (UUID) mỗi lần và làm mới curtime; khi retry, ký lại.</li><li>Đỉnh đồng thời khi kiểm tải → nhiều 411: QPS cơ bản ~100 bị vượt → token bucket + backoff ở client, hoặc mua thêm QPS ở bảng điều khiển.</li><li>App mới gọi phát âm và nhận 110: instance dịch đã gắn, instance TTS chưa → gắn từng instance theo dịch vụ ở bảng điều khiển.</li><li>Đột nhiên tất cả 401: gói ký tự / số dư cạn → nạp thêm và đặt cảnh báo số dư; chuẩn bị kênh dự phòng cho luồng quan trọng.</li><li>Bẫy giống khi chuyển từ Baidu: q được URL-encode trước khi ký → Youdao v3 ký bằng input (quy tắc cắt), không phải q đã encode; ký trước, encode q khi gửi.</li></ul><div class="related"><h2>Liên quan</h2><ul><li><a href="https://yoidao.com/">Hướng dẫn tích hợp / mã lỗi Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">Tạo chữ ký v3 và chẩn đoán 202</a></li><li><a href="https://yoydao.com/">Công cụ nhà phát triển API Youdao (trang chị em)</a></li></ul></div></main>
+<footer>Mã lỗi và thuật toán chữ ký v3 tổng hợp từ tài liệu chính thức nền tảng mở AI Youdao Zhiyun (ai.youdao.com); so sánh chữ ký/mã/hạn mức của đối thủ dựa trên tài liệu chính thức của Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation và DeepL. Hạn mức/QPS/giá 2026 là ước tính, không phải giá trị cam kết hay đo trực tiếp; chỉ để tham khảo, lấy bảng điều khiển chính thức mới nhất của từng nhà cung cấp làm chuẩn. Trang tiếng Việt: bản địa hóa LLM từ 母版 zh/en (không chính thức, chờ rà soát người bản ngữ).<br>Dự án mã nguồn mở · Giấy phép MIT</footer>
+</div>
+<script src="/vi/codes.js"></script><script src="/app.js"></script>
+</body></html>
