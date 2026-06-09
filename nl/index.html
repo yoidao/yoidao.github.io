@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Youdao Zhiyun API-foutcodes opzoeken - 202/411/108 van de vertaal-API oplossen + v3-handtekening & concurrenten</title>
+<meta name="description" content="Geeft de Youdao (Zhiyun) vertaal-API een errorCode? Zoek de code op (101 ontbrekende parameter / 102 taal / 103 te lang / 108 app-ID / 110 instantie niet gekoppeld / 202 handtekening mislukt / 203 IP / 206 timestamp / 207 replay / 401 saldo / 411 rate limit) voor de officiele L1-betekenis plus de L2-oorzaak: v3-handtekening sha256(appKey+input+salt+curtime+appSecret), valkuilen van input-truncatie/codering/volgorde, curtime UTC in seconden, UUID-salt tegen replay, instantiekoppeling per dienst en QPS-backoff - met vergelijking Youdao vs Baidu/Tencent/Alibaba/Google/DeepL en 2026-schattingen van gratis quota en QPS.">
+<link rel="canonical" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Youdao Zhiyun API-foutcode opzoeken",
+   "url": "https://yoidao.github.io/nl/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "nl",
+   "description": "Geeft de Youdao (Zhiyun) vertaal-API een errorCode? Zoek de code op (101 ontbrekende parameter / 102 taal / 103 te lang / 108 app-ID / 110 instantie niet gekoppeld / 202 handtekening mislukt / 203 IP / 206 timestamp / 207 replay / 401 saldo / 411 rate limit) voor de officiele L1-betekenis plus de L2-oorzaak: v3-handtekening sha256(appKey+input+salt+curtime+appSecret), valkuilen van input-truncatie/codering/volgorde, curtime UTC in seconden, UUID-salt tegen replay, instantiekoppeling per dienst en QPS-backoff - met vergelijking Youdao vs Baidu/Tencent/Alibaba/Google/DeepL en 2026-schattingen van gratis quota en QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "nl",
+   "url": "https://yoidao.github.io/nl/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Hoe los je Youdao Zhiyun API-fout 101 op?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Verplichte parameter ontbreekt. Vul eerst de verplichte aan, controleer dan de schrijfwijze (hoofdletters). v3 vereist 8: q、from、to、appKey、salt、sign、signType、curtime. Eén ontbreekt of een naam fout = 101; v1 had geen curtime / signType (vaakst vergeten bij migratie). Vergelijk met de officiele parametertabel; bevestig signType=v3 en curtime (timestamp in seconden) aanwezig."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hoe los je Youdao Zhiyun API-fout 102 op?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Niet-ondersteund taaltype. Youdao gebruikt zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn worden niet herkend; bij strict=true en niet-ondersteunde richting faalt het ook. Gebruik de exacte code uit de officiele tabel; bij twijfel from=auto en strict standaard (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hoe los je Youdao Zhiyun API-fout 103 op?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Vertaaltekst te lang. Tekenlimiet per verzoek overschreden (model-/documentinterfaces i ≤ 5000). Splits per zin / alinea en verstuur in batches; lange documenten via de documentvertaalinterface."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hoe los je Youdao Zhiyun API-fout 108 op?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "App-ID ongeldig. Registreer een account, maak de app in de console en koppel de dienst voor appKey en appSecret. appKey met verloren tekens / spaties; of app zonder dienstinstantie; soms verlopen handtekening (curtime te ver van servertijd, ~120s). Controleer de appKey (zonder spaties); bevestig de gekoppelde instantie; curtime actueel in seconden."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hoe los je Youdao Zhiyun API-fout 110 op?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Geen geldige dienstinstantie: de app koppelde geen instantie, maak en koppel er een. Uitspraak vereist een aparte TTS-instantie. Elke app koppelt een instantie per dienst - vertaling / TTS / OCR apart; alleen vertaling koppelen en voice vragen → 110. Koppel in de console per dienst een instantie (vertaling / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hoe los je Youdao Zhiyun API-fout 111 op?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ontwikkelaarsaccount ongeldig. Account zonder ontwikkelaarsverificatie, afwijkende status of risicocontrole. Controleer status en echte / ontwikkelaarsverificatie in de console; ticket indien nodig."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Taal: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <strong>Nederlands</strong> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Youdao Zhiyun API-foutcodes / diagnose van de vertaal-API</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_nl.webp"><img src="/img/cover_nl.png" alt="illustratie van de Youdao Zhiyun API-foutcode-zoektool" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Afb.: Youdao Zhiyun API-foutcodes opzoeken (L1 officieel + L2 oorzaak + vergelijking)</figcaption></figure>
+<p>Gaf de vertaal- / woordenboek- / OCR- / TTS-interface van <strong>Youdao Zhiyun</strong> een <code>errorCode</code>? Verhelder eerst drie dingen: <strong>is het een door de client te checken parameter-/handtekeningprobleem of een server-/factureringsprobleem</strong>, <strong>kloppen de volgorde en codering van de handtekeningstring</strong> en <strong>is de QPS overschreden</strong>. Voer de <strong>foutcode of een trefwoord</strong> in (bijv. <code>202</code>, <code>411</code>, <code>108</code>, <code>handtekening</code>, <code>rate limit</code>, <code>timestamp</code>): eerst de <strong>officiele L1-betekenis</strong>, dan de <strong>L2-oorzaak en diagnose</strong>, tot slot de vergelijking met concurrenten en echte cases. Officiele docs op <a href="https://yoidao.com/">de Youdao Zhiyun API-foutcodes / integratiegids</a>.</p>
+<input id="q" placeholder="Voer een code of trefwoord in, bijv. 202 / 411 / 108 / handtekening / timestamp / rate limit" autocomplete="off">
+<button id="go">Opzoeken</button>
+<div id="out"></div>
+<h2>Stap 1: indelen op codereeks (L1 - eerst van wie is de fout)</h2>
+<p>De <code>errorCode</code> van Youdao Zhiyun valt grofweg in vier reeksen; plaats hem eerst voordat je blind probeert: ① <strong>1xx parameters</strong> (101 ontbreekt / 102 taal / 103 lang / 113 q leeg / 116 strict) - client checkt verplichte velden en waarden; ② <strong>2xx auth & handtekening</strong> (108 ID / 202 handtekening / 203 IP / 205 platform / 206 timestamp / 207 replay) - check de handtekeningstring en credentials; ③ <strong>3xx/5xx server</strong> (303 / 500 / 902000) - opnieuw met <code>request_id</code> of ticket; ④ <strong>4xx account/facturering/limiet</strong> (401 saldo / 411 / 412) - check saldo en QPS. Meer op <a href="https://yoidao.com/sign">v3-handtekening genereren en 202-diagnose</a>.</p>
+<div class="cat"><div class="catbox"><b>Parameters</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>Clientcheck: verplichte velden volledig (q/from/to/appKey/sign/signType/curtime/salt), taalcodes zh-CHS / en / auto, q niet leeg/te lang, strict true/false.</div></div><div class="catbox"><b>Auth / handtekening</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 over appKey+input+salt+curtime+appSecret; curtime UTC in seconden, salt UUID tegen replay; IP-whitelist afgestemd op platformtype.</div></div><div class="catbox"><b>Dienst / instantie</b><span class="cs">110 · 310</span><div>Elke app koppelt een instantie per dienst (vertaling / TTS / OCR apart); domeinvertaling eerst in de console activeren.</div></div><div class="catbox"><b>Account / facturering / limiet</b><span class="cs">401 · 411 · 412</span><div>Verbruik saldo / tekenpakket niet (401 stopt de dienst); QPS (basis ~100) overschreden = 411: token bucket + exponentiele backoff.</div></div><div class="catbox"><b>Resultaat / ontsleuteling / overig</b><span class="cs">201 · 303 · 500 · 902000</span><div>Serverfouten: opnieuw met request_id of ticket; bij versleuteling de volgorde DES / BASE64 / URLDecode checken.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="beslisdiagram voor de diagnose van Youdao Zhiyun API-foutcodes" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Diagnosestroom errorCode (eerst per reeks, dan client / server)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode ontvangen</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">indelen per reeks</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">Client kan checken →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx parameters · 2xx auth-handtekening</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Server / facturering →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx uitzondering · 4xx saldo/limiet</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Vijf categorieen (zie officieel L1 / oorzaak L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Parameters</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Auth / handtekening</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Account / limiet</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Dienst / instantie</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Afb. 1: diagnosestroom van de Youdao Zhiyun errorCode - eerst per reeks, dan client / server</figcaption></figure>
+<h2>Stap 2: de twee meest voorkomende valkuilen → oorzaak (L2: handtekening 202 en limiet 411)</h2>
+<p>Kern: <strong>90% van de Youdao API-fouten blijft hangen op «handtekening 202» en «rate limit 411»</strong>. 202 is zelden een verkeerde sleutel, maar meestal een verkeerd gebouwde <strong>v3-handtekeningstring</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, waar <code>input</code> bij q&gt;20 «eerste 10 tekens + lengte van q + laatste 10 tekens» neemt (per Unicode-teken, niet bytes), en q bij ≤20. Voeg UTF-8-codering, volgorde en spaties toe. 411 is QPS boven het plan: throttle in de client + backoff. Onder staat het zelf-checkpaneel, daarna vergelijking en 2026-schattingen.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="illustratie van het zelf-checkpaneel voor de Youdao Zhiyun API-aanroep" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Zelf-checkpaneel handtekening / parameters (groen = bevestigd / rood = makkelijk vergeten)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Item</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Oordeel</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Status</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Verplichte velden volledig (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 verplicht</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Bevestigd</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Taalcodes geldig (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">vs tabel</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Bevestigd</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Handtekeningvolgorde appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·klein</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Bevestigd</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Truncatie lange input (10+lengte+10·per teken)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">veelgemaakte fout</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Checken</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC in seconden + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">voorkomt 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Bevestigd</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ planlimiet (basis ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">veroorzaakt 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Checken</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Let op: rood = de twee meest vergeten - truncatie van de lange input (oorzaak van 202) en QPS-limiet (411); doe voor productie een loadtest met echte concurrency.</text></svg><figcaption>Afb. 2: zelf-checkpaneel handtekening / parameters voor het aanroepen (groen = bevestigd / rood = makkelijk vergeten)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_nl.webp"><img src="/img/board_nl.png" alt="illustratie van het zelf-checkpaneel handtekening/parameters van de Youdao Zhiyun API" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Afb.: check eerst de handtekeningstring met curtime / salt, dan QPS en instantiekoppeling - 202 en 411 worden het vaakst vergeten</figcaption></figure>
+<h2>Volledige foutcodetabel (L1 officieel · L2 oorzaak)</h2>
+<table id="tbl"></table>
+<h2>Vergelijking concurrerende vertaal-APIs (handtekening / codes / gratis quota · openbare data)</h2>
+<table class="cmp"><tr><th>Dienst</th><th>Handtekening / auth</th><th>Codestijl</th><th>Gratis quota (schatting)</th><th>QPS / frequentie (schatting)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 cijfers (101 / 202 / 411)</td><td>Testquota per dienst</td><td>Basis ~100 QPS (uitbreidbaar)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 klein (appid+q+salt+sleutel)</td><td>5 cijfers (52001 / 54001 / 54003 / 58001)</td><td>Standaard gratis</td><td>Standaard 1 / Geavanceerd 10 / Premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>String (RequestLimitExceeded / NoFreeAmount)</td><td>5 mln tekens/maand</td><td>5 per seconde standaard</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (gemeenschappelijke RPC / ROA-handtekening)</td><td>String (bijv. InvalidApiKey)</td><td>Maandelijkse gratis quota (per versie)</td><td>Per QPS-quota</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP-status + reason (403 / 429)</td><td>500k tekens/maand (v2)</td><td>Per projectquota</td></tr><tr><td>DeepL API</td><td>Header DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k tekens/maand</td><td>Per plan</td></tr></table><section class="i4data">
+<h2>Foutafhandeling en quota van vertaal-APIs (schatting 2026)</h2>
+<p><strong>2026</strong>-schatting op basis van de officiele documentatie van de platforms (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): geen toegezegde of zelf gemeten waarden, alleen ter referentie; quota en QPS veranderen volgens het officiele beleid:</p>
+<table>
+<tr><th>Dimensie</th><th>Schatting / vergelijking</th></tr>
+<tr><td>Handtekeningalgoritme (auth)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL Auth-Key-header</td></tr>
+<tr><td>Gratis quota (maand · schatting)</td><td>Tencent <strong>5 mln tekens</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu standaard gratis (QPS=1); Youdao testquota per dienst, volgens console</td></tr>
+<tr><td>QPS- / frequentielimiet (schatting)</td><td>Youdao basis ~<strong>100</strong> (uitbreidbaar) · Baidu standaard 1 / geavanceerd 10 / premium 100 · Tencent <strong>5/s</strong></td></tr>
+<tr><td>Max. lengte per tekst (schatting)</td><td>Youdao model / document <strong>i ≤ 5000</strong> · Tencent &lt; 6000 per verzoek (langer via document / batch)</td></tr>
+<tr><td>Meest voorkomende codes (community · schatting)</td><td><strong>202 handtekening</strong> &gt; <strong>411 limiet</strong> &gt; 108 / 110 koppeling &gt; 206 timestamp domineren de fouten</td></tr>
+</table>
+<p><small>Schattingsbasis: referentiebronnen + temporele extrapolatie (officiele docs 2026 van Youdao / Baidu / Tencent / Alibaba / Google / DeepL); verandert volgens beleid en versie; de actuele officiele console is leidend.</small></p>
+</section>
+<h2>Snelle diagnose per echt scenario</h2>
+<ul class="scenes"><li>Lokaal werkt het, maar veel 206 in cloud/container: de containerklok loopt af en maakt curtime ongeldig (handtekening ~120s) → activeer NTP, synchroniseer de klok met de host; cache geen oude curtime.</li><li>Engels vertaalt prima, lang Chinees geeft soms 202: de truncatie sneed de multibyte op «bytes» → input moet Unicode-tekens tellen (q&gt;20: 10 + lengte + 10).</li><li>vaste of oplopende salt en een 207 bij de tweede aanroep: salt moet elke keer willekeurig (UUID) zijn en curtime vernieuwen; bij retry opnieuw ondertekenen.</li><li>Concurrentiepieken in een loadtest → veel 411: basis-QPS ~100 overschreden → token bucket + backoff in de client, of QPS bijkopen in de console.</li><li>Nieuwe app roept de uitspraak aan en krijgt 110: de vertaalinstantie is gekoppeld, de TTS-instantie niet → koppel per dienst in de console.</li><li>Opeens alles 401: tekenpakket / saldo op → laad op en stel saldoalerts in; houd een fallback-kanaal op kritieke paden.</li><li>Zelfde valkuil bij migratie van Baidu: q vooraf URL-gecodeerd voor het ondertekenen → Youdao v3 ondertekent met input (truncatieregel), niet met gecodeerde q; teken eerst, codeer q bij het verzenden.</li></ul><div class="related"><h2>Gerelateerd</h2><ul><li><a href="https://yoidao.com/">Youdao Zhiyun API-foutcodes / integratiegids</a></li><li><a href="https://yoidao.com/sign">v3-handtekening genereren en 202-diagnose</a></li><li><a href="https://yoydao.com/">Youdao API-ontwikkelaarstools (zustersite)</a></li></ul></div></main>
+<footer>Foutcodes en v3-handtekeningalgoritme samengesteld uit de officiele documentatie van het Youdao Zhiyun AI-openplatform (ai.youdao.com); vergelijking van handtekening/codes/quota van concurrenten op basis van officiele docs van Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation en DeepL. Quota/QPS/prijzen 2026 zijn schattingen, geen toegezegde of zelf gemeten waarden; alleen ter referentie, de actuele officiele console van elke aanbieder is leidend. Nederlandse pagina: LLM-lokalisatie vanuit het zh/en-母版 (onofficieel, native review volgt).<br>Opensourceproject · MIT-licentie</footer>
+</div>
+<script src="/nl/codes.js"></script><script src="/app.js"></script>
+</body></html>
