@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>بحث رموز أخطاء واجهة Youdao Zhiyun API - إصلاح 202/411/108 لواجهة الترجمة + توقيع v3 والمنافسون</title>
+<meta name="description" content="هل أعادت واجهة ترجمة Youdao (Zhiyun) رمز errorCode؟ ابحث عن الرمز (101 معامل ناقص / 102 لغة / 103 طويل جدًا / 108 معرّف التطبيق / 110 مثيل غير مرتبط / 202 فشل التوقيع / 203 IP / 206 الطابع الزمني / 207 إعادة / 401 الرصيد / 411 حد المعدل) لرؤية المعنى الرسمي L1 والسبب الجذري L2: توقيع v3 sha256(appKey+input+salt+curtime+appSecret)، مزالق قطع/ترميز/ترتيب input، curtime بتوقيت UTC بالثواني، salt من نوع UUID لمنع الإعادة، ربط المثيل لكل خدمة، وتراجع QPS، مع مقارنة Youdao مقابل Baidu/Tencent/Alibaba/Google/DeepL وتقديرات 2026 للحصة المجانية وQPS.">
+<link rel="canonical" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "بحث رموز أخطاء Youdao Zhiyun API",
+   "url": "https://yoidao.github.io/ar/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "ar",
+   "description": "هل أعادت واجهة ترجمة Youdao (Zhiyun) رمز errorCode؟ ابحث عن الرمز (101 معامل ناقص / 102 لغة / 103 طويل جدًا / 108 معرّف التطبيق / 110 مثيل غير مرتبط / 202 فشل التوقيع / 203 IP / 206 الطابع الزمني / 207 إعادة / 401 الرصيد / 411 حد المعدل) لرؤية المعنى الرسمي L1 والسبب الجذري L2: توقيع v3 sha256(appKey+input+salt+curtime+appSecret)، مزالق قطع/ترميز/ترتيب input، curtime بتوقيت UTC بالثواني، salt من نوع UUID لمنع الإعادة، ربط المثيل لكل خدمة، وتراجع QPS، مع مقارنة Youdao مقابل Baidu/Tencent/Alibaba/Google/DeepL وتقديرات 2026 للحصة المجانية وQPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "ar",
+   "url": "https://yoidao.github.io/ar/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "كيف تُحلّ خطأ 101 في Youdao Zhiyun API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "معامل إلزامي ناقص. أكمل الإلزامية أولًا، ثم تحقق من الكتابة (حالة الأحرف). يتطلب v3 ثمانية: q، from، to، appKey، salt، sign، signType، curtime. نقص واحد أو اسم خاطئ = 101؛ لم يكن في v1 curtime / signType (الأكثر إغفالًا عند الانتقال). قارن بجدول المعاملات الرسمي؛ تأكد من وجود signType=v3 وcurtime (طابع بالثواني)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف تُحلّ خطأ 102 في Youdao Zhiyun API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نوع لغة غير مدعوم. يستخدم Youdao zh-CHS / zh-CHT / en / ja / ko…؛ ولا يُتعرّف على zh / zh-CN / cn؛ ومع strict=true واتجاه غير مدعوم يفشل أيضًا. استخدم الرمز الدقيق من الجدول الرسمي؛ عند الشك from=auto وstrict افتراضي (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف تُحلّ خطأ 103 في Youdao Zhiyun API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نص الترجمة طويل جدًا. تجاوز حد الأحرف لكل طلب (واجهات النموذج/المستند i ≤ 5000). قسّم حسب الجملة / الفقرة وأرسل دفعات؛ المستندات الطويلة عبر واجهة ترجمة المستندات."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف تُحلّ خطأ 108 في Youdao Zhiyun API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "معرّف تطبيق غير صالح. سجّل حسابًا، أنشئ التطبيق في وحدة التحكم واربط الخدمة للحصول على appKey وappSecret. appKey بأحرف مفقودة / مسافات؛ أو تطبيق بلا مثيل خدمة؛ أحيانًا توقيع منتهٍ (curtime بعيد عن وقت الخادم، ~120s). تحقق من appKey (بلا مسافات)؛ أكّد المثيل المربوط؛ curtime حالي بالثواني."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف تُحلّ خطأ 110 في Youdao Zhiyun API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "لا مثيل خدمة صالح: لم يربط التطبيق مثيلًا، أنشئ واربط. يحتاج النطق إلى مثيل TTS منفصل. كل تطبيق يربط مثيلًا لكل خدمة - الترجمة / TTS / OCR منفصلة؛ ربط الترجمة فقط وطلب voice → 110. اربط في وحدة التحكم كل مثيل لكل خدمة (الترجمة / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "كيف تُحلّ خطأ 111 في Youdao Zhiyun API؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "حساب مطوّر غير صالح. حساب بلا توثيق مطوّر، أو حالة غير طبيعية، أو ضمن التحكم بالمخاطر. افحص الحالة والتوثيق الحقيقي / المطوّر في وحدة التحكم؛ تذكرة عند الحاجة."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">اللغة: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <strong>العربية</strong> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>رموز أخطاء Youdao Zhiyun API / تشخيص واجهة الترجمة</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_ar.webp"><img src="/img/cover_ar.png" alt="رسم توضيحي لأداة بحث رموز أخطاء Youdao Zhiyun API" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>شكل: بحث رموز أخطاء Youdao Zhiyun API (L1 رسمي + L2 سبب جذري + مقارنة)</figcaption></figure>
+<p>هل أعادت واجهة الترجمة / القاموس / OCR / TTS من <strong>Youdao Zhiyun</strong> رمز <code>errorCode</code>؟ وضّح ثلاثة أمور أولًا: <strong>أهي مشكلة معامل/توقيع يمكن للعميل فحصها، أم مشكلة خادم/فوترة</strong>، <strong>هل ترتيب وترميز سلسلة التوقيع صحيحان</strong>، و<strong>هل تجاوزت QPS</strong>. أدخل <strong>رمز الخطأ أو كلمة مفتاحية</strong> (مثل <code>202</code> و<code>411</code> و<code>108</code> و<code>توقيع</code> و<code>حد</code> و<code>طابع زمني</code>): أولًا <strong>المعنى الرسمي L1</strong>، ثم <strong>السبب الجذري والتشخيص L2</strong>، وأخيرًا مقارنة المنافسين وحالات واقعية. الوثائق الرسمية على <a href="https://yoidao.com/">دليل التكامل / رموز أخطاء Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="أدخل رمزًا أو كلمة مفتاحية، مثل 202 / 411 / 108 / توقيع / طابع زمني / حد" autocomplete="off">
+<button id="go">بحث</button>
+<div id="out"></div>
+<h2>الخطوة 1: صنّف حسب نطاق الرمز (L1 - أولًا خطأ مَن)</h2>
+<p>ينقسم <code>errorCode</code> في Youdao Zhiyun إلى أربعة نطاقات تقريبًا؛ حدّد قبل التجربة العمياء: ① <strong>1xx معاملات</strong> (101 ناقص / 102 لغة / 103 طويل / 113 q فارغ / 116 strict) - يفحص العميل الإلزامي والقيم؛ ② <strong>2xx مصادقة وتوقيع</strong> (108 معرّف / 202 توقيع / 203 IP / 205 منصة / 206 طابع زمني / 207 إعادة) - افحص سلسلة التوقيع وبيانات الاعتماد؛ ③ <strong>3xx/5xx خادم</strong> (303 / 500 / 902000) - أعد المحاولة بـ <code>request_id</code> أو افتح تذكرة؛ ④ <strong>4xx حساب/فوترة/حد</strong> (401 رصيد / 411 / 412) - افحص الرصيد وQPS. المزيد على <a href="https://yoidao.com/sign">توليد توقيع v3 وتشخيص 202</a>.</p>
+<div class="cat"><div class="catbox"><b>معاملات</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>فحص العميل: الحقول الإلزامية كاملة (q/from/to/appKey/sign/signType/curtime/salt)، رموز اللغة zh-CHS / en / auto، q غير فارغ/طويل، strict true/false.</div></div><div class="catbox"><b>مصادقة / توقيع</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 لـ appKey+input+salt+curtime+appSecret؛ curtime بتوقيت UTC بالثواني، salt من UUID لمنع الإعادة؛ قائمة IP البيضاء متوافقة مع نوع المنصة.</div></div><div class="catbox"><b>خدمة / مثيل</b><span class="cs">110 · 310</span><div>كل تطبيق يربط مثيلًا لكل خدمة (الترجمة / TTS / OCR منفصلة)؛ تُفعّل ترجمة المجال في وحدة التحكم أولًا.</div></div><div class="catbox"><b>حساب / فوترة / حد</b><span class="cs">401 · 411 · 412</span><div>لا تستنفد الرصيد / حزمة الأحرف (401 يوقف الخدمة)؛ تجاوز QPS (الأساس ~100) = 411: token bucket + تراجع أسي.</div></div><div class="catbox"><b>نتيجة / فك تشفير / أخرى</b><span class="cs">201 · 303 · 500 · 902000</span><div>أخطاء الخادم: أعد بـ request_id أو تذكرة؛ في الواجهة المشفّرة افحص ترتيب DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مخطط قرار تشخيص رموز أخطاء Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">تدفق تشخيص errorCode (أولًا حسب النطاق ثم العميل / الخادم)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">استُلم errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">صنّف حسب النطاق</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">العميل يمكنه الفحص ←</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx معاملات · 2xx مصادقة-توقيع</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">خادم / فوترة ←</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx استثناء · 4xx رصيد/حد</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">خمس فئات (انظر الرسمي L1 / السبب L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① معاملات</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② مصادقة / توقيع</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ حساب / حد</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ خدمة / مثيل</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>الشكل 1: تدفق تشخيص errorCode في Youdao Zhiyun - أولًا حسب النطاق ثم العميل / الخادم</figcaption></figure>
+<h2>الخطوة 2: أكثر فخّين شيوعًا → السبب الجذري (L2: التوقيع 202 والحد 411)</h2>
+<p>المفتاح: <strong>90% من أخطاء Youdao API تتعطل عند «التوقيع 202» و«الحد 411»</strong>. نادرًا ما يكون 202 مفتاحًا خاطئًا؛ غالبًا <strong>سلسلة توقيع v3</strong> مبنية خطأ - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>، حيث يأخذ <code>input</code> عند q&gt;20 «أول 10 أحرف + طول q + آخر 10 أحرف» (حسب أحرف Unicode لا البايتات)، وq إذا ≤20. يُضاف ترميز UTF-8 والترتيب والمسافات. أما 411 فهو QPS فوق الباقة: قيّد المعدل + تراجع لدى العميل. أدناه لوحة الفحص الذاتي ثم المقارنة وتقديرات 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="رسم توضيحي للوحة الفحص الذاتي قبل استدعاء Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">لوحة الفحص الذاتي للتوقيع / المعاملات (أخضر = مؤكد / أحمر = يُغفل بسهولة)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">البند</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">الحكم</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">الحالة</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">الحقول الإلزامية كاملة (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 إلزامية</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">مؤكد</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">رموز اللغة صالحة (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">مقابل الجدول</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">مؤكد</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ترتيب التوقيع appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·صغيرة</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">مؤكد</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">قطع input الطويل (10+الطول+10·حسب الحرف)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">خطأ شائع</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">افحص</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC بالثواني + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">يمنع 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">مؤكد</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ حد الباقة (الأساس ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">يسبب 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">افحص</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">ملاحظة: بالأحمر الأكثر إغفالًا - قطع input الطويل (سبب 202) وحد QPS (411)؛ قبل الإنتاج نفّذ اختبار حمل بتزامن حقيقي.</text></svg><figcaption>الشكل 2: لوحة الفحص الذاتي للتوقيع / المعاملات قبل الاستدعاء (أخضر = مؤكد / أحمر = يُغفل بسهولة)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_ar.webp"><img src="/img/board_ar.png" alt="رسم توضيحي للوحة الفحص الذاتي للتوقيع/المعاملات في Youdao Zhiyun API" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>شكل: افحص سلسلة التوقيع مع curtime / salt أولًا، ثم QPS وربط المثيل - 202 و411 الأكثر إغفالًا</figcaption></figure>
+<h2>جدول رموز الأخطاء الكامل (L1 رسمي · L2 السبب الجذري)</h2>
+<table id="tbl"></table>
+<h2>مقارنة واجهات الترجمة المنافسة (التوقيع / الرموز / الحصة المجانية · بيانات علنية)</h2>
+<table class="cmp"><tr><th>الخدمة</th><th>التوقيع / المصادقة</th><th>نمط الرمز</th><th>الحصة المجانية (تقدير)</th><th>QPS / التردد (تقدير)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 أرقام (101 / 202 / 411)</td><td>حصة تجريبية لكل خدمة</td><td>أساس ~100 QPS (قابل للتوسيع)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 صغيرة (appid+q+salt+مفتاح)</td><td>5 أرقام (52001 / 54001 / 54003 / 58001)</td><td>القياسي مجاني</td><td>قياسي 1 / متقدم 10 / بريميوم 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>سلسلة (RequestLimitExceeded / NoFreeAmount)</td><td>5 ملايين حرف/شهر</td><td>5 في الثانية افتراضيًا</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (توقيع RPC / ROA عام)</td><td>سلسلة (مثل InvalidApiKey)</td><td>حصة مجانية شهرية (حسب الإصدار)</td><td>حسب حصة QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>حالة HTTP + reason (403 / 429)</td><td>500 ألف حرف/شهر (v2)</td><td>حسب حصة المشروع</td></tr><tr><td>DeepL API</td><td>ترويسة DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500 ألف حرف/شهر</td><td>حسب الخطة</td></tr></table><section class="i4data">
+<h2>معالجة أخطاء واجهات الترجمة وحصصها (تقدير 2026)</h2>
+<p>تقدير <strong>2026</strong> من الوثائق الرسمية للمنصات (Youdao Zhiyun وBaidu وTencent Cloud وAlibaba Cloud وGoogle وDeepL): ليست قيمًا مضمونة أو مقيسة مباشرة، للاسترشاد فقط؛ تتغير الحصص وQPS وفق السياسة الرسمية:</p>
+<table>
+<tr><th>البُعد</th><th>التقدير / المقارنة</th></tr>
+<tr><td>خوارزمية التوقيع (المصادقة)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL ترويسة Auth-Key</td></tr>
+<tr><td>الحصة المجانية (شهر · تقدير)</td><td>Tencent <strong>5 ملايين حرف</strong> &gt; Google / DeepL <strong>500 ألف</strong> &gt; Baidu القياسي مجاني (QPS=1)؛ Youdao حصة تجريبية لكل خدمة، حسب وحدة التحكم</td></tr>
+<tr><td>حد QPS / التردد (تقدير)</td><td>Youdao أساس ~<strong>100</strong> (قابل للتوسيع) · Baidu قياسي 1 / متقدم 10 / بريميوم 100 · Tencent <strong>5/ث</strong></td></tr>
+<tr><td>أقصى طول لكل نص (تقدير)</td><td>Youdao نموذج / مستند <strong>i ≤ 5000</strong> · Tencent &lt; 6000 لكل طلب (أطول عبر مستند / دفعة)</td></tr>
+<tr><td>أكثر الرموز شيوعًا (مجتمع · تقدير)</td><td><strong>202 توقيع</strong> &gt; <strong>411 حد</strong> &gt; 108 / 110 ربط &gt; 206 طابع زمني يسيطر على الأخطاء</td></tr>
+</table>
+<p><small>أساس التقدير: مصادر مرجعية + استقراء زمني (وثائق 2026 الرسمية لـ Youdao / Baidu / Tencent / Alibaba / Google / DeepL)؛ يتغير وفق السياسة والإصدار؛ المرجع وحدة التحكم الرسمية الأحدث.</small></p>
+</section>
+<h2>تشخيص سريع حسب سيناريو واقعي</h2>
+<ul class="scenes"><li>يعمل محليًا، لكن كثير من 206 على السحابة/الحاوية: انحراف ساعة الحاوية يبطل curtime (التوقيع ~120s) → فعّل NTP، زامن الساعة مع المضيف؛ لا تخزّن curtime القديم.</li><li>الإنجليزية تُترجم جيدًا، والصينية الطويلة أحيانًا 202: قطع التقطيع المتعدد البايت حسب «البايت» → يجب أن يعدّ input أحرف Unicode (q&gt;20: 10 + الطول + 10).</li><li>salt ثابت أو متزايد و207 في الاستدعاء الثاني: يجب أن يكون salt عشوائيًا (UUID) كل مرة وتحديث curtime؛ عند إعادة المحاولة وقّع من جديد.</li><li>ذروة التزامن في اختبار الحمل → كثير من 411: تجاوز QPS الأساس ~100 → token bucket + تراجع لدى العميل، أو اشترِ QPS من وحدة التحكم.</li><li>تطبيق جديد يستدعي النطق فيحصل على 110: مثيل الترجمة مرتبط، أما TTS فلا → اربط كل مثيل لكل خدمة في وحدة التحكم.</li><li>فجأة الكل 401: نفدت حزمة الأحرف / الرصيد → اشحن واضبط تنبيهات الرصيد؛ وفّر قناة احتياطية في المسارات الحرجة.</li><li>الفخ نفسه عند الانتقال من Baidu: q مُرمّز URL قبل التوقيع → يوقّع Youdao v3 بـ input (قاعدة القطع) لا بـ q المرمّز؛ وقّع أولًا ثم رمّز q عند الإرسال.</li></ul><div class="related"><h2>ذو صلة</h2><ul><li><a href="https://yoidao.com/">دليل تكامل / رموز أخطاء Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">توليد توقيع v3 وتشخيص 202</a></li><li><a href="https://yoydao.com/">أدوات مطوّري Youdao API (موقع شقيق)</a></li></ul></div></main>
+<footer>جُمعت رموز الأخطاء وخوارزمية التوقيع v3 من الوثائق الرسمية لمنصة Youdao Zhiyun AI المفتوحة (ai.youdao.com)؛ وتستند مقارنة توقيع/رموز/حصة المنافسين إلى الوثائق الرسمية لـ Baidu Translate وTencent Cloud MT وAlibaba Cloud وGoogle Cloud Translation وDeepL. تقديرات 2026 للحصص/QPS/الأسعار ليست قيمًا مضمونة أو مقيسة مباشرة؛ للاسترشاد فقط، والمرجع هو لوحة التحكم الرسمية الأحدث لكل مزوّد. الصفحة العربية: توطين LLM من 母版 zh/en (غير رسمي، بانتظار مراجعة ناطق أصلي).<br>مشروع مفتوح المصدر · رخصة MIT</footer>
+</div>
+<script src="/ar/codes.js"></script><script src="/app.js"></script>
+</body></html>
