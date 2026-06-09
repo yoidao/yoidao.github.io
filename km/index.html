@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="km"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ស្វែងរកលេខកូដកំហុស Youdao Zhiyun API - ដោះស្រាយ 202/411/108 នៃ API បកប្រែ + ហត្ថលេខា v3 និងគូប្រកួត</title>
+<meta name="description" content="តើ Youdao (Zhiyun) API បកប្រែបានបញ្ជូន errorCode មកវិញឬ? ស្វែងរកលេខកូដ (101 ខ្វះប៉ារ៉ាម៉ែត្រ / 102 ភាសា / 103 វែងពេក / 108 ID កម្មវិធី / 110 មិនបានភ្ជាប់ instance / 202 ហត្ថលេខាបរាជ័យ / 203 IP / 206 timestamp / 207 ចាក់ឡើងវិញ / 401 សមតុល្យ / 411 ដែនកំណត់អត្រា) ដើម្បីមើលអត្ថន័យផ្លូវការ L1 និងមូលហេតុ L2៖ ហត្ថលេខា v3 sha256(appKey+input+salt+curtime+appSecret), អន្ទាក់នៃការកាត់/ការអ៊ិនកូដ/លំដាប់ input, curtime ជា UTC វិនាទី, salt ប្រភេទ UUID ការពារការចាក់ឡើងវិញ, ការភ្ជាប់ instance ក្នុងមួយសេវា និង QPS backoff ជាមួយការប្រៀបធៀប Youdao នឹង Baidu/Tencent/Alibaba/Google/DeepL និងការប៉ាន់ស្មាន 2026 កូតាឥតគិតថ្លៃ និង QPS។">
+<link rel="canonical" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "ស្វែងរកលេខកូដកំហុស Youdao Zhiyun API",
+   "url": "https://yoidao.github.io/km/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "km",
+   "description": "តើ Youdao (Zhiyun) API បកប្រែបានបញ្ជូន errorCode មកវិញឬ? ស្វែងរកលេខកូដ (101 ខ្វះប៉ារ៉ាម៉ែត្រ / 102 ភាសា / 103 វែងពេក / 108 ID កម្មវិធី / 110 មិនបានភ្ជាប់ instance / 202 ហត្ថលេខាបរាជ័យ / 203 IP / 206 timestamp / 207 ចាក់ឡើងវិញ / 401 សមតុល្យ / 411 ដែនកំណត់អត្រា) ដើម្បីមើលអត្ថន័យផ្លូវការ L1 និងមូលហេតុ L2៖ ហត្ថលេខា v3 sha256(appKey+input+salt+curtime+appSecret), អន្ទាក់នៃការកាត់/ការអ៊ិនកូដ/លំដាប់ input, curtime ជា UTC វិនាទី, salt ប្រភេទ UUID ការពារការចាក់ឡើងវិញ, ការភ្ជាប់ instance ក្នុងមួយសេវា និង QPS backoff ជាមួយការប្រៀបធៀប Youdao នឹង Baidu/Tencent/Alibaba/Google/DeepL និងការប៉ាន់ស្មាន 2026 កូតាឥតគិតថ្លៃ និង QPS។",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "km",
+   "url": "https://yoidao.github.io/km/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "តើធ្វើដូចម្ដេចដើម្បីដោះស្រាយកំហុស 101 របស់ Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ខ្វះប៉ារ៉ាម៉ែត្រចាំបាច់។ ធ្វើឱ្យចាំបាច់ពេញលេញជាមុន, បន្ទាប់មកពិនិត្យអក្ខរាវិរុទ្ធ (តួអក្សរធំ/តូច)។ v3 ត្រូវការ 8៖ q、from、to、appKey、salt、sign、signType、curtime។ ខ្វះមួយ ឬឈ្មោះខុស = 101; v1 គ្មាន curtime / signType (ភ្លេចញឹកញាប់បំផុតពេលផ្លាស់ប្ដូរ)។ ធៀបនឹងតារាងប៉ារ៉ាម៉ែត្រផ្លូវការ; បញ្ជាក់ signType=v3 និង curtime (timestamp វិនាទី)។"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "តើធ្វើដូចម្ដេចដើម្បីដោះស្រាយកំហុស 102 របស់ Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ប្រភេទភាសាមិនគាំទ្រ។ Youdao ប្រើ zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn មិនស្គាល់; strict=true និងទិសមិនគាំទ្រក៏បរាជ័យ។ ប្រើលេខកូដត្រឹមត្រូវពីតារាងផ្លូវការ; បើសង្ស័យ from=auto និង strict លំនាំដើម (false)។"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "តើធ្វើដូចម្ដេចដើម្បីដោះស្រាយកំហុស 103 របស់ Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "អត្ថបទបកប្រែវែងពេក។ លើសដែនកំណត់តួអក្សរក្នុងមួយសំណើ (ផ្ទៃខាងមុខម៉ូដែល/ឯកសារ i ≤ 5000)។ បំបែកតាមប្រយោគ / កថាខណ្ឌ ហើយផ្ញើជាបាច់; ឯកសារវែងតាមផ្ទៃខាងមុខបកប្រែឯកសារ។"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "តើធ្វើដូចម្ដេចដើម្បីដោះស្រាយកំហុស 108 របស់ Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ID កម្មវិធីមិនត្រឹមត្រូវ។ ចុះឈ្មោះគណនី, បង្កើតកម្មវិធីក្នុង console និងភ្ជាប់សេវា ដើម្បីទទួល appKey និង appSecret។ appKey បាត់តួអក្សរ / មានចន្លោះ; ឬកម្មវិធីគ្មាន instance សេវា; ពេលខ្លះហត្ថលេខាផុតកំណត់ (curtime ឆ្ងាយពីពេលវេលា server, ~120s)។ ផ្ទៀងផ្ទាត់ appKey (គ្មានចន្លោះ); បញ្ជាក់ instance ដែលភ្ជាប់; curtime បច្ចុប្បន្នជាវិនាទី។"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "តើធ្វើដូចម្ដេចដើម្បីដោះស្រាយកំហុស 110 របស់ Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "គ្មាន instance សេវាត្រឹមត្រូវ៖ កម្មវិធីមិនបានភ្ជាប់ instance, បង្កើត និងភ្ជាប់។ ការបញ្ចេញសំឡេងត្រូវការ instance TTS ដាច់ដោយឡែក។ កម្មវិធីនីមួយៗភ្ជាប់ instance មួយក្នុងមួយសេវា - បកប្រែ / TTS / OCR ដាច់; ភ្ជាប់តែបកប្រែហើយសុំ voice → 110។ ភ្ជាប់ក្នុង console instance នីមួយៗក្នុងមួយសេវា (បកប្រែ / TTS / OCR)។"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "តើធ្វើដូចម្ដេចដើម្បីដោះស្រាយកំហុស 111 របស់ Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "គណនីអ្នកអភិវឌ្ឍមិនត្រឹមត្រូវ។ គណនីគ្មានការផ្ទៀងផ្ទាត់អ្នកអភិវឌ្ឍ, ស្ថានភាពមិនធម្មតា ឬគ្រប់គ្រងហានិភ័យ។ ពិនិត្យស្ថានភាព និងការផ្ទៀងផ្ទាត់ពិត / អ្នកអភិវឌ្ឍក្នុង console; ticket បើចាំបាច់។"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">ភាសា: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <strong>ភាសាខ្មែរ</strong> · <a href="/my/">မြန်မာ</a></nav>
+<h1>លេខកូដកំហុស Youdao Zhiyun API / ការវិនិច្ឆ័យ API បកប្រែ</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_km.webp"><img src="/img/cover_km.png" alt="រូបភាពឧបករណ៍ស្វែងរកលេខកូដកំហុស Youdao Zhiyun API" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>រូប៖ ស្វែងរកលេខកូដកំហុស Youdao Zhiyun API (L1 ផ្លូវការ + L2 មូលហេតុ + ការប្រៀបធៀប)</figcaption></figure>
+<p>តើ​ផ្ទៃ​ខាង​មុខ​បកប្រែ / វចនានុក្រម / OCR / TTS របស់ <strong>Youdao Zhiyun</strong> បាន​បញ្ជូន <code>errorCode</code> មក​វិញ​ឬ? សូម​បញ្ជាក់​បី​ចំណុច​ជា​មុន៖ <strong>តើ​ជា​បញ្ហា​ប៉ារ៉ាម៉ែត្រ/ហត្ថលេខា​ដែល client អាច​ពិនិត្យ ឬ server/វិក្កយបត្រ</strong>, <strong>តើ​លំដាប់ និង​ការ​អ៊ិនកូដ​នៃ​ខ្សែ​ហត្ថលេខា​ត្រឹមត្រូវ​ឬ</strong>, និង <strong>តើ QPS លើស​ឬ</strong>។ បញ្ចូល <strong>លេខកូដ​កំហុស ឬ​ពាក្យ​គន្លឹះ</strong> (ឧ. <code>202</code>, <code>411</code>, <code>108</code>, <code>ហត្ថលេខា</code>, <code>ដែនកំណត់</code>, <code>timestamp</code>)៖ ដំបូង <strong>អត្ថន័យ​ផ្លូវការ L1</strong>, បន្ទាប់​មក <strong>មូលហេតុ និង​ការ​វិនិច្ឆ័យ L2</strong>, ចុង​ក្រោយ​ការ​ប្រៀបធៀប​គូប្រកួត និង​ករណី​ពិត។ ឯកសារ​ផ្លូវការ​នៅ <a href="https://yoidao.com/">មគ្គុទ្ទេសក៍​ការ​រួម​បញ្ចូល / លេខកូដ​កំហុស Youdao Zhiyun</a>។</p>
+<input id="q" placeholder="បញ្ចូលលេខកូដ ឬពាក្យគន្លឹះ ឧ. 202 / 411 / 108 / ហត្ថលេខា / timestamp / ដែនកំណត់" autocomplete="off">
+<button id="go">ស្វែងរក</button>
+<div id="out"></div>
+<h2>ជំហានទី 1៖ ចាត់ថ្នាក់តាមជួរលេខកូដ (L1 - ដំបូងជាកំហុសរបស់នរណា)</h2>
+<p><code>errorCode</code> របស់ Youdao Zhiyun បែងចែកប្រហែលជាបួនជួរ; កំណត់ទីតាំងមុនពេលសាកល្បងងងឹត៖ ① <strong>1xx ប៉ារ៉ាម៉ែត្រ</strong> (101 ខ្វះ / 102 ភាសា / 103 វែង / 113 q ទទេ / 116 strict) - client ពិនិត្យចាំបាច់ និងតម្លៃ; ② <strong>2xx ការផ្ទៀងផ្ទាត់ និងហត្ថលេខា</strong> (108 ID / 202 ហត្ថលេខា / 203 IP / 205 វេទិកា / 206 timestamp / 207 ចាក់ឡើងវិញ) - ពិនិត្យខ្សែហត្ថលេខា និងព័ត៌មានសម្ងាត់; ③ <strong>3xx/5xx server</strong> (303 / 500 / 902000) - សាកល្បងម្ដងទៀតជាមួយ <code>request_id</code> ឬ ticket; ④ <strong>4xx គណនី/វិក្កយបត្រ/ដែនកំណត់</strong> (401 សមតុល្យ / 411 / 412) - ពិនិត្យសមតុល្យ និង QPS។ បន្ថែមនៅ <a href="https://yoidao.com/sign">ការបង្កើតហត្ថលេខា v3 និងការវិនិច្ឆ័យ 202</a>។</p>
+<div class="cat"><div class="catbox"><b>ប៉ារ៉ាម៉ែត្រ</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>ពិនិត្យ client៖ វាលចាំបាច់ពេញលេញ (q/from/to/appKey/sign/signType/curtime/salt), លេខកូដភាសា zh-CHS / en / auto, q មិនទទេ/មិនវែងពេក, strict true/false។</div></div><div class="catbox"><b>ការផ្ទៀងផ្ទាត់ / ហត្ថលេខា</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 នៃ appKey+input+salt+curtime+appSecret; curtime UTC វិនាទី, salt UUID ការពារចាក់ឡើងវិញ; បញ្ជីស IP ស៊ីគ្នានឹងប្រភេទវេទិកា។</div></div><div class="catbox"><b>សេវា / instance</b><span class="cs">110 · 310</span><div>កម្មវិធីនីមួយៗភ្ជាប់ instance មួយក្នុងមួយសេវា (បកប្រែ / TTS / OCR ដាច់ដោយឡែក); ការបកប្រែដែនបើកក្នុង console ជាមុន។</div></div><div class="catbox"><b>គណនី / វិក្កយបត្រ / ដែនកំណត់</b><span class="cs">401 · 411 · 412</span><div>កុំប្រើសមតុល្យ / កញ្ចប់តួអក្សរអស់ (401 បញ្ឈប់សេវា); QPS (មូលដ្ឋាន ~100) លើស = 411៖ token bucket + backoff អិចស្ប៉ូណង់ស្យែល។</div></div><div class="catbox"><b>លទ្ធផល / ការឌិគ្រីប / ផ្សេងៗ</b><span class="cs">201 · 303 · 500 · 902000</span><div>កំហុស server៖ សាកល្បងម្ដងទៀតជាមួយ request_id ឬ ticket; ក្នុងផ្ទៃខាងមុខអ៊ិនគ្រីប ពិនិត្យលំដាប់ DES / BASE64 / URLDecode។</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ដ្យាក្រាមការសម្រេចចិត្តវិនិច្ឆ័យលេខកូដកំហុស Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">លំហូរវិនិច្ឆ័យ errorCode (ដំបូងតាមជួរ, បន្ទាប់មក client / server)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">ទទួល errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">ចាត់ថ្នាក់តាមជួរ</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">client អាចពិនិត្យ →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx ប៉ារ៉ាម៉ែត្រ · 2xx ផ្ទៀងផ្ទាត់-ហត្ថលេខា</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">server / វិក្កយបត្រ →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx ករណីលើកលែង · 4xx សមតុល្យ/ដែនកំណត់</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">ប្រាំប្រភេទ (មើលផ្លូវការ L1 / មូលហេតុ L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① ប៉ារ៉ាម៉ែត្រ</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② ផ្ទៀងផ្ទាត់ / ហត្ថលេខា</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ គណនី / ដែនកំណត់</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ សេវា / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>រូប 1៖ លំហូរវិនិច្ឆ័យ errorCode របស់ Youdao Zhiyun - ដំបូងតាមជួរ, បន្ទាប់មក client / server</figcaption></figure>
+<h2>ជំហានទី 2៖ អន្ទាក់ពីរញឹកញាប់បំផុត → មូលហេតុ (L2៖ ហត្ថលេខា 202 និងដែនកំណត់ 411)</h2>
+<p>គន្លឹះ៖ <strong>90% នៃកំហុស Youdao API ជាប់នៅ «ហត្ថលេខា 202» និង «ដែនកំណត់ 411»</strong>។ 202 កម្រជាគន្លឹះខុស; ភាគច្រើនជា <strong>ខ្សែហត្ថលេខា v3</strong> ដែលបង្កើតខុស - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, ដែលនៅពេល q&gt;20 <code>input</code> យក «10 តួអក្សរដំបូង + ប្រវែង q + 10 តួអក្សរចុងក្រោយ» (តាមតួអក្សរ Unicode មិនមែនបៃ), និង q នៅពេល ≤20។ បន្ថែមការអ៊ិនកូដ UTF-8, លំដាប់ និងចន្លោះ។ 411 គឺ QPS លើសគម្រោង៖ កំណត់អត្រា + backoff នៅ client។ ខាងក្រោមជាផ្ទាំងពិនិត្យខ្លួនឯង, បន្ទាប់មកការប្រៀបធៀប និងការប៉ាន់ស្មាន 2026។</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="រូបភាពផ្ទាំងពិនិត្យខ្លួនឯងមុនពេលហៅ Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">ផ្ទាំងពិនិត្យខ្លួនឯងហត្ថលេខា / ប៉ារ៉ាម៉ែត្រ (បៃតង = បានបញ្ជាក់ / ក្រហម = ភ្លេចងាយ)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">ធាតុ</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">ការវិនិច្ឆ័យ</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">ស្ថានភាព</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">វាលចាំបាច់ពេញលេញ (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 ចាំបាច់</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">បានបញ្ជាក់</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">លេខកូដភាសាត្រឹមត្រូវ (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">ធៀបនឹងតារាង</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">បានបញ្ជាក់</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">លំដាប់ហត្ថលេខា appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·តូច</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">បានបញ្ជាក់</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ការកាត់ input វែង (10+ប្រវែង+10·តាមតួអក្សរ)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">កំហុសញឹកញាប់</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">ពិនិត្យ</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC វិនាទី + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">ការពារ 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">បានបញ្ជាក់</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ ដែនកំណត់គម្រោង (មូលដ្ឋាន ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">បង្ក 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">ពិនិត្យ</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">ចំណាំ៖ ក្រហម = ពីរដែលភ្លេចញឹកញាប់បំផុត - ការកាត់ input វែង (មូលហេតុ 202) និងដែនកំណត់ QPS (411); មុនពេលផលិតកម្ម សូមធ្វើតេស្តបន្ទុកជាមួយដំណើរការដំណាលគ្នាពិត។</text></svg><figcaption>រូប 2៖ ផ្ទាំងពិនិត្យខ្លួនឯងហត្ថលេខា / ប៉ារ៉ាម៉ែត្រមុនពេលហៅ (បៃតង = បានបញ្ជាក់ / ក្រហម = ភ្លេចងាយ)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_km.webp"><img src="/img/board_km.png" alt="រូបភាពផ្ទាំងពិនិត្យខ្លួនឯងហត្ថលេខា/ប៉ារ៉ាម៉ែត្រ Youdao Zhiyun API" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>រូប៖ ពិនិត្យខ្សែហត្ថលេខាជាមួយ curtime / salt ជាមុន, បន្ទាប់មក QPS និងការភ្ជាប់ instance - 202 និង 411 ភ្លេចញឹកញាប់បំផុត</figcaption></figure>
+<h2>តារាងលេខកូដកំហុសពេញលេញ (L1 ផ្លូវការ · L2 មូលហេតុ)</h2>
+<table id="tbl"></table>
+<h2>ការប្រៀបធៀប API បកប្រែគូប្រកួត (ហត្ថលេខា / លេខកូដ / កូតាឥតគិតថ្លៃ · ទិន្នន័យសាធារណៈ)</h2>
+<table class="cmp"><tr><th>សេវា</th><th>ហត្ថលេខា / ផ្ទៀងផ្ទាត់</th><th>រចនាប័ទ្មលេខកូដ</th><th>កូតាឥតគិតថ្លៃ (ប៉ាន់)</th><th>QPS / ប្រេកង់ (ប៉ាន់)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 ខ្ទង់ (101 / 202 / 411)</td><td>កូតាសាកល្បងក្នុងមួយសេវា</td><td>មូលដ្ឋាន ~100 QPS (បង្កើនបាន)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 តូច (appid+q+salt+សោ)</td><td>5 ខ្ទង់ (52001 / 54001 / 54003 / 58001)</td><td>ស្តង់ដារឥតគិតថ្លៃ</td><td>ស្តង់ដារ 1 / កម្រិតខ្ពស់ 10 / ព្រីមៀម 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>ខ្សែ (RequestLimitExceeded / NoFreeAmount)</td><td>5 លានតួអក្សរ/ខែ</td><td>លំនាំដើម 5 ក្នុងមួយវិនាទី</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (ហត្ថលេខាទូទៅ RPC / ROA)</td><td>ខ្សែ (ឧ. InvalidApiKey)</td><td>កូតាឥតគិតថ្លៃប្រចាំខែ (តាមកំណែ)</td><td>តាមកូតា QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>ស្ថានភាព HTTP + reason (403 / 429)</td><td>5 សែនតួអក្សរ/ខែ (v2)</td><td>តាមកូតាគម្រោង</td></tr><tr><td>DeepL API</td><td>បឋមកថា DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 5 សែនតួអក្សរ/ខែ</td><td>តាមគម្រោង</td></tr></table><section class="i4data">
+<h2>ការគ្រប់គ្រងកំហុស និងកូតារបស់ API បកប្រែ (ប៉ាន់ស្មាន 2026)</h2>
+<p>ប៉ាន់ស្មាន <strong>2026</strong> ពីឯកសារផ្លូវការរបស់វេទិកា (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL)៖ មិនមែនតម្លៃដែលសន្យា ឬវាស់ដោយផ្ទាល់, សម្រាប់ជាឯកសារយោងតែប៉ុណ្ណោះ; កូតា និង QPS ប្ដូរតាមគោលនយោបាយផ្លូវការ៖</p>
+<table>
+<tr><th>វិមាត្រ</th><th>ប៉ាន់ស្មាន / ប្រៀបធៀប</th></tr>
+<tr><td>ក្បួនដោះស្រាយហត្ថលេខា (ផ្ទៀងផ្ទាត់)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL បឋមកថា Auth-Key</td></tr>
+<tr><td>កូតាឥតគិតថ្លៃ (ខែ · ប៉ាន់)</td><td>Tencent <strong>5 លានតួអក្សរ</strong> &gt; Google / DeepL <strong>5 សែន</strong> &gt; Baidu ស្តង់ដារឥតគិតថ្លៃ (QPS=1); Youdao កូតាសាកល្បងក្នុងមួយសេវា, តាម console</td></tr>
+<tr><td>ដែនកំណត់ QPS / ប្រេកង់ (ប៉ាន់)</td><td>Youdao មូលដ្ឋាន ~<strong>100</strong> (បង្កើនបាន) · Baidu ស្តង់ដារ 1 / ខ្ពស់ 10 / ព្រីមៀម 100 · Tencent <strong>5/វិ</strong></td></tr>
+<tr><td>ប្រវែងអតិបរមាក្នុងមួយអត្ថបទ (ប៉ាន់)</td><td>Youdao ម៉ូដែល / ឯកសារ <strong>i ≤ 5000</strong> · Tencent ក្នុងមួយសំណើ &lt; 6000 (វែងជាងតាមឯកសារ / បាច់)</td></tr>
+<tr><td>លេខកូដញឹកញាប់បំផុត (សហគមន៍ · ប៉ាន់)</td><td><strong>202 ហត្ថលេខា</strong> &gt; <strong>411 ដែនកំណត់</strong> &gt; 108 / 110 ការភ្ជាប់ &gt; 206 timestamp នាំមុខកំហុស</td></tr>
+</table>
+<p><small>មូលដ្ឋានប៉ាន់ស្មាន៖ ប្រភពយោង + ការប៉ាន់ស្មានតាមពេលវេលា (ឯកសារផ្លូវការ 2026 របស់ Youdao / Baidu / Tencent / Alibaba / Google / DeepL); ប្ដូរតាមគោលនយោបាយ និងកំណែ; console ផ្លូវការថ្មីៗបំផុតជាគោល។</small></p>
+</section>
+<h2>ការវិនិច្ឆ័យលឿនតាមសេណារីយ៉ូពិត</h2>
+<ul class="scenes"><li>ដំណើរការនៅ local, ប៉ុន្តែនៅ cloud/container មាន 206 ច្រើន៖ នាឡិកា container រអិលធ្វើឱ្យ curtime មិនត្រឹមត្រូវ (ហត្ថលេខា ~120s) → បើក NTP, ធ្វើសមកាលកម្មនាឡិកាជាមួយ host; កុំ cache curtime ចាស់។</li><li>អង់គ្លេសបកប្រែល្អ, ចិនវែងម្ដងម្កាល 202៖ truncation កាត់ multibyte តាម «បៃ» → input ត្រូវរាប់តួអក្សរ Unicode (q&gt;20: 10 + ប្រវែង + 10)។</li><li>salt ថេរ ឬកើនឡើង និង 207 នៅការហៅទីពីរ៖ salt ត្រូវចៃដន្យ (UUID) រាល់ពេល និងធ្វើ curtime ឱ្យថ្មី; ពេល retry សូមចុះហត្ថលេខាម្ដងទៀត។</li><li>កំពូលដំណើរការដំណាលគ្នាក្នុងការសាកល្បងបន្ទុក → 411 ច្រើន៖ QPS មូលដ្ឋាន ~100 លើស → token bucket + backoff នៅ client, ឬទិញ QPS ក្នុង console។</li><li>កម្មវិធីថ្មីហៅការបញ្ចេញសំឡេងហើយទទួល 110៖ instance បកប្រែភ្ជាប់, TTS អត់ → ភ្ជាប់ instance នីមួយៗក្នុងមួយសេវាក្នុង console។</li><li>ភ្លាមៗទាំងអស់ 401៖ កញ្ចប់តួអក្សរ / សមតុល្យអស់ → បញ្ចូលទឹកប្រាក់ និងកំណត់ការជូនដំណឹងសមតុល្យ; មានឆានែលបម្រុងលើផ្លូវសំខាន់។</li><li>អន្ទាក់ដូចគ្នាពេលផ្លាស់ប្ដូរពី Baidu៖ q ត្រូវ URL-encode មុនចុះហត្ថលេខា → Youdao v3 ចុះហត្ថលេខាជាមួយ input (ច្បាប់កាត់), មិនមែន q ដែលអ៊ិនកូដ; ចុះហត្ថលេខាជាមុន, អ៊ិនកូដ q ពេលផ្ញើ។</li></ul><div class="related"><h2>ពាក់ព័ន្ធ</h2><ul><li><a href="https://yoidao.com/">មគ្គុទ្ទេសក៍ការរួមបញ្ចូល / លេខកូដកំហុស Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">ការបង្កើតហត្ថលេខា v3 និងការវិនិច្ឆ័យ 202</a></li><li><a href="https://yoydao.com/">ឧបករណ៍អ្នកអភិវឌ្ឍ Youdao API (គេហទំព័របងប្អូន)</a></li></ul></div></main>
+<footer>លេខកូដកំហុស និងក្បួនដោះស្រាយហត្ថលេខា v3 ត្រូវបានចងក្រងពីឯកសារផ្លូវការនៃវេទិកាបើកចំហ AI Youdao Zhiyun (ai.youdao.com); ការប្រៀបធៀបហត្ថលេខា/លេខកូដ/កូតារបស់គូប្រកួតផ្អែកលើឯកសារផ្លូវការរបស់ Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation និង DeepL។ កូតា/QPS/តម្លៃ 2026 ជាការប៉ាន់ស្មាន មិនមែនតម្លៃដែលសន្យា ឬវាស់ដោយផ្ទាល់; សម្រាប់ជាឯកសារយោងតែប៉ុណ្ណោះ, console ផ្លូវការថ្មីៗបំផុតរបស់អ្នកផ្ដល់សេវានីមួយៗជាគោល។ ទំព័រខ្មែរ៖ ការធ្វើមូលដ្ឋានីយកម្ម LLM ពី 母版 zh/en (មិនផ្លូវការ, រង់ចាំការត្រួតពិនិត្យដោយអ្នកនិយាយដើម)។<br>គម្រោងប្រភពបើកចំហ · អាជ្ញាប័ណ្ណ MIT</footer>
+</div>
+<script src="/km/codes.js"></script><script src="/app.js"></script>
+</body></html>
