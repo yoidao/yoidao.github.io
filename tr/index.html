@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Youdao Zhiyun API hata kodu arama - çeviri API 202/411/108 çözümü + v3 imza ve rakipler</title>
+<meta name="description" content="Youdao (Zhiyun) çeviri API'si errorCode mu döndürdü? Kodu arayın (101 eksik parametre / 102 dil / 103 çok uzun / 108 uygulama kimliği / 110 örnek bağlı değil / 202 imza başarısız / 203 IP / 206 zaman damgası / 207 yeniden oynatma / 401 bakiye / 411 hız sınırı) - L1 resmi anlam ve L2 kök neden: v3 imza sha256(appKey+input+salt+curtime+appSecret), input kesme/kodlama/sıra tuzakları, saniye cinsinden UTC curtime, yeniden oynatmaya karşı UUID salt, hizmet başına örnek bağlama ve QPS geri çekilmesi - Youdao vs Baidu/Tencent/Alibaba/Google/DeepL karşılaştırması ve 2026 ücretsiz kota & QPS tahminleriyle.">
+<link rel="canonical" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Youdao Zhiyun API hata kodu arama",
+   "url": "https://yoidao.github.io/tr/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "tr",
+   "description": "Youdao (Zhiyun) çeviri API'si errorCode mu döndürdü? Kodu arayın (101 eksik parametre / 102 dil / 103 çok uzun / 108 uygulama kimliği / 110 örnek bağlı değil / 202 imza başarısız / 203 IP / 206 zaman damgası / 207 yeniden oynatma / 401 bakiye / 411 hız sınırı) - L1 resmi anlam ve L2 kök neden: v3 imza sha256(appKey+input+salt+curtime+appSecret), input kesme/kodlama/sıra tuzakları, saniye cinsinden UTC curtime, yeniden oynatmaya karşı UUID salt, hizmet başına örnek bağlama ve QPS geri çekilmesi - Youdao vs Baidu/Tencent/Alibaba/Google/DeepL karşılaştırması ve 2026 ücretsiz kota & QPS tahminleriyle.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "tr",
+   "url": "https://yoidao.github.io/tr/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API 101 hatası nasıl çözülür?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Zorunlu parametre eksik. Önce zorunluları tamamlayın, sonra yazımı (büyük/küçük harf) denetleyin. v3 sekiz gerektirir: q、from、to、appKey、salt、sign、signType、curtime. Biri eksik veya adı yanlış = 101; v1'de curtime / signType yoktu (geçişte en sık atlanan). Resmi parametre tablosuyla karşılaştırın; signType=v3 ve curtime (saniye zaman damgası) mevcut olduğunu doğrulayın."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API 102 hatası nasıl çözülür?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Desteklenmeyen dil türü. Youdao zh-CHS / zh-CHT / en / ja / ko… kullanır; zh / zh-CN / cn tanınmaz; strict=true ve desteklenmeyen yönde de başarısız olur. Resmi tablodan tam kodu kullanın; emin değilseniz from=auto ve strict varsayılan (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API 103 hatası nasıl çözülür?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Çevrilecek metin çok uzun. İstek başına karakter sınırı aşıldı (model/belge arayüzleri i ≤ 5000). Cümle / paragrafa bölün ve toplu gönderin; uzun belgeler belge çeviri arayüzünden."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API 108 hatası nasıl çözülür?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Geçersiz uygulama kimliği. Hesap kaydedin, konsolda uygulama oluşturun ve hizmeti bağlayın; appKey ve appSecret edinin. Karakter kaybı / boşluk içeren appKey; veya hizmet örneği olmayan uygulama; bazen imza süresi dolmuş (curtime sunucu saatinden çok uzak, ~120s). appKey'i doğrulayın (boşluksuz); bağlı örneği onaylayın; curtime güncel saniye."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API 110 hatası nasıl çözülür?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Geçerli hizmet örneği yok: uygulama örnek bağlamadı, oluşturun ve bağlayın. Telaffuz ayrı bir TTS örneği gerektirir. Her uygulama hizmet başına bir örnek bağlar - çeviri / TTS / OCR ayrı; yalnızca çeviriyi bağlayıp voice istemek → 110. Konsolda her örneği hizmet başına bağlayın (çeviri / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API 111 hatası nasıl çözülür?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Geçersiz geliştirici hesabı. Geliştirici doğrulaması olmayan, anormal durumlu veya risk denetimindeki hesap. Konsolda durumu ve gerçek / geliştirici doğrulamasını denetleyin; gerekirse talep."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Dil: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <strong>Türkçe</strong> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Youdao Zhiyun API hata kodları / çeviri API tanılaması</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_tr.webp"><img src="/img/cover_tr.png" alt="Youdao Zhiyun API hata kodu arama aracı görseli" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Şek.: Youdao Zhiyun API hata kodu arama (L1 resmi + L2 kök neden + karşılaştırma)</figcaption></figure>
+<p><strong>Youdao Zhiyun</strong> çeviri / sözlük / OCR / TTS arayüzü bir <code>errorCode</code> mu döndürdü? Önce üç şeyi netleştirin: <strong>istemcinin denetleyebileceği parametre/imza sorunu mu, yoksa sunucu/faturalama mı</strong>, <strong>imza dizesinin sırası ve kodlaması doğru mu</strong> ve <strong>QPS aşıldı mı</strong>. <strong>Hata kodu veya anahtar kelime</strong> girin (ör. <code>202</code>, <code>411</code>, <code>108</code>, <code>imza</code>, <code>sınır</code>, <code>zaman damgası</code>): önce <strong>L1 resmi anlam</strong>, sonra <strong>L2 kök neden ve tanı</strong>, en son rakip karşılaştırması ve gerçek vakalar. Resmi belgeler: <a href="https://yoidao.com/">Youdao Zhiyun API entegrasyon kılavuzu / hata kodları</a>.</p>
+<input id="q" placeholder="Bir kod veya anahtar kelime girin, ör. 202 / 411 / 108 / imza / zaman damgası / sınır" autocomplete="off">
+<button id="go">Ara</button>
+<div id="out"></div>
+<h2>1. Adım: kod aralığına göre sınıflandırın (L1 - önce kimin hatası)</h2>
+<p>Youdao Zhiyun <code>errorCode</code>'u kabaca dört aralığa ayrılır; körlemesine denemeden önce konumlandırın: ① <strong>1xx parametre</strong> (101 eksik / 102 dil / 103 uzun / 113 q boş / 116 strict) - istemci zorunluları ve değerleri denetler; ② <strong>2xx kimlik & imza</strong> (108 kimlik / 202 imza / 203 IP / 205 platform / 206 zaman damgası / 207 yeniden oynatma) - imza dizesini ve kimlik bilgilerini denetleyin; ③ <strong>3xx/5xx sunucu</strong> (303 / 500 / 902000) - <code>request_id</code> ile yeniden deneyin veya talep açın; ④ <strong>4xx hesap/faturalama/sınır</strong> (401 bakiye / 411 / 412) - bakiyeyi ve QPS'i denetleyin. Daha fazlası: <a href="https://yoidao.com/sign">v3 imza üretimi ve 202 tanısı</a>.</p>
+<div class="cat"><div class="catbox"><b>Parametre</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>İstemci denetimi: zorunlu alanlar tam (q/from/to/appKey/sign/signType/curtime/salt), dil kodları zh-CHS / en / auto, q boş değil/çok uzun değil, strict true/false.</div></div><div class="catbox"><b>Kimlik / imza</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>appKey+input+salt+curtime+appSecret için SHA256; saniye cinsinden UTC curtime, yeniden oynatmaya karşı UUID salt; IP beyaz listesi platform türüyle hizalı.</div></div><div class="catbox"><b>Hizmet / örnek</b><span class="cs">110 · 310</span><div>Her uygulama hizmet başına bir örnek bağlar (çeviri / TTS / OCR ayrı); alan çevirisi önce konsolda etkinleştirilir.</div></div><div class="catbox"><b>Hesap / faturalama / sınır</b><span class="cs">401 · 411 · 412</span><div>Bakiyeyi / karakter paketini tüketmeyin (401 hizmeti durdurur); QPS (taban ~100) aşılırsa 411: token bucket + üstel geri çekilme.</div></div><div class="catbox"><b>Sonuç / şifre çözme / diğer</b><span class="cs">201 · 303 · 500 · 902000</span><div>Sunucu hataları: request_id ile yeniden deneyin veya talep; şifreli arayüzde DES / BASE64 / URLDecode sırasını denetleyin.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API hata kodu tanı karar diyagramı" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">errorCode tanı akışı (önce aralığa göre, sonra istemci / sunucu)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode alındı</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">aralığa göre sınıflandır</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">İstemci denetleyebilir →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx parametre · 2xx kimlik-imza</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Sunucu / faturalama →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx istisna · 4xx bakiye/sınır</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Beş kategori (L1 resmi / L2 nedene bakın)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Parametre</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Kimlik / imza</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Hesap / sınır</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Hizmet / örnek</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Şek. 1: Youdao Zhiyun errorCode tanı akışı - önce aralığa göre, sonra istemci / sunucu</figcaption></figure>
+<h2>2. Adım: en sık iki tuzak → kök neden (L2: imza 202 ve sınır 411)</h2>
+<p>Anahtar: <strong>Youdao API hatalarının %90'ı «imza 202» ve «sınır 411»de takılır</strong>. 202 nadiren yanlış anahtardır; genelde yanlış kurulmuş bir <strong>v3 imza dizesidir</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>; burada <code>input</code>, q&gt;20 olduğunda «ilk 10 karakter + q uzunluğu + son 10 karakter» alır (bayt değil Unicode karaktere göre), ≤20 ise q'nun kendisi. Buna UTF-8 kodlama, sıra ve boşluklar eklenir. 411, plan üstü QPS'dir: istemcide hız sınırlama + geri çekilme uygulayın. Aşağıda öz denetim paneli, ardından karşılaştırma ve 2026 tahminleri.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API çağrısı öncesi öz denetim paneli görseli" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">İmza / parametre öz denetim paneli (yeşil = doğrulandı / kırmızı = kolayca atlanır)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Öğe</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Değerlendirme</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Durum</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Zorunlu alanlar tam (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 zorunlu</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Doğrulandı</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Dil kodları geçerli (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">tabloya karşı</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Doğrulandı</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">İmza sırası appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·küçük</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Doğrulandı</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Uzun input kesme (10+uzunluk+10·karaktere göre)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">sık hata</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Denetle</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime saniye UTC + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">206/207 önler</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Doğrulandı</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ plan sınırı (taban ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">411 tetikler</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Denetle</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Not: kırmızı = en sık atlanan ikisi - uzun input kesme (202 nedeni) ve QPS sınırı (411); üretimden önce gerçek eşzamanlılıkla yük testi yapın.</text></svg><figcaption>Şek. 2: çağrı öncesi imza / parametre öz denetim paneli (yeşil = doğrulandı / kırmızı = kolayca atlanır)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_tr.webp"><img src="/img/board_tr.png" alt="Youdao Zhiyun API imza/parametre öz denetim paneli görseli" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Şek.: önce curtime / salt ile imza dizesini, sonra QPS ve örnek bağlamayı denetleyin - 202 ve 411 en sık atlananlardır</figcaption></figure>
+<h2>Tam hata kodu tablosu (L1 resmi · L2 kök neden)</h2>
+<table id="tbl"></table>
+<h2>Rakip çeviri API karşılaştırması (imza / kodlar / ücretsiz kota · kamuya açık veri)</h2>
+<table class="cmp"><tr><th>Hizmet</th><th>İmza / kimlik</th><th>Kod stili</th><th>Ücretsiz kota (tahmini)</th><th>QPS / sıklık (tahmini)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 basamak (101 / 202 / 411)</td><td>Hizmet başına deneme kotası</td><td>Taban ~100 QPS (artırılabilir)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 küçük (appid+q+salt+anahtar)</td><td>5 basamak (52001 / 54001 / 54003 / 58001)</td><td>Standart ücretsiz</td><td>Standart 1 / Gelişmiş 10 / Premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>Dize (RequestLimitExceeded / NoFreeAmount)</td><td>Ayda 5 milyon karakter</td><td>Varsayılan saniyede 5</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (ortak RPC / ROA imzası)</td><td>Dize (ör. InvalidApiKey)</td><td>Aylık ücretsiz kota (sürüme göre)</td><td>QPS kotasına göre</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP durumu + reason (403 / 429)</td><td>Ayda 500k karakter (v2)</td><td>Proje kotasına göre</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key başlığı</td><td>HTTP (403 / 456 / 429)</td><td>Free ayda 500k karakter</td><td>Plana göre</td></tr></table><section class="i4data">
+<h2>Çeviri API hata yönetimi ve kotalar (2026 tahmini)</h2>
+<p>Platformların resmi belgelerinden (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL) <strong>2026</strong> tahmini: taahhüt edilmiş veya doğrudan ölçülmüş değerler değil, yalnızca referans; kotalar ve QPS resmi politikaya göre değişir:</p>
+<table>
+<tr><th>Boyut</th><th>Tahmin / karşılaştırma</th></tr>
+<tr><td>İmza algoritması (kimlik)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL Auth-Key başlığı</td></tr>
+<tr><td>Ücretsiz kota (ay · tahmini)</td><td>Tencent <strong>5 milyon karakter</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu standart ücretsiz (QPS=1); Youdao hizmet başına deneme kotası, konsola göre</td></tr>
+<tr><td>QPS / sıklık sınırı (tahmini)</td><td>Youdao taban ~<strong>100</strong> (artırılabilir) · Baidu standart 1 / gelişmiş 10 / premium 100 · Tencent <strong>5/s</strong></td></tr>
+<tr><td>Metin başına maks. uzunluk (tahmini)</td><td>Youdao model / belge <strong>i ≤ 5000</strong> · Tencent istek başına &lt; 6000 (daha uzun belge / toplu)</td></tr>
+<tr><td>En sık kodlar (topluluk · tahmini)</td><td><strong>202 imza</strong> &gt; <strong>411 sınır</strong> &gt; 108 / 110 bağlama &gt; 206 zaman damgası hataların çoğu</td></tr>
+</table>
+<p><small>Tahmin temeli: referans kaynaklar + zamansal dışdeğerleme (Youdao / Baidu / Tencent / Alibaba / Google / DeepL 2026 resmi belgeleri); politika ve sürüme göre değişir; güncel resmi konsol esastır.</small></p>
+</section>
+<h2>Gerçek senaryoya göre hızlı tanı</h2>
+<ul class="scenes"><li>Yerelde çalışır ama bulutta/konteynerde çok 206: konteyner saati kayar ve curtime'ı geçersiz kılar (imza ~120s) → NTP'yi etkinleştirin, saati ana makineyle eşitleyin; eski curtime'ı önbelleğe almayın.</li><li>İngilizce iyi çevirir, uzun Çince bazen 202: kesme çok baytlıyı «bayta» göre kesmiş → input Unicode karakter saymalı (q&gt;20: 10 + uzunluk + 10).</li><li>sabit veya artan salt ve ikinci çağrıda 207: salt her seferinde rastgele (UUID) olmalı ve curtime yenilenmeli; yeniden denemede yeniden imzalayın.</li><li>Yük testinde eşzamanlılık zirveleri → çok 411: taban QPS ~100 aşıldı → istemcide token bucket + geri çekilme, ya da konsoldan QPS satın alın.</li><li>Yeni uygulama telaffuzu çağırır ve 110 alır: çeviri örneği bağlı, TTS değil → konsolda her örneği hizmet başına bağlayın.</li><li>Aniden hepsi 401: karakter paketi / bakiye tükendi → yükleyin ve bakiye uyarıları kurun; kritik yollarda yedek kanal bulundurun.</li><li>Baidu'dan geçişte aynı tuzak: q imzadan önce URL kodlanmış → Youdao v3 input ile imzalar (kesme kuralı), kodlanmış q ile değil; önce imzalayın, gönderirken q'yu kodlayın.</li></ul><div class="related"><h2>İlgili</h2><ul><li><a href="https://yoidao.com/">Youdao Zhiyun API entegrasyon kılavuzu / hata kodları</a></li><li><a href="https://yoidao.com/sign">v3 imza üretimi ve 202 tanısı</a></li><li><a href="https://yoydao.com/">Youdao API geliştirici araçları (kardeş site)</a></li></ul></div></main>
+<footer>Hata kodları ve v3 imza algoritması Youdao Zhiyun AI açık platform resmi belgelerinden (ai.youdao.com) derlenmiştir; rakip imza/kod/kota karşılaştırması Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation ve DeepL resmi belgelerine dayanır. 2026 kota/QPS/fiyatlar tahmindir; taahhüt edilmiş veya doğrudan ölçülmüş değildir; yalnızca referans, her sağlayıcının güncel resmi konsolu esastır. Türkçe sayfa: zh/en 母版'den LLM yerelleştirmesi (gayriresmi, ana dili konuşan inceleme beklemede).<br>Açık kaynak proje · MIT Lisansı</footer>
+</div>
+<script src="/tr/codes.js"></script><script src="/app.js"></script>
+</body></html>
