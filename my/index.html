@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="my"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Youdao Zhiyun API အမှားကုဒ် ရှာဖွေခြင်း - ဘာသာပြန် API ၏ 202/411/108 ဖြေရှင်းခြင်း + v3 လက်မှတ် နှင့် ပြိုင်ဘက်များ</title>
+<meta name="description" content="Youdao (Zhiyun) ဘာသာပြန် API က errorCode ပြန်ပို့သလား? ကုဒ်ကိုရှာပါ (101 ပါရာမီတာ မရှိ / 102 ဘာသာ / 103 ရှည်လွန်း / 108 အက်ပ် ID / 110 instance မချိတ်ရသေး / 202 လက်မှတ် မအောင်မြင် / 203 IP / 206 timestamp / 207 ပြန်ဖွင့် / 401 လက်ကျန် / 411 နှုန်းကန့်သတ်) L1 တရားဝင်အဓိပ္ပာယ် နှင့် L2 အရင်းခံအကြောင်းရင်း: v3 လက်မှတ် sha256(appKey+input+salt+curtime+appSecret), input ဖြတ်တောက်/ကုဒ်/အစီအစဉ် ထောင်ချောက်များ, စက္ကန့်ဖြင့် UTF curtime, ပြန်ဖွင့်ကာကွယ် UUID salt, ဝန်ဆောင်မှုတစ်ခုစီ instance ချိတ်ဆက်ခြင်း နှင့် QPS backoff; Youdao နှင့် Baidu/Tencent/Alibaba/Google/DeepL နှိုင်းယှဉ်ချက် နှင့် 2026 အခမဲ့ကိုတာ နှင့် QPS ခန့်မှန်းချက်များဖြင့်။">
+<link rel="canonical" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Youdao Zhiyun API အမှားကုဒ် ရှာဖွေခြင်း",
+   "url": "https://yoidao.github.io/my/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "my",
+   "description": "Youdao (Zhiyun) ဘာသာပြန် API က errorCode ပြန်ပို့သလား? ကုဒ်ကိုရှာပါ (101 ပါရာမီတာ မရှိ / 102 ဘာသာ / 103 ရှည်လွန်း / 108 အက်ပ် ID / 110 instance မချိတ်ရသေး / 202 လက်မှတ် မအောင်မြင် / 203 IP / 206 timestamp / 207 ပြန်ဖွင့် / 401 လက်ကျန် / 411 နှုန်းကန့်သတ်) L1 တရားဝင်အဓိပ္ပာယ် နှင့် L2 အရင်းခံအကြောင်းရင်း: v3 လက်မှတ် sha256(appKey+input+salt+curtime+appSecret), input ဖြတ်တောက်/ကုဒ်/အစီအစဉ် ထောင်ချောက်များ, စက္ကန့်ဖြင့် UTF curtime, ပြန်ဖွင့်ကာကွယ် UUID salt, ဝန်ဆောင်မှုတစ်ခုစီ instance ချိတ်ဆက်ခြင်း နှင့် QPS backoff; Youdao နှင့် Baidu/Tencent/Alibaba/Google/DeepL နှိုင်းယှဉ်ချက် နှင့် 2026 အခမဲ့ကိုတာ နှင့် QPS ခန့်မှန်းချက်များဖြင့်။",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "my",
+   "url": "https://yoidao.github.io/my/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API အမှား 101 ကို မည်သို့ဖြေရှင်းမည်နည်း?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "မဖြစ်မနေ ပါရာမီတာ မရှိ။ မဖြစ်မနေများ အရင်ပြည့်စုံစေ, ထို့နောက် စာလုံးပေါင်း (စာလုံးကြီး/သေး) စစ်။ v3 သည် 8 လိုအပ်: q、from、to、appKey、salt、sign、signType、curtime။ တစ်ခု မရှိ သို့မဟုတ် အမည်မှား = 101; v1 တွင် curtime / signType မရှိ (ပြောင်းရွှေ့ရာတွင် အလွတ်ဆုံး)။ တရားဝင် ပါရာမီတာ ဇယားနှင့် တိုက်; signType=v3 နှင့် curtime (စက္ကန့် timestamp) ရှိကြောင်း အတည်ပြု။"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API အမှား 102 ကို မည်သို့ဖြေရှင်းမည်နည်း?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "မပံ့ပိုးသော ဘာသာအမျိုးအစား။ Youdao သည် zh-CHS / zh-CHT / en / ja / ko… သုံး; zh / zh-CN / cn မသိ; strict=true နှင့် မပံ့ပိုးသော ဦးတည်ချက်တွင်လည်း မအောင်မြင်။ တရားဝင် ဇယားမှ တိကျသောကုဒ် သုံး; မသေချာလျှင် from=auto နှင့် strict default (false)။"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API အမှား 103 ကို မည်သို့ဖြေရှင်းမည်နည်း?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ဘာသာပြန်စာသား ရှည်လွန်း။ တောင်းဆိုမှုတစ်ခုလျှင် အက္ခရာ ကန့်သတ်ချက် ကျော် (model/document interface i ≤ 5000)။ ဝါကျ / စာပိုဒ်အလိုက် ခွဲ၍ batch ဖြင့်ပို့; ရှည်သော document များ document-translation interface ဖြင့်။"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API အမှား 108 ကို မည်သို့ဖြေရှင်းမည်နည်း?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "မမှန်ကန်သော အက်ပ် ID။ အကောင့်မှတ်ပုံတင်, console တွင် အက်ပ်ဖန်တီး၍ ဝန်ဆောင်မှုချိတ် - appKey နှင့် appSecret ရ။ appKey တွင် အက္ခရာ ပျောက် / space; သို့မဟုတ် ဝန်ဆောင်မှု instance မပါသော အက်ပ်; တစ်ခါတစ်ရံ လက်မှတ် သက်တမ်းကုန် (curtime သည် server အချိန်နှင့် ဝေးလွန်း, ~120s)။ appKey စစ် (space မပါ); ချိတ်ထားသော instance အတည်ပြု; curtime လက်ရှိ စက္ကန့်။"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API အမှား 110 ကို မည်သို့ဖြေရှင်းမည်နည်း?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "မှန်ကန်သော ဝန်ဆောင်မှု instance မရှိ: အက်ပ် instance မချိတ်ရ, ဖန်တီး၍ ချိတ်။ အသံထွက်အတွက် သီးခြား TTS instance လို။ အက်ပ်တစ်ခုစီ ဝန်ဆောင်မှုတစ်ခုစီ instance တစ်ခု ချိတ် - ဘာသာပြန် / TTS / OCR သီးခြား; ဘာသာပြန်သာ ချိတ်၍ voice တောင်း → 110။ console တွင် ဝန်ဆောင်မှုတစ်ခုစီ instance ချိတ် (ဘာသာပြန် / TTS / OCR)။"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API အမှား 111 ကို မည်သို့ဖြေရှင်းမည်နည်း?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "မမှန်ကန်သော developer အကောင့်။ developer အတည်ပြုခြင်း မရှိသော အကောင့်, ပုံမှန်မဟုတ်သော အခြေအနေ သို့မဟုတ် risk control။ console တွင် အခြေအနေနှင့် တကယ် / developer အတည်ပြုခြင်း စစ်; လိုအပ်လျှင် ticket။"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">ဘာသာ: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <strong>မြန်မာ</strong></nav>
+<h1>Youdao Zhiyun API အမှားကုဒ်များ / ဘာသာပြန် API စစ်ဆေးခြင်း</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_my.webp"><img src="/img/cover_my.png" alt="Youdao Zhiyun API အမှားကုဒ် ရှာဖွေရေးကိရိယာ ပုံ" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>ပုံ: Youdao Zhiyun API အမှားကုဒ် ရှာဖွေခြင်း (L1 တရားဝင် + L2 အရင်းခံအကြောင်းရင်း + နှိုင်းယှဉ်)</figcaption></figure>
+<p><strong>Youdao Zhiyun</strong> ၏ ဘာသာပြန် / အဘိဓာန် / OCR / TTS interface က <code>errorCode</code> ပြန်ပို့သလား? အရင်ဆုံး သုံးချက်ကို ရှင်းလင်းပါ: <strong>client စစ်ဆေးနိုင်သော ပါရာမီတာ/လက်မှတ် ပြဿနာလား, သို့မဟုတ် server/ငွေတောင်းခံမှု လား</strong>, <strong>လက်မှတ် string ၏ အစီအစဉ်နှင့် ကုဒ်ပြုလုပ်ခြင်း မှန်ကန်လား</strong>, နှင့် <strong>QPS ကျော်လွန်လား</strong>။ <strong>အမှားကုဒ် သို့မဟုတ် သော့ချက်စကားလုံး</strong> ထည့်ပါ (ဥပမာ <code>202</code>, <code>411</code>, <code>108</code>, <code>လက်မှတ်</code>, <code>ကန့်သတ်</code>, <code>timestamp</code>): အရင်ဆုံး <strong>L1 တရားဝင်အဓိပ္ပာယ်</strong>, ထို့နောက် <strong>L2 အရင်းခံအကြောင်းရင်းနှင့် စစ်ဆေးခြင်း</strong>, နောက်ဆုံး ပြိုင်ဘက်နှိုင်းယှဉ်ချက် နှင့် အမှန်တကယ်ဖြစ်ရပ်များ။ တရားဝင်စာရွက်စာတမ်း <a href="https://yoidao.com/">Youdao Zhiyun API ပေါင်းစပ်လမ်းညွှန် / အမှားကုဒ်များ</a> တွင်။</p>
+<input id="q" placeholder="ကုဒ် သို့မဟုတ် သော့ချက်စကားလုံး ထည့်ပါ ဥပမာ 202 / 411 / 108 / လက်မှတ် / timestamp / ကန့်သတ်" autocomplete="off">
+<button id="go">ရှာဖွေ</button>
+<div id="out"></div>
+<h2>အဆင့် 1: ကုဒ်အပိုင်းအခြားအလိုက် ခွဲခြားပါ (L1 - အရင်ဆုံး ဘယ်သူ့အမှားလဲ)</h2>
+<p>Youdao Zhiyun ၏ <code>errorCode</code> သည် ခန့်မှန်းခြေ အပိုင်းအခြားလေးခု ခွဲခြားသည်; မျက်ကန်းစမ်းမသပ်မီ နေရာသတ်မှတ်ပါ: ① <strong>1xx ပါရာမီတာ</strong> (101 မရှိ / 102 ဘာသာ / 103 ရှည် / 113 q ဗလာ / 116 strict) - client က မဖြစ်မနေနှင့် တန်ဖိုးများ စစ်ဆေး; ② <strong>2xx အတည်ပြုခြင်းနှင့် လက်မှတ်</strong> (108 ID / 202 လက်မှတ် / 203 IP / 205 ပလက်ဖောင်း / 206 timestamp / 207 ပြန်ဖွင့်) - လက်မှတ် string နှင့် အထောက်အထားများ စစ်ဆေး; ③ <strong>3xx/5xx server</strong> (303 / 500 / 902000) - <code>request_id</code> ဖြင့် ပြန်ကြိုးစား သို့မဟုတ် ticket; ④ <strong>4xx အကောင့်/ငွေတောင်းခံ/ကန့်သတ်</strong> (401 လက်ကျန် / 411 / 412) - လက်ကျန်နှင့် QPS စစ်ဆေး။ နောက်ထပ် <a href="https://yoidao.com/sign">v3 လက်မှတ် ဖန်တီးခြင်းနှင့် 202 စစ်ဆေးခြင်း</a> တွင်။</p>
+<div class="cat"><div class="catbox"><b>ပါရာမီတာ</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>client စစ်ဆေး: မဖြစ်မနေ fields ပြည့်စုံ (q/from/to/appKey/sign/signType/curtime/salt), ဘာသာကုဒ် zh-CHS / en / auto, q ဗလာမဟုတ်/ရှည်လွန်းမဟုတ်, strict true/false။</div></div><div class="catbox"><b>အတည်ပြု / လက်မှတ်</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>appKey+input+salt+curtime+appSecret ၏ SHA256; စက္ကန့်ဖြင့် UTF curtime, ပြန်ဖွင့်ကာကွယ် UUID salt; IP whitelist ပလက်ဖောင်းအမျိုးအစားနှင့် ကိုက်ညီ။</div></div><div class="catbox"><b>ဝန်ဆောင်မှု / instance</b><span class="cs">110 · 310</span><div>အက်ပ်တစ်ခုစီ ဝန်ဆောင်မှုတစ်ခုစီ instance တစ်ခု ချိတ် (ဘာသာပြန် / TTS / OCR သီးခြား); domain ဘာသာပြန်ကို console တွင် အရင်ဖွင့်။</div></div><div class="catbox"><b>အကောင့် / ငွေတောင်းခံ / ကန့်သတ်</b><span class="cs">401 · 411 · 412</span><div>လက်ကျန် / အက္ခရာ package မကုန်စေနဲ့ (401 ဝန်ဆောင်မှု ရပ်); QPS (အခြေခံ ~100) ကျော် = 411: token bucket + exponential backoff။</div></div><div class="catbox"><b>ရလဒ် / ဖွင့်ကုဒ် / အခြား</b><span class="cs">201 · 303 · 500 · 902000</span><div>server အမှားများ: request_id ဖြင့် ပြန်ကြိုးစား သို့မဟုတ် ticket; ကုဒ်ဝှက် interface တွင် DES / BASE64 / URLDecode အစီအစဉ် စစ်ဆေး။</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API အမှားကုဒ် စစ်ဆေးမှု ဆုံးဖြတ်ချက် ပုံ" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">errorCode စစ်ဆေးမှု စီးဆင်းမှု (အရင်ဆုံး အပိုင်းအခြားအလိုက်, ထို့နောက် client / server)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode လက်ခံ</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">အပိုင်းအခြားအလိုက် ခွဲ</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">client စစ်နိုင် →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx ပါရာမီတာ · 2xx အတည်ပြု-လက်မှတ်</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">server / ငွေတောင်းခံ →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx ခြွင်းချက် · 4xx လက်ကျန်/ကန့်သတ်</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">အမျိုးအစား ငါးခု (တရားဝင် L1 / အကြောင်းရင်း L2 ကြည့်)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① ပါရာမီတာ</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② အတည်ပြု / လက်မှတ်</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ အကောင့် / ကန့်သတ်</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ ဝန်ဆောင်မှု / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>ပုံ 1: Youdao Zhiyun errorCode စစ်ဆေးမှု စီးဆင်းမှု - အရင်ဆုံး အပိုင်းအခြားအလိုက်, ထို့နောက် client / server</figcaption></figure>
+<h2>အဆင့် 2: အဖြစ်များဆုံး ထောင်ချောက်နှစ်ခု → အရင်းခံအကြောင်းရင်း (L2: လက်မှတ် 202 နှင့် ကန့်သတ် 411)</h2>
+<p>အဓိက: <strong>Youdao API အမှားများ၏ 90% သည် «လက်မှတ် 202» နှင့် «ကန့်သတ် 411» တွင် ပိတ်နေသည်</strong>။ 202 သည် ရှားရှားပါးပါး သော့မှား; များသောအားဖြင့် မှားယွင်းတည်ဆောက်ထားသော <strong>v3 လက်မှတ် string</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, q&gt;20 ဖြစ်လျှင် <code>input</code> သည် «ပထမ 10 လုံး + q အရှည် + နောက်ဆုံး 10 လုံး» ယူသည် (byte မဟုတ်, Unicode အက္ခရာအလိုက်), ≤20 ဖြစ်လျှင် q။ UTF-8 ကုဒ်, အစီအစဉ်နှင့် space များ ထပ်ပေါင်း။ 411 သည် အစီအစဉ်ထက် ကျော်သော QPS: client တွင် နှုန်းကန့်သတ် + backoff။ အောက်တွင် ကိုယ်တိုင်စစ်ဆေးချက် panel, ထို့နောက် နှိုင်းယှဉ်ချက်နှင့် 2026 ခန့်မှန်းချက်များ။</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API ခေါ်မီ ကိုယ်တိုင်စစ်ဆေးချက် panel ပုံ" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">လက်မှတ် / ပါရာမီတာ ကိုယ်တိုင်စစ်ဆေးချက် panel (အစိမ်း = အတည်ပြု / အနီ = အလွယ်တကူ လွတ်)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">အချက်</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">ဆုံးဖြတ်ချက်</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">အခြေအနေ</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">မဖြစ်မနေ fields ပြည့်စုံ (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 မဖြစ်မနေ</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">အတည်ပြု</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ဘာသာကုဒ် မှန်ကန် (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">ဇယားနှင့်</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">အတည်ပြု</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">လက်မှတ် အစီအစဉ် appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·သေး</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">အတည်ပြု</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">input ရှည် ဖြတ်တောက် (10+အရှည်+10·အက္ခရာအလိုက်)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">မကြာခဏ မှား</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">စစ်ဆေး</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTF စက္ကန့် + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">206/207 ကာကွယ်</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">အတည်ပြု</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ အစီအစဉ်ကန့်သတ် (အခြေခံ ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">411 ဖြစ်စေ</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">စစ်ဆေး</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">မှတ်ချက်: အနီ = အလွတ်ဆုံး နှစ်ခု - input ရှည် ဖြတ်တောက် (202 အကြောင်းရင်း) နှင့် QPS ကန့်သတ် (411); production မတင်မီ အမှန်တကယ် တစ်ပြိုင်နက်ဖြင့် load test လုပ်ပါ။</text></svg><figcaption>ပုံ 2: ခေါ်မီ လက်မှတ် / ပါရာမီတာ ကိုယ်တိုင်စစ်ဆေးချက် panel (အစိမ်း = အတည်ပြု / အနီ = အလွယ်တကူ လွတ်)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_my.webp"><img src="/img/board_my.png" alt="Youdao Zhiyun API လက်မှတ်/ပါရာမီတာ ကိုယ်တိုင်စစ်ဆေးချက် panel ပုံ" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>ပုံ: curtime / salt ဖြင့် လက်မှတ် string ကို အရင်စစ်, ထို့နောက် QPS နှင့် instance ချိတ်ဆက်ခြင်း - 202 နှင့် 411 အလွတ်ဆုံး</figcaption></figure>
+<h2>အမှားကုဒ် ဇယားအပြည့်အစုံ (L1 တရားဝင် · L2 အရင်းခံအကြောင်းရင်း)</h2>
+<table id="tbl"></table>
+<h2>ပြိုင်ဘက် ဘာသာပြန် API နှိုင်းယှဉ်ချက် (လက်မှတ် / ကုဒ်များ / အခမဲ့ကိုတာ · အများသုံးဒေတာ)</h2>
+<table class="cmp"><tr><th>ဝန်ဆောင်မှု</th><th>လက်မှတ် / အတည်ပြု</th><th>ကုဒ် ပုံစံ</th><th>အခမဲ့ကိုတာ (ခန့်)</th><th>QPS / ကြိမ်နှုန်း (ခန့်)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 လုံး (101 / 202 / 411)</td><td>ဝန်ဆောင်မှုတစ်ခုစီ စမ်းသပ်ကိုတာ</td><td>အခြေခံ ~100 QPS (တိုးနိုင်)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 သေး (appid+q+salt+key)</td><td>5 လုံး (52001 / 54001 / 54003 / 58001)</td><td>standard အခမဲ့</td><td>standard 1 / advanced 10 / premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>string (RequestLimitExceeded / NoFreeAmount)</td><td>လ 5 သန်း အက္ခရာ</td><td>default စက္ကန့် 5</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (ယေဘုယျ RPC / ROA လက်မှတ်)</td><td>string (ဥပမာ InvalidApiKey)</td><td>လစဉ် အခမဲ့ကိုတာ (version အလိုက်)</td><td>QPS ကိုတာ အလိုက်</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP status + reason (403 / 429)</td><td>လ 5 သိန်း အက္ခရာ (v2)</td><td>project ကိုတာ အလိုက်</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key header</td><td>HTTP (403 / 456 / 429)</td><td>Free လ 5 သိန်း အက္ခရာ</td><td>plan အလိုက်</td></tr></table><section class="i4data">
+<h2>ဘာသာပြန် API အမှား စီမံခန့်ခွဲမှုနှင့် ကိုတာ (ခန့်မှန်း 2026)</h2>
+<p>platform များ၏ တရားဝင်စာရွက်စာတမ်း (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL) မှ <strong>2026</strong> ခန့်မှန်းချက်: ကတိပြုသော သို့မဟုတ် တိုက်ရိုက်တိုင်းတာသော တန်ဖိုးများ မဟုတ်, ကိုးကားရန်သာ; ကိုတာနှင့် QPS သည် တရားဝင်မူဝါဒအလိုက် ပြောင်း:</p>
+<table>
+<tr><th>အတိုင်းအတာ</th><th>ခန့်မှန်း / နှိုင်းယှဉ်</th></tr>
+<tr><td>လက်မှတ် algorithm (အတည်ပြု)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL Auth-Key header</td></tr>
+<tr><td>အခမဲ့ကိုတာ (လ · ခန့်)</td><td>Tencent <strong>5 သန်း အက္ခရာ</strong> &gt; Google / DeepL <strong>5 သိန်း</strong> &gt; Baidu standard အခမဲ့ (QPS=1); Youdao ဝန်ဆောင်မှုတစ်ခုစီ စမ်းသပ်ကိုတာ, console အလိုက်</td></tr>
+<tr><td>QPS / ကြိမ်နှုန်း ကန့်သတ် (ခန့်)</td><td>Youdao အခြေခံ ~<strong>100</strong> (တိုးနိုင်) · Baidu standard 1 / advanced 10 / premium 100 · Tencent <strong>5/စက္ကန့်</strong></td></tr>
+<tr><td>စာသားတစ်ခုလျှင် အများဆုံးအရှည် (ခန့်)</td><td>Youdao model / document <strong>i ≤ 5000</strong> · Tencent တောင်းဆိုမှုတစ်ခု &lt; 6000 (ရှည်လျှင် document / batch)</td></tr>
+<tr><td>အဖြစ်များဆုံး ကုဒ်များ (community · ခန့်)</td><td><strong>202 လက်မှတ်</strong> &gt; <strong>411 ကန့်သတ်</strong> &gt; 108 / 110 ချိတ်ဆက် &gt; 206 timestamp အမှားများတွင် ဦးဆောင်</td></tr>
+</table>
+<p><small>ခန့်မှန်းအခြေခံ: ကိုးကားရင်းမြစ်များ + အချိန်အလိုက် ခန့်မှန်းတွက်ချက် (Youdao / Baidu / Tencent / Alibaba / Google / DeepL ၏ 2026 တရားဝင်စာရွက်); မူဝါဒနှင့် version အလိုက် ပြောင်း; နောက်ဆုံးတရားဝင် console အဓိက။</small></p>
+</section>
+<h2>အမှန်တကယ်အခြေအနေအလိုက် မြန်ဆန်စစ်ဆေးခြင်း</h2>
+<ul class="scenes"><li>local တွင် အလုပ်လုပ်, ဒါပေမယ့် cloud/container တွင် 206 များ: container နာရီ ရွေ့သွားပြီး curtime ကို မမှန်စေ (လက်မှတ် ~120s) → NTP ဖွင့်, နာရီကို host နှင့် sync; curtime အဟောင်း cache မလုပ်နဲ့။</li><li>အင်္ဂလိပ် ကောင်းကောင်းဘာသာပြန်, တရုတ်ရှည် တစ်ခါတစ်ရံ 202: truncation က multibyte ကို «byte» အလိုက် ဖြတ်ခဲ့ → input သည် Unicode အက္ခရာ ရေတွက်ရမည် (q&gt;20: 10 + အရှည် + 10)။</li><li>salt သေချာ သို့မဟုတ် တိုးနေ နှင့် ဒုတိယခေါ်ဆိုမှုတွင် 207: salt သည် အကြိမ်တိုင်း ကျပန်း (UUID) ဖြစ်ရမည် နှင့် curtime refresh; retry တွင် ပြန်လက်မှတ်ထိုး။</li><li>load test တွင် တစ်ပြိုင်နက် ထိပ်ဆုံး → 411 များ: အခြေခံ QPS ~100 ကျော် → client တွင် token bucket + backoff, သို့မဟုတ် console တွင် QPS ဝယ်။</li><li>အက်ပ်အသစ်က အသံထွက် ခေါ်ပြီး 110 ရ: ဘာသာပြန် instance ချိတ်, TTS မချိတ် → console တွင် ဝန်ဆောင်မှုတစ်ခုစီ instance ချိတ်။</li><li>ရုတ်တရက် အားလုံး 401: အက္ခရာ package / လက်ကျန် ကုန် → ငွေဖြည့် နှင့် လက်ကျန် alert သတ်မှတ်; အရေးကြီးလမ်းတွင် backup channel ထား။</li><li>Baidu မှ ပြောင်းရွှေ့ရာတွင် တူညီသော ထောင်ချောက်: လက်မှတ်မထိုးမီ q ကို URL-encode လုပ်ခဲ့ → Youdao v3 သည် input ဖြင့် လက်မှတ်ထိုး (ဖြတ်တောက်စည်းမျဉ်း), encode လုပ်ထားသော q မဟုတ်; အရင်လက်မှတ်ထိုး, ပို့သည့်အခါ q encode။</li></ul><div class="related"><h2>ဆက်စပ်</h2><ul><li><a href="https://yoidao.com/">Youdao Zhiyun API ပေါင်းစပ်လမ်းညွှန် / အမှားကုဒ်များ</a></li><li><a href="https://yoidao.com/sign">v3 လက်မှတ် ဖန်တီးခြင်းနှင့် 202 စစ်ဆေးခြင်း</a></li><li><a href="https://yoydao.com/">Youdao API developer tools (ညီအစ်ကို site)</a></li></ul></div></main>
+<footer>အမှားကုဒ်များနှင့် v3 လက်မှတ် algorithm ကို Youdao Zhiyun AI ပွင့်လင်းပလက်ဖောင်း၏ တရားဝင်စာရွက်စာတမ်း (ai.youdao.com) မှ စုစည်းသည်; ပြိုင်ဘက် လက်မှတ်/ကုဒ်/ကိုတာ နှိုင်းယှဉ်ချက်ကို Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation နှင့် DeepL ၏ တရားဝင်စာရွက်စာတမ်းများအပေါ် အခြေခံသည်။ 2026 ကိုတာ/QPS/စျေးနှုန်းများသည် ခန့်မှန်းချက်များဖြစ်ပြီး ကတိပြုသော သို့မဟုတ် တိုက်ရိုက်တိုင်းတာသော တန်ဖိုးများ မဟုတ်; ကိုးကားရန်သာ, ဝန်ဆောင်မှုပေးသူတစ်ဦးစီ၏ နောက်ဆုံးတရားဝင် console သည် အဓိက။ မြန်မာစာမျက်နှာ: zh/en 母版 မှ LLM ဒေသသုံးပြုလုပ်ခြင်း (တရားမဝင်, ဇာတိစကားပြောသူ စစ်ဆေးရန် ကျန်ရှိ)။<br>ပွင့်လင်းရင်းမြစ်ပရောဂျက် · MIT လိုင်စင်</footer>
+</div>
+<script src="/my/codes.js"></script><script src="/app.js"></script>
+</body></html>
