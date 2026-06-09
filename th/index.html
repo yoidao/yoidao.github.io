@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ค้นหารหัสข้อผิดพลาด API Youdao Zhiyun - แก้ 202/411/108 ของ API แปลภาษา + ลายเซ็น v3 และคู่แข่ง</title>
+<meta name="description" content="API แปลภาษา Youdao (Zhiyun) คืนค่า errorCode? ค้นหารหัส (101 ขาดพารามิเตอร์ / 102 ภาษา / 103 ยาวเกิน / 108 App ID / 110 ยังไม่ผูก instance / 202 ลายเซ็นล้มเหลว / 203 IP / 206 timestamp / 207 รีเพลย์ / 401 ยอดเงิน / 411 จำกัดอัตรา) เพื่อดูความหมายทางการ L1 และต้นเหตุ L2: ลายเซ็น v3 sha256(appKey+input+salt+curtime+appSecret), กับดักการตัด/เข้ารหัส/ลำดับของ input, curtime UTC เป็นวินาที, salt UUID กันรีเพลย์, การผูก instance ตามบริการ และ backoff ของ QPS พร้อมเปรียบเทียบ Youdao กับ Baidu/Tencent/Alibaba/Google/DeepL และประมาณการโควตาฟรีและ QPS ปี 2026">
+<link rel="canonical" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "ค้นหารหัสข้อผิดพลาด API Youdao Zhiyun",
+   "url": "https://yoidao.github.io/th/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "th",
+   "description": "API แปลภาษา Youdao (Zhiyun) คืนค่า errorCode? ค้นหารหัส (101 ขาดพารามิเตอร์ / 102 ภาษา / 103 ยาวเกิน / 108 App ID / 110 ยังไม่ผูก instance / 202 ลายเซ็นล้มเหลว / 203 IP / 206 timestamp / 207 รีเพลย์ / 401 ยอดเงิน / 411 จำกัดอัตรา) เพื่อดูความหมายทางการ L1 และต้นเหตุ L2: ลายเซ็น v3 sha256(appKey+input+salt+curtime+appSecret), กับดักการตัด/เข้ารหัส/ลำดับของ input, curtime UTC เป็นวินาที, salt UUID กันรีเพลย์, การผูก instance ตามบริการ และ backoff ของ QPS พร้อมเปรียบเทียบ Youdao กับ Baidu/Tencent/Alibaba/Google/DeepL และประมาณการโควตาฟรีและ QPS ปี 2026",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "th",
+   "url": "https://yoidao.github.io/th/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "จะแก้ข้อผิดพลาด 101 ของ API Youdao Zhiyun อย่างไร?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ขาดพารามิเตอร์บังคับ ตรวจให้ครบก่อน แล้วเช็กการสะกด (ตัวพิมพ์ใหญ่/เล็ก) v3 ต้องการ 8 ตัว: q、from、to、appKey、salt、sign、signType、curtime ขาดตัวใดหรือชื่อผิด = 101; v1 ไม่มี curtime / signType (ลืมบ่อยสุดเมื่อย้าย) เทียบกับตารางพารามิเตอร์ทางการ; ยืนยันมี signType=v3 และ curtime (timestamp วินาที)"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "จะแก้ข้อผิดพลาด 102 ของ API Youdao Zhiyun อย่างไร?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ประเภทภาษาไม่รองรับ Youdao ใช้ zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn ไม่รู้จัก; strict=true กับทิศทางที่ไม่รองรับก็ผิด ใช้รหัสที่ถูกต้องจากตารางทางการ; ถ้าไม่แน่ใจ from=auto และ strict ค่าเริ่มต้น (false)"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "จะแก้ข้อผิดพลาด 103 ของ API Youdao Zhiyun อย่างไร?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ข้อความที่จะแปลยาวเกินไป เกินขีดจำกัดอักขระต่อคำขอ (อินเทอร์เฟซโมเดล/เอกสาร i ≤ 5000) แบ่งตามประโยค / ย่อหน้าแล้วส่งเป็นชุด; เอกสารยาวใช้อินเทอร์เฟซแปลเอกสาร"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "จะแก้ข้อผิดพลาด 108 ของ API Youdao Zhiyun อย่างไร?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "App ID ไม่ถูกต้อง ลงทะเบียนบัญชี สร้างแอปในคอนโซลและผูกบริการเพื่อรับ appKey และ appSecret appKey ตกอักขระ / มีช่องว่าง; หรือแอปไม่มี instance บริการ; บางครั้งลายเซ็นหมดอายุ (curtime ห่างเวลาเซิร์ฟเวอร์มาก ~120s) ตรวจ appKey (ไม่มีช่องว่าง); ยืนยัน instance ที่ผูก; curtime ปัจจุบันเป็นวินาที"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "จะแก้ข้อผิดพลาด 110 ของ API Youdao Zhiyun อย่างไร?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ไม่มี instance บริการที่ใช้ได้: แอปยังไม่ผูก instance สร้างและผูก การออกเสียงต้องมี instance TTS แยก แต่ละแอปผูกหนึ่ง instance ต่อบริการ - แปล / TTS / OCR แยกกัน; ผูกแค่แปลแล้วขอ voice → 110 ผูกแต่ละ instance ต่อบริการในคอนโซล (แปล / TTS / OCR)"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "จะแก้ข้อผิดพลาด 111 ของ API Youdao Zhiyun อย่างไร?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "บัญชีนักพัฒนาไม่ถูกต้อง บัญชีไม่ได้ยืนยันนักพัฒนา สถานะผิดปกติ หรืออยู่ในการควบคุมความเสี่ยง ตรวจสถานะและการยืนยันจริง / นักพัฒนาในคอนโซล; เปิด ticket ถ้าจำเป็น"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">ภาษา: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <strong>ไทย</strong> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>รหัสข้อผิดพลาด API Youdao Zhiyun / วินิจฉัย API แปลภาษา</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_th.webp"><img src="/img/cover_th.png" alt="ภาพประกอบเครื่องมือค้นหารหัสข้อผิดพลาด API Youdao Zhiyun" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>รูป: ค้นหารหัสข้อผิดพลาด API Youdao Zhiyun (L1 ทางการ + L2 ต้นเหตุ + เปรียบเทียบ)</figcaption></figure>
+<p>อินเทอร์เฟซแปล / พจนานุกรม / OCR / TTS ของ <strong>Youdao Zhiyun</strong> คืนค่า <code>errorCode</code>? ก่อนอื่นทำสามอย่างให้ชัด: <strong>เป็นปัญหาพารามิเตอร์/ลายเซ็นที่ฝั่งไคลเอนต์ตรวจได้ หรือฝั่งเซิร์ฟเวอร์/การเรียกเก็บเงิน</strong>, <strong>ลำดับและการเข้ารหัสของสตริงลายเซ็นถูกต้องหรือไม่</strong> และ <strong>QPS เกินหรือไม่</strong> กรอก <strong>รหัสข้อผิดพลาดหรือคำสำคัญ</strong> (เช่น <code>202</code>, <code>411</code>, <code>108</code>, <code>ลายเซ็น</code>, <code>จำกัด</code>, <code>timestamp</code>): ก่อนคือ <strong>ความหมายทางการ L1</strong> จากนั้น <strong>ต้นเหตุและการวินิจฉัย L2</strong> สุดท้ายคือการเปรียบเทียบคู่แข่งและกรณีจริง เอกสารทางการที่ <a href="https://yoidao.com/">คู่มือเชื่อมต่อ / รหัสข้อผิดพลาด Youdao Zhiyun</a></p>
+<input id="q" placeholder="กรอกรหัสหรือคำสำคัญ เช่น 202 / 411 / 108 / ลายเซ็น / timestamp / จำกัด" autocomplete="off">
+<button id="go">ค้นหา</button>
+<div id="out"></div>
+<h2>ขั้นที่ 1: แยกตามช่วงรหัส (L1 - ก่อนอื่นเป็นความผิดของใคร)</h2>
+<p><code>errorCode</code> ของ Youdao Zhiyun แบ่งคร่าว ๆ เป็นสี่ช่วง; ระบุก่อนแทนการลองมั่ว: ① <strong>1xx พารามิเตอร์</strong> (101 ขาด / 102 ภาษา / 103 ยาว / 113 q ว่าง / 116 strict) - ไคลเอนต์ตรวจฟิลด์บังคับและค่า; ② <strong>2xx ยืนยันตัวตนและลายเซ็น</strong> (108 ID / 202 ลายเซ็น / 203 IP / 205 แพลตฟอร์ม / 206 timestamp / 207 รีเพลย์) - ตรวจสตริงลายเซ็นและข้อมูลรับรอง; ③ <strong>3xx/5xx เซิร์ฟเวอร์</strong> (303 / 500 / 902000) - ลองใหม่ด้วย <code>request_id</code> หรือเปิด ticket; ④ <strong>4xx บัญชี/เรียกเก็บเงิน/จำกัด</strong> (401 ยอดเงิน / 411 / 412) - ตรวจยอดเงินและ QPS เพิ่มเติมที่ <a href="https://yoidao.com/sign">การสร้างลายเซ็น v3 และวินิจฉัย 202</a></p>
+<div class="cat"><div class="catbox"><b>พารามิเตอร์</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>ตรวจฝั่งไคลเอนต์: ฟิลด์บังคับครบ (q/from/to/appKey/sign/signType/curtime/salt), รหัสภาษา zh-CHS / en / auto, q ไม่ว่าง/ไม่ยาวเกิน, strict true/false</div></div><div class="catbox"><b>ยืนยันตัวตน / ลายเซ็น</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 ของ appKey+input+salt+curtime+appSecret; curtime UTC เป็นวินาที, salt UUID กันรีเพลย์; whitelist IP สอดคล้องประเภทแพลตฟอร์ม</div></div><div class="catbox"><b>บริการ / instance</b><span class="cs">110 · 310</span><div>แต่ละแอปผูกหนึ่ง instance ต่อบริการ (แปล / TTS / OCR แยกกัน); การแปลเฉพาะโดเมนเปิดใช้ในคอนโซลก่อน</div></div><div class="catbox"><b>บัญชี / เรียกเก็บเงิน / จำกัด</b><span class="cs">401 · 411 · 412</span><div>อย่าใช้ยอดเงิน / แพ็กอักขระจนหมด (401 หยุดบริการ); QPS (พื้นฐาน ~100) เกิน = 411: token bucket + backoff แบบเอ็กซ์โพเนนเชียล</div></div><div class="catbox"><b>ผลลัพธ์ / ถอดรหัส / อื่น ๆ</b><span class="cs">201 · 303 · 500 · 902000</span><div>ข้อผิดพลาดเซิร์ฟเวอร์: ลองใหม่ด้วย request_id หรือ ticket; อินเทอร์เฟซเข้ารหัสตรวจลำดับ DES / BASE64 / URLDecode</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ผังการตัดสินใจวินิจฉัยรหัสข้อผิดพลาด API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">ผังวินิจฉัย errorCode (ก่อนตามช่วง แล้วจึงไคลเอนต์ / เซิร์ฟเวอร์)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">ได้รับ errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">แยกตามช่วง</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">ไคลเอนต์ตรวจได้ →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx พารามิเตอร์ · 2xx ยืนยันตัวตน-ลายเซ็น</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">เซิร์ฟเวอร์ / เรียกเก็บเงิน →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx ข้อยกเว้น · 4xx ยอดเงิน/จำกัด</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">ห้าหมวด (ดูทางการ L1 / ต้นเหตุ L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① พารามิเตอร์</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② ยืนยันตัวตน / ลายเซ็น</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ บัญชี / จำกัด</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ บริการ / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>รูปที่ 1: ผังวินิจฉัย errorCode ของ Youdao Zhiyun - ก่อนตามช่วง แล้วจึงไคลเอนต์ / เซิร์ฟเวอร์</figcaption></figure>
+<h2>ขั้นที่ 2: สองกับดักที่พบบ่อยที่สุด → ต้นเหตุ (L2: ลายเซ็น 202 และจำกัด 411)</h2>
+<p>หัวใจ: <strong>90% ของข้อผิดพลาด API Youdao ติดอยู่ที่ «ลายเซ็น 202» และ «จำกัด 411»</strong> 202 ไม่ค่อยเกิดจากคีย์ผิด แต่มักเป็น <strong>สตริงลายเซ็น v3</strong> ที่ประกอบผิด - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code> โดย <code>input</code> เมื่อ q&gt;20 ใช้ «10 อักขระแรก + ความยาว q + 10 อักขระท้าย» (ตามอักขระ Unicode ไม่ใช่ไบต์) และ q เมื่อ ≤20 บวกการเข้ารหัส UTF-8 ลำดับ และช่องว่าง ส่วน 411 คือ QPS เกินแพ็กเกจ: จำกัดอัตรา + backoff ที่ไคลเอนต์ ด้านล่างคือแผงตรวจสอบตนเอง ตามด้วยการเปรียบเทียบและประมาณการปี 2026</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ภาพประกอบแผงตรวจสอบตนเองก่อนเรียก API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">แผงตรวจสอบตนเองลายเซ็น / พารามิเตอร์ (เขียว = ยืนยันแล้ว / แดง = พลาดง่าย)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">รายการ</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">การตัดสิน</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">สถานะ</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ฟิลด์บังคับครบ (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 บังคับ</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ยืนยันแล้ว</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">รหัสภาษาถูกต้อง (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">เทียบตาราง</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ยืนยันแล้ว</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ลำดับลายเซ็น appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·พิมพ์เล็ก</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ยืนยันแล้ว</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">การตัด input ยาว (10+ความยาว+10·ตามอักขระ)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">ผิดบ่อย</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">ต้องตรวจ</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC วินาที + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">กัน 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ยืนยันแล้ว</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ ขีดจำกัดแพ็กเกจ (พื้นฐาน ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">ทำให้เกิด 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">ต้องตรวจ</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">หมายเหตุ: สีแดงคือสองสิ่งที่พลาดบ่อยที่สุด - การตัด input ยาว (ต้นเหตุ 202) และขีดจำกัด QPS (411); ก่อนขึ้นโปรดักชันให้ทดสอบโหลดด้วยการทำงานพร้อมกันจริง</text></svg><figcaption>รูปที่ 2: แผงตรวจสอบตนเองลายเซ็น / พารามิเตอร์ก่อนเรียก (เขียว = ยืนยันแล้ว / แดง = พลาดง่าย)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_th.webp"><img src="/img/board_th.png" alt="ภาพประกอบแผงตรวจสอบตนเองลายเซ็น/พารามิเตอร์ API Youdao Zhiyun" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>รูป: ตรวจสตริงลายเซ็นกับ curtime / salt ก่อน แล้วจึง QPS และการผูก instance - 202 และ 411 พลาดบ่อยที่สุด</figcaption></figure>
+<h2>ตารางรหัสข้อผิดพลาดทั้งหมด (L1 ทางการ · L2 ต้นเหตุ)</h2>
+<table id="tbl"></table>
+<h2>เปรียบเทียบ API แปลภาษาคู่แข่ง (ลายเซ็น / รหัส / โควตาฟรี · ข้อมูลสาธารณะ)</h2>
+<table class="cmp"><tr><th>บริการ</th><th>ลายเซ็น / ยืนยันตัวตน</th><th>รูปแบบรหัส</th><th>โควตาฟรี (ประมาณ)</th><th>QPS / ความถี่ (ประมาณ)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 หลัก (101 / 202 / 411)</td><td>โควตาทดลองต่อบริการ</td><td>พื้นฐาน ~100 QPS (เพิ่มได้)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 พิมพ์เล็ก (appid+q+salt+คีย์)</td><td>5 หลัก (52001 / 54001 / 54003 / 58001)</td><td>มาตรฐานฟรี</td><td>มาตรฐาน 1 / สูง 10 / พรีเมียม 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>สตริง (RequestLimitExceeded / NoFreeAmount)</td><td>5 ล้านอักขระ/เดือน</td><td>5 ต่อวินาที ค่าเริ่มต้น</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (ลายเซ็นทั่วไป RPC / ROA)</td><td>สตริง (เช่น InvalidApiKey)</td><td>โควตาฟรีรายเดือน (ตามเวอร์ชัน)</td><td>ตามโควตา QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>สถานะ HTTP + reason (403 / 429)</td><td>500k อักขระ/เดือน (v2)</td><td>ตามโควตาโปรเจกต์</td></tr><tr><td>DeepL API</td><td>ส่วนหัว DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k อักขระ/เดือน</td><td>ตามแผน</td></tr></table><section class="i4data">
+<h2>การจัดการข้อผิดพลาดและโควตาของ API แปลภาษา (ประมาณ 2026)</h2>
+<p>ประมาณการ <strong>2026</strong> จากเอกสารทางการของแต่ละแพลตฟอร์ม (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): ไม่ใช่ค่าที่รับประกันหรือวัดเองโดยตรง ใช้อ้างอิงเท่านั้น; โควตาและ QPS เปลี่ยนตามนโยบายทางการ:</p>
+<table>
+<tr><th>มิติ</th><th>ประมาณ / เปรียบเทียบ</th></tr>
+<tr><td>อัลกอริทึมลายเซ็น (ยืนยันตัวตน)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL ส่วนหัว Auth-Key</td></tr>
+<tr><td>โควตาฟรี (เดือน · ประมาณ)</td><td>Tencent <strong>5 ล้านอักขระ</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu มาตรฐานฟรี (QPS=1); Youdao โควตาทดลองต่อบริการ ตามคอนโซล</td></tr>
+<tr><td>ขีดจำกัด QPS / ความถี่ (ประมาณ)</td><td>Youdao พื้นฐาน ~<strong>100</strong> (เพิ่มได้) · Baidu มาตรฐาน 1 / สูง 10 / พรีเมียม 100 · Tencent <strong>5/วินาที</strong></td></tr>
+<tr><td>ความยาวสูงสุดต่อข้อความ (ประมาณ)</td><td>Youdao โมเดล / เอกสาร <strong>i ≤ 5000</strong> · Tencent &lt; 6000 ต่อคำขอ (ยาวกว่าผ่านเอกสาร / ชุด)</td></tr>
+<tr><td>รหัสที่พบบ่อยสุด (ชุมชน · ประมาณ)</td><td><strong>202 ลายเซ็น</strong> &gt; <strong>411 จำกัด</strong> &gt; 108 / 110 การผูก &gt; 206 timestamp ครองข้อผิดพลาดส่วนใหญ่</td></tr>
+</table>
+<p><small>ฐานการประมาณ: แหล่งอ้างอิง + การคาดการณ์ตามเวลา (เอกสารทางการ 2026 ของ Youdao / Baidu / Tencent / Alibaba / Google / DeepL); เปลี่ยนตามนโยบายและเวอร์ชัน; ยึดคอนโซลทางการล่าสุด</small></p>
+</section>
+<h2>วินิจฉัยรวดเร็วตามสถานการณ์จริง</h2>
+<ul class="scenes"><li>ใช้ที่เครื่องได้ แต่ขึ้นคลาวด์/คอนเทนเนอร์แล้ว 206 จำนวนมาก: นาฬิกาคอนเทนเนอร์คลาดทำให้ curtime ใช้ไม่ได้ (ลายเซ็น ~120s) → เปิด NTP, ซิงก์นาฬิกากับโฮสต์; อย่าแคช curtime เก่า</li><li>แปลอังกฤษได้ดี แต่จีนยาวบางครั้ง 202: การตัดตัดมัลติไบต์ตาม «ไบต์» → input ต้องนับอักขระ Unicode (q&gt;20: 10 + ความยาว + 10)</li><li>salt คงที่หรือเพิ่มทีละหนึ่ง แล้ว 207 ที่การเรียกครั้งที่สอง: salt ต้องสุ่ม (UUID) ทุกครั้งและรีเฟรช curtime; เมื่อ retry ให้เซ็นใหม่</li><li>พีคการทำงานพร้อมกันตอนทดสอบโหลด → 411 จำนวนมาก: QPS พื้นฐาน ~100 ถูกเกิน → token bucket + backoff ที่ไคลเอนต์ หรือซื้อ QPS เพิ่มในคอนโซล</li><li>แอปใหม่เรียกการออกเสียงแล้วได้ 110: instance แปลผูกแล้ว แต่ TTS ยังไม่ผูก → ผูกแต่ละ instance ต่อบริการในคอนโซล</li><li>จู่ ๆ ทั้งหมด 401: แพ็กอักขระ / ยอดเงินหมด → เติมเงินและตั้งการแจ้งเตือนยอดเงิน; เตรียมช่องทางสำรองในเส้นทางสำคัญ</li><li>กับดักเดียวกันเมื่อย้ายจาก Baidu: q ถูก URL-encode ก่อนเซ็น → Youdao v3 เซ็นด้วย input (กฎการตัด) ไม่ใช่ q ที่เข้ารหัส; เซ็นก่อน แล้วค่อย encode q ตอนส่ง</li></ul><div class="related"><h2>ที่เกี่ยวข้อง</h2><ul><li><a href="https://yoidao.com/">คู่มือเชื่อมต่อ / รหัสข้อผิดพลาด Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">การสร้างลายเซ็น v3 และวินิจฉัย 202</a></li><li><a href="https://yoydao.com/">เครื่องมือนักพัฒนา API Youdao (เว็บไซต์พี่น้อง)</a></li></ul></div></main>
+<footer>รหัสข้อผิดพลาดและอัลกอริทึมลายเซ็น v3 รวบรวมจากเอกสารทางการของแพลตฟอร์มเปิด AI Youdao Zhiyun (ai.youdao.com); การเปรียบเทียบลายเซ็น/รหัส/โควตาของคู่แข่งอ้างอิงเอกสารทางการของ Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation และ DeepL โควตา/QPS/ราคาปี 2026 เป็นการประมาณ ไม่ใช่ค่าที่รับประกันหรือวัดเองโดยตรง ใช้อ้างอิงเท่านั้น ยึดคอนโซลทางการล่าสุดของแต่ละผู้ให้บริการ หน้าภาษาไทย: แปลด้วย LLM จาก 母版 zh/en (ไม่เป็นทางการ รอการตรวจโดยเจ้าของภาษา)<br>โครงการโอเพนซอร์ส · สัญญาอนุญาต MIT</footer>
+</div>
+<script src="/th/codes.js"></script><script src="/app.js"></script>
+</body></html>
