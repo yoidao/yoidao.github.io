@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pencarian kode error API Youdao Zhiyun - atasi 202/411/108 API terjemahan + tanda tangan v3 & pesaing</title>
+<meta name="description" content="API terjemahan Youdao (Zhiyun) mengembalikan errorCode? Cari kodenya (101 parameter hilang / 102 bahasa / 103 terlalu panjang / 108 ID app / 110 instance belum terikat / 202 tanda tangan gagal / 203 IP / 206 timestamp / 207 replay / 401 saldo / 411 batas laju) untuk arti resmi L1 plus akar masalah L2: tanda tangan v3 sha256(appKey+input+salt+curtime+appSecret), jebakan pemotongan/encoding/urutan input, curtime UTC dalam detik, salt UUID anti-replay, pengikatan instance per layanan, dan backoff QPS, dengan perbandingan Youdao vs Baidu/Tencent/Alibaba/Google/DeepL serta estimasi kuota gratis & QPS 2026.">
+<link rel="canonical" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Pencarian kode error API Youdao Zhiyun",
+   "url": "https://yoidao.github.io/id/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "id",
+   "description": "API terjemahan Youdao (Zhiyun) mengembalikan errorCode? Cari kodenya (101 parameter hilang / 102 bahasa / 103 terlalu panjang / 108 ID app / 110 instance belum terikat / 202 tanda tangan gagal / 203 IP / 206 timestamp / 207 replay / 401 saldo / 411 batas laju) untuk arti resmi L1 plus akar masalah L2: tanda tangan v3 sha256(appKey+input+salt+curtime+appSecret), jebakan pemotongan/encoding/urutan input, curtime UTC dalam detik, salt UUID anti-replay, pengikatan instance per layanan, dan backoff QPS, dengan perbandingan Youdao vs Baidu/Tencent/Alibaba/Google/DeepL serta estimasi kuota gratis & QPS 2026.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "id",
+   "url": "https://yoidao.github.io/id/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Bagaimana mengatasi error 101 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Parameter wajib hilang. Pastikan yang wajib lengkap, lalu cek penulisan (huruf besar/kecil). v3 butuh 8: q、from、to、appKey、salt、sign、signType、curtime. Satu hilang atau nama salah = 101; v1 tak punya curtime / signType (paling sering terlupa saat migrasi). Cocokkan dengan tabel parameter resmi; pastikan signType=v3 dan curtime (timestamp detik) ada."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bagaimana mengatasi error 102 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tipe bahasa tidak didukung. Youdao pakai zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn tidak dikenali; strict=true dengan arah tak didukung juga gagal. Pakai kode persis dari tabel resmi; jika ragu, from=auto dan strict default (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bagaimana mengatasi error 103 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Teks terjemahan terlalu panjang. Batas karakter per permintaan terlampaui (antarmuka model/dokumen i ≤ 5000). Pecah per kalimat / paragraf dan kirim per batch; dokumen panjang lewat antarmuka terjemahan dokumen."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bagaimana mengatasi error 108 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ID app tidak valid. Daftar akun, buat app di konsol, dan ikat layanan untuk mendapat appKey dan appSecret. appKey kurang karakter / spasi; atau app tanpa instance layanan; kadang tanda tangan kedaluwarsa (curtime jauh dari waktu server, ~120s). Verifikasi appKey (tanpa spasi); pastikan instance terikat; curtime kini dalam detik."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bagaimana mengatasi error 110 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tak ada instance layanan valid: app belum mengikat instance, buat dan ikat. Pelafalan butuh instance TTS terpisah. Tiap app mengikat satu instance per layanan - terjemahan / TTS / OCR terpisah; mengikat terjemahan saja lalu minta voice → 110. Ikat di konsol tiap instance per layanan (terjemahan / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Bagaimana mengatasi error 111 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Akun pengembang tidak valid. Akun tanpa verifikasi pengembang, status tak normal, atau kontrol risiko. Cek status dan verifikasi asli / pengembang di konsol; tiket bila perlu."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Bahasa: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <strong>Bahasa Indonesia</strong> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Kode error API Youdao Zhiyun / diagnosis API terjemahan</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_id.webp"><img src="/img/cover_id.png" alt="ilustrasi alat pencarian kode error API Youdao Zhiyun" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Gbr: pencarian kode error API Youdao Zhiyun (L1 resmi + L2 akar masalah + perbandingan)</figcaption></figure>
+<p>Antarmuka terjemahan / kamus / OCR / TTS <strong>Youdao Zhiyun</strong> mengembalikan <code>errorCode</code>? Perjelas tiga hal dulu: <strong>apakah masalah parameter/tanda tangan yang bisa dicek klien, atau server/penagihan</strong>, <strong>apakah urutan dan encoding string tanda tangan benar</strong>, dan <strong>apakah QPS terlampaui</strong>. Masukkan <strong>kode error atau kata kunci</strong> (mis. <code>202</code>, <code>411</code>, <code>108</code>, <code>tanda tangan</code>, <code>batas</code>, <code>timestamp</code>): pertama <strong>arti resmi L1</strong>, lalu <strong>akar masalah dan diagnosis L2</strong>, terakhir perbandingan pesaing dan kasus nyata. Dok resmi di <a href="https://yoidao.com/">panduan integrasi / kode error Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="Masukkan kode atau kata kunci, mis. 202 / 411 / 108 / tanda tangan / timestamp / batas" autocomplete="off">
+<button id="go">Cari</button>
+<div id="out"></div>
+<h2>Langkah 1: golongkan berdasarkan rentang kode (L1 - dulu siapa yang salah)</h2>
+<p><code>errorCode</code> Youdao Zhiyun terbagi kira-kira empat rentang; tempatkan dulu sebelum coba-coba: ① <strong>1xx parameter</strong> (101 hilang / 102 bahasa / 103 panjang / 113 q kosong / 116 strict) - klien cek wajib dan nilai; ② <strong>2xx auth & tanda tangan</strong> (108 ID / 202 tanda tangan / 203 IP / 205 platform / 206 timestamp / 207 replay) - cek string tanda tangan dan kredensial; ③ <strong>3xx/5xx server</strong> (303 / 500 / 902000) - coba lagi dengan <code>request_id</code> atau tiket; ④ <strong>4xx akun/penagihan/batas</strong> (401 saldo / 411 / 412) - cek saldo dan QPS. Lebih lanjut di <a href="https://yoidao.com/sign">pembuatan tanda tangan v3 dan diagnosis 202</a>.</p>
+<div class="cat"><div class="catbox"><b>Parameter</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>Cek klien: field wajib lengkap (q/from/to/appKey/sign/signType/curtime/salt), kode bahasa zh-CHS / en / auto, q tidak kosong/terlalu panjang, strict true/false.</div></div><div class="catbox"><b>Auth / tanda tangan</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 dari appKey+input+salt+curtime+appSecret; curtime UTC detik, salt UUID anti-replay; whitelist IP selaras tipe platform.</div></div><div class="catbox"><b>Layanan / instance</b><span class="cs">110 · 310</span><div>Tiap app mengikat satu instance per layanan (terjemahan / TTS / OCR terpisah); terjemahan domain diaktifkan dulu di konsol.</div></div><div class="catbox"><b>Akun / penagihan / batas</b><span class="cs">401 · 411 · 412</span><div>Jangan habiskan saldo / paket karakter (401 menghentikan layanan); QPS (basis ~100) terlampaui = 411: token bucket + backoff eksponensial.</div></div><div class="catbox"><b>Hasil / dekripsi / lainnya</b><span class="cs">201 · 303 · 500 · 902000</span><div>Error server: coba lagi dengan request_id atau tiket; pada antarmuka terenkripsi cek urutan DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagram keputusan diagnosis kode error API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Alur diagnosis errorCode (dulu per rentang, lalu klien / server)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode diterima</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">golongkan per rentang</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">Klien bisa cek →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx parameter · 2xx auth-tanda tangan</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Server / penagihan →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx pengecualian · 4xx saldo/batas</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Lima kategori (lihat resmi L1 / akar L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Parameter</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Auth / tanda tangan</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Akun / batas</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Layanan / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Gbr 1: alur diagnosis errorCode Youdao Zhiyun - dulu per rentang, lalu klien / server</figcaption></figure>
+<h2>Langkah 2: dua jebakan tersering → akar masalah (L2: tanda tangan 202 dan batas 411)</h2>
+<p>Inti: <strong>90% error API Youdao tersangkut di «tanda tangan 202» dan «batas 411»</strong>. 202 jarang karena kunci salah, biasanya <strong>string tanda tangan v3</strong> salah susun - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, di mana <code>input</code> saat q&gt;20 ambil «10 karakter pertama + panjang q + 10 karakter terakhir» (per karakter Unicode, bukan byte), dan q jika ≤20. Tambah encoding UTF-8, urutan, dan spasi. 411 adalah QPS di atas paket: batasi laju + backoff di klien. Di bawah panel swacek, lalu perbandingan dan estimasi 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ilustrasi panel swacek sebelum memanggil API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Panel swacek tanda tangan / parameter (hijau = terkonfirmasi / merah = mudah terlewat)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Item</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Penilaian</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Status</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Field wajib lengkap (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 wajib</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Terkonfirmasi</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Kode bahasa valid (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">vs tabel</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Terkonfirmasi</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Urutan tanda tangan appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·kecil</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Terkonfirmasi</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Pemotongan input panjang (10+panjang+10·per karakter)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">sering salah</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Periksa</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC detik + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">cegah 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Terkonfirmasi</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ batas paket (basis ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">memicu 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Periksa</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Catatan: merah = dua yang paling sering terlewat - pemotongan input panjang (akar 202) dan batas QPS (411); sebelum produksi, lakukan uji beban dengan konkurensi nyata.</text></svg><figcaption>Gbr 2: panel swacek tanda tangan / parameter sebelum memanggil (hijau = terkonfirmasi / merah = mudah terlewat)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_id.webp"><img src="/img/board_id.png" alt="ilustrasi panel swacek tanda tangan/parameter API Youdao Zhiyun" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Gbr: cek dulu string tanda tangan dengan curtime / salt, lalu QPS dan pengikatan instance - 202 dan 411 paling sering terlewat</figcaption></figure>
+<h2>Tabel lengkap kode error (L1 resmi · L2 akar masalah)</h2>
+<table id="tbl"></table>
+<h2>Perbandingan API terjemahan pesaing (tanda tangan / kode / kuota gratis · data publik)</h2>
+<table class="cmp"><tr><th>Layanan</th><th>Tanda tangan / auth</th><th>Gaya kode</th><th>Kuota gratis (estimasi)</th><th>QPS / frekuensi (estimasi)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 digit (101 / 202 / 411)</td><td>Kuota coba per layanan</td><td>Basis ~100 QPS (bisa ditambah)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 kecil (appid+q+salt+kunci)</td><td>5 digit (52001 / 54001 / 54003 / 58001)</td><td>Standar gratis</td><td>Standar 1 / Lanjut 10 / Premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>String (RequestLimitExceeded / NoFreeAmount)</td><td>5 juta karakter/bulan</td><td>5 per detik default</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (tanda tangan umum RPC / ROA)</td><td>String (mis. InvalidApiKey)</td><td>Kuota gratis bulanan (per versi)</td><td>Per kuota QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>Status HTTP + reason (403 / 429)</td><td>500k karakter/bulan (v2)</td><td>Per kuota proyek</td></tr><tr><td>DeepL API</td><td>Header DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k karakter/bulan</td><td>Per paket</td></tr></table><section class="i4data">
+<h2>Penanganan error dan kuota API terjemahan (estimasi 2026)</h2>
+<p>Estimasi <strong>2026</strong> dari dokumentasi resmi tiap platform (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): bukan nilai yang dijanjikan atau diukur langsung, hanya rujukan; kuota dan QPS berubah sesuai kebijakan resmi:</p>
+<table>
+<tr><th>Dimensi</th><th>Estimasi / perbandingan</th></tr>
+<tr><td>Algoritma tanda tangan (auth)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL header Auth-Key</td></tr>
+<tr><td>Kuota gratis (bulan · estimasi)</td><td>Tencent <strong>5 juta karakter</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu standar gratis (QPS=1); Youdao kuota coba per layanan, sesuai konsol</td></tr>
+<tr><td>Batas QPS / frekuensi (estimasi)</td><td>Youdao basis ~<strong>100</strong> (bisa ditambah) · Baidu standar 1 / lanjut 10 / premium 100 · Tencent <strong>5/d</strong></td></tr>
+<tr><td>Panjang maks per teks (estimasi)</td><td>Youdao model / dokumen <strong>i ≤ 5000</strong> · Tencent &lt; 6000 per permintaan (lebih panjang via dokumen / batch)</td></tr>
+<tr><td>Kode tersering (komunitas · estimasi)</td><td><strong>202 tanda tangan</strong> &gt; <strong>411 batas</strong> &gt; 108 / 110 pengikatan &gt; 206 timestamp mendominasi error</td></tr>
+</table>
+<p><small>Basis estimasi: sumber rujukan + ekstrapolasi waktu (dok resmi 2026 Youdao / Baidu / Tencent / Alibaba / Google / DeepL); berubah sesuai kebijakan dan versi; acuan konsol resmi terbaru.</small></p>
+</section>
+<h2>Diagnosis cepat per skenario nyata</h2>
+<ul class="scenes"><li>Jalan di lokal, tapi banyak 206 di cloud/kontainer: jam kontainer melenceng dan membatalkan curtime (tanda tangan ~120s) → aktifkan NTP, sinkronkan jam dengan host; jangan cache curtime lama.</li><li>Inggris terjemah baik, Mandarin panjang kadang 202: truncation memotong multibyte per «byte» → input harus hitung karakter Unicode (q&gt;20: 10 + panjang + 10).</li><li>salt tetap atau menaik dan 207 di panggilan kedua: salt harus acak (UUID) tiap kali dan segarkan curtime; saat retry, tanda tangani ulang.</li><li>Lonjakan konkurensi saat uji beban → banyak 411: QPS basis ~100 terlampaui → token bucket + backoff di klien, atau beli QPS di konsol.</li><li>App baru memanggil pelafalan dan dapat 110: instance terjemahan terikat, TTS tidak → ikat tiap instance per layanan di konsol.</li><li>Tiba-tiba semua 401: paket karakter / saldo habis → isi ulang dan atur peringatan saldo; siapkan kanal cadangan di jalur kritis.</li><li>Jebakan sama saat migrasi dari Baidu: q di-URL-encode sebelum tanda tangan → Youdao v3 menandatangani dengan input (aturan pemotongan), bukan q ter-encode; tandatangani dulu, encode q saat kirim.</li></ul><div class="related"><h2>Terkait</h2><ul><li><a href="https://yoidao.com/">Panduan integrasi / kode error Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">Pembuatan tanda tangan v3 dan diagnosis 202</a></li><li><a href="https://yoydao.com/">Alat pengembang API Youdao (situs saudara)</a></li></ul></div></main>
+<footer>Kode error dan algoritma tanda tangan v3 dirangkum dari dokumentasi resmi platform terbuka AI Youdao Zhiyun (ai.youdao.com); perbandingan tanda tangan/kode/kuota pesaing dari dok resmi Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation, dan DeepL. Kuota/QPS/harga 2026 adalah estimasi, bukan nilai yang dijanjikan atau diukur langsung; hanya rujukan, acuan adalah konsol resmi terbaru tiap penyedia. Halaman Indonesia: lokalisasi LLM dari 母版 zh/en (tidak resmi, menunggu tinjauan penutur asli).<br>Proyek sumber terbuka · Lisensi MIT</footer>
+</div>
+<script src="/id/codes.js"></script><script src="/app.js"></script>
+</body></html>
