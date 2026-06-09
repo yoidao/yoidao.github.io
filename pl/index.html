@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wyszukiwarka kodów błędów API Youdao Zhiyun - napraw 202/411/108 API tłumaczeń + podpis v3 i konkurencja</title>
+<meta name="description" content="API tłumaczeń Youdao (Zhiyun) zwraca errorCode? Wyszukaj kod (101 brak parametru / 102 język / 103 za długi / 108 ID aplikacji / 110 instancja niepowiązana / 202 podpis nieudany / 203 IP / 206 znacznik czasu / 207 powtórka / 401 saldo / 411 limit szybkości) dla oficjalnego znaczenia L1 oraz przyczyny źródłowej L2: podpis v3 sha256(appKey+input+salt+curtime+appSecret), pułapki obcinania/kodowania/kolejności input, curtime UTC w sekundach, salt UUID przeciw powtórkom, wiązanie instancji per usługa i backoff QPS, z porównaniem Youdao vs Baidu/Tencent/Alibaba/Google/DeepL oraz szacunkami 2026 darmowego limitu i QPS.">
+<link rel="canonical" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Wyszukiwarka kodów błędów API Youdao Zhiyun",
+   "url": "https://yoidao.github.io/pl/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "pl",
+   "description": "API tłumaczeń Youdao (Zhiyun) zwraca errorCode? Wyszukaj kod (101 brak parametru / 102 język / 103 za długi / 108 ID aplikacji / 110 instancja niepowiązana / 202 podpis nieudany / 203 IP / 206 znacznik czasu / 207 powtórka / 401 saldo / 411 limit szybkości) dla oficjalnego znaczenia L1 oraz przyczyny źródłowej L2: podpis v3 sha256(appKey+input+salt+curtime+appSecret), pułapki obcinania/kodowania/kolejności input, curtime UTC w sekundach, salt UUID przeciw powtórkom, wiązanie instancji per usługa i backoff QPS, z porównaniem Youdao vs Baidu/Tencent/Alibaba/Google/DeepL oraz szacunkami 2026 darmowego limitu i QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "pl",
+   "url": "https://yoidao.github.io/pl/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Jak rozwiązać błąd 101 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Brak wymaganego parametru. Najpierw uzupełnij wymagane, potem sprawdź pisownię (wielkość liter). v3 wymaga 8: q、from、to、appKey、salt、sign、signType、curtime. Brak jednego lub zła nazwa = 101; v1 nie miało curtime / signType (najczęściej pomijane przy migracji). Porównaj z oficjalną tabelą parametrów; potwierdź signType=v3 i curtime (znacznik w sekundach) obecne."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Jak rozwiązać błąd 102 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nieobsługiwany typ języka. Youdao używa zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn nie są rozpoznawane; przy strict=true i nieobsługiwanym kierunku też błąd. Użyj dokładnego kodu z oficjalnej tabeli; w razie wątpliwości from=auto i strict domyślnie (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Jak rozwiązać błąd 103 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Tekst do tłumaczenia za długi. Przekroczony limit znaków na żądanie (interfejsy model/dokument i ≤ 5000). Podziel wg zdania / akapitu i wyślij partiami; długie dokumenty przez interfejs tłumaczenia dokumentów."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Jak rozwiązać błąd 108 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nieprawidłowe ID aplikacji. Zarejestruj konto, utwórz aplikację w konsoli i powiąż usługę, aby uzyskać appKey i appSecret. appKey z utraconymi znakami / spacjami; lub aplikacja bez instancji usługi; czasem podpis wygasły (curtime za daleko od czasu serwera, ~120s). Zweryfikuj appKey (bez spacji); potwierdź powiązaną instancję; curtime aktualne w sekundach."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Jak rozwiązać błąd 110 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Brak prawidłowej instancji usługi: aplikacja nie powiązała instancji, utwórz i powiąż. Wymowa wymaga osobnej instancji TTS. Każda aplikacja wiąże instancję per usługa - tłumaczenie / TTS / OCR osobno; powiązanie tylko tłumaczenia i żądanie voice → 110. Powiąż w konsoli każdą instancję per usługa (tłumaczenie / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Jak rozwiązać błąd 111 API Youdao Zhiyun?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nieprawidłowe konto dewelopera. Konto bez weryfikacji dewelopera, status nietypowy lub kontrola ryzyka. Sprawdź status i weryfikację rzeczywistą / dewelopera w konsoli; zgłoszenie w razie potrzeby."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Język: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <strong>Polski</strong> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Kody błędów API Youdao Zhiyun / diagnoza API tłumaczeń</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_pl.webp"><img src="/img/cover_pl.png" alt="ilustracja narzędzia wyszukiwania kodów błędów API Youdao Zhiyun" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Rys.: wyszukiwanie kodów błędów API Youdao Zhiyun (L1 oficjalne + L2 przyczyna źródłowa + porównanie)</figcaption></figure>
+<p>Interfejs tłumaczenia / słownika / OCR / TTS <strong>Youdao Zhiyun</strong> zwrócił <code>errorCode</code>? Najpierw wyjaśnij trzy rzeczy: <strong>czy to problem parametru/podpisu sprawdzalny po stronie klienta, czy serwera/rozliczeń</strong>, <strong>czy kolejność i kodowanie ciągu podpisu są poprawne</strong> oraz <strong>czy przekroczono QPS</strong>. Wpisz <strong>kod błędu lub słowo kluczowe</strong> (np. <code>202</code>, <code>411</code>, <code>108</code>, <code>podpis</code>, <code>limit</code>, <code>znacznik czasu</code>): najpierw <strong>oficjalne znaczenie L1</strong>, potem <strong>przyczyna źródłowa i diagnoza L2</strong>, na końcu porównanie z konkurencją i realne przypadki. Oficjalna dok. na <a href="https://yoidao.com/">przewodniku integracji / kodów błędów Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="Wpisz kod lub słowo kluczowe, np. 202 / 411 / 108 / podpis / znacznik czasu / limit" autocomplete="off">
+<button id="go">Szukaj</button>
+<div id="out"></div>
+<h2>Krok 1: sklasyfikuj według zakresu kodu (L1 - najpierw czyja wina)</h2>
+<p><code>errorCode</code> Youdao Zhiyun dzieli się z grubsza na cztery zakresy; umiejsców najpierw, zamiast próbować na ślepo: ① <strong>1xx parametry</strong> (101 brak / 102 język / 103 długi / 113 q puste / 116 strict) - klient sprawdza wymagane i wartości; ② <strong>2xx auth i podpis</strong> (108 ID / 202 podpis / 203 IP / 205 platforma / 206 znacznik czasu / 207 powtórka) - sprawdź ciąg podpisu i poświadczenia; ③ <strong>3xx/5xx serwer</strong> (303 / 500 / 902000) - ponów z <code>request_id</code> lub zgłoszenie; ④ <strong>4xx konto/rozliczenia/limit</strong> (401 saldo / 411 / 412) - sprawdź saldo i QPS. Więcej na <a href="https://yoidao.com/sign">generowaniu podpisu v3 i diagnozie 202</a>.</p>
+<div class="cat"><div class="catbox"><b>Parametry</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>Kontrola klienta: pola wymagane kompletne (q/from/to/appKey/sign/signType/curtime/salt), kody języka zh-CHS / en / auto, q niepuste i niezbyt długie, strict true/false.</div></div><div class="catbox"><b>Auth / podpis</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 z appKey+input+salt+curtime+appSecret; curtime UTC w sekundach, salt UUID przeciw powtórkom; biała lista IP zgodna z typem platformy.</div></div><div class="catbox"><b>Usługa / instancja</b><span class="cs">110 · 310</span><div>Każda aplikacja wiąże instancję per usługa (tłumaczenie / TTS / OCR osobno); tłumaczenie domenowe aktywuje się wcześniej w konsoli.</div></div><div class="catbox"><b>Konto / rozliczenia / limit</b><span class="cs">401 · 411 · 412</span><div>Nie wyczerpuj salda / pakietu znaków (401 zatrzymuje usługę); QPS (bazowy ~100) przekroczony = 411: token bucket + backoff wykładniczy.</div></div><div class="catbox"><b>Wynik / deszyfracja / inne</b><span class="cs">201 · 303 · 500 · 902000</span><div>Błędy serwera: ponów z request_id lub zgłoszenie; w interfejsie szyfrowanym sprawdź kolejność DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="diagram decyzyjny diagnozy kodów błędów API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Przepływ diagnozy errorCode (najpierw wg zakresu, potem klient / serwer)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">Otrzymano errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">sklasyfikuj wg zakresu</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">Klient może sprawdzić →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx parametry · 2xx auth-podpis</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Serwer / rozliczenia →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx wyjątek · 4xx saldo/limit</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Pięć kategorii (zobacz oficjalne L1 / przyczynę L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Parametry</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Auth / podpis</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Konto / limit</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Usługa / instancja</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Rys. 1: przepływ diagnozy errorCode Youdao Zhiyun - najpierw wg zakresu, potem klient / serwer</figcaption></figure>
+<h2>Krok 2: dwie najczęstsze pułapki → przyczyna źródłowa (L2: podpis 202 i limit 411)</h2>
+<p>Sedno: <strong>90% błędów API Youdao blokuje się na «podpisie 202» i «limicie 411»</strong>. 202 rzadko to zły klucz, zwykle źle zbudowany <strong>ciąg podpisu v3</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, gdzie <code>input</code> przy q&gt;20 bierze «10 pierwszych znaków + długość q + 10 ostatnich znaków» (wg znaków Unicode, nie bajtów), a q przy ≤20. Dodaj kodowanie UTF-8, kolejność i spacje. 411 to QPS powyżej planu: ogranicz tempo + backoff po stronie klienta. Poniżej panel autokontroli, potem porównanie i szacunki 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ilustracja panelu autokontroli przed wywołaniem API Youdao Zhiyun" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Panel autokontroli podpisu / parametrów (zielony = potwierdzone / czerwony = łatwe do przeoczenia)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Pozycja</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Ocena</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Status</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Pola wymagane kompletne (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 wymaganych</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Potwierdzone</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Kody języka poprawne (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">vs tabela</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Potwierdzone</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Kolejność podpisu appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·małe</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Potwierdzone</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Obcinanie długiego input (10+długość+10·wg znaków)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">częsty błąd</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Sprawdź</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC w sekundach + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">zapobiega 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Potwierdzone</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ limit planu (bazowy ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">wywołuje 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Sprawdź</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Uwaga: na czerwono dwa najczęściej przeoczane - obcinanie długiego input (przyczyna 202) i limit QPS (411); przed produkcją wykonaj test obciążeniowy z realną współbieżnością.</text></svg><figcaption>Rys. 2: panel autokontroli podpisu / parametrów przed wywołaniem (zielony = potwierdzone / czerwony = łatwe do przeoczenia)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_pl.webp"><img src="/img/board_pl.png" alt="ilustracja panelu autokontroli podpisu/parametrów API Youdao Zhiyun" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Rys.: najpierw sprawdź ciąg podpisu z curtime / salt, potem QPS i wiązanie instancji - 202 i 411 są najczęściej przeoczane</figcaption></figure>
+<h2>Pełna tabela kodów błędów (L1 oficjalne · L2 przyczyna źródłowa)</h2>
+<table id="tbl"></table>
+<h2>Porównanie konkurencyjnych API tłumaczeń (podpis / kody / darmowy limit · dane publiczne)</h2>
+<table class="cmp"><tr><th>Usługa</th><th>Podpis / auth</th><th>Styl kodu</th><th>Darmowy limit (szac.)</th><th>QPS / częstotliwość (szac.)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 cyfry (101 / 202 / 411)</td><td>Limit próbny per usługa</td><td>Bazowo ~100 QPS (rozszerzalny)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 małe (appid+q+salt+klucz)</td><td>5 cyfr (52001 / 54001 / 54003 / 58001)</td><td>Standard darmowy</td><td>Standard 1 / Zaawansowany 10 / Premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>Ciąg (RequestLimitExceeded / NoFreeAmount)</td><td>5 mln znaków/mies.</td><td>5 na sekundę domyślnie</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (wspólny podpis RPC / ROA)</td><td>Ciąg (np. InvalidApiKey)</td><td>Miesięczny darmowy limit (wg wersji)</td><td>Wg limitu QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>Status HTTP + reason (403 / 429)</td><td>500k znaków/mies. (v2)</td><td>Wg limitu projektu</td></tr><tr><td>DeepL API</td><td>Nagłówek DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k znaków/mies.</td><td>Wg planu</td></tr></table><section class="i4data">
+<h2>Obsługa błędów i limity API tłumaczeń (szacunek 2026)</h2>
+<p>Szacunek <strong>2026</strong> na podstawie oficjalnej dokumentacji platform (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): nie są to wartości obiecane ani zmierzone bezpośrednio, tylko orientacyjne; limity i QPS zmieniają się wg oficjalnej polityki:</p>
+<table>
+<tr><th>Wymiar</th><th>Szacunek / porównanie</th></tr>
+<tr><td>Algorytm podpisu (auth)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL nagłówek Auth-Key</td></tr>
+<tr><td>Darmowy limit (mies. · szac.)</td><td>Tencent <strong>5 mln znaków</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu standard darmowy (QPS=1); Youdao limit próbny per usługa, wg konsoli</td></tr>
+<tr><td>Limit QPS / częstotliwości (szac.)</td><td>Youdao bazowo ~<strong>100</strong> (rozszerzalny) · Baidu standard 1 / zaawansowany 10 / premium 100 · Tencent <strong>5/s</strong></td></tr>
+<tr><td>Maks. długość na tekst (szac.)</td><td>Youdao model / dokument <strong>i ≤ 5000</strong> · Tencent &lt; 6000 na żądanie (dłużej przez dokument / partię)</td></tr>
+<tr><td>Najczęstsze kody (społeczność · szac.)</td><td><strong>202 podpis</strong> &gt; <strong>411 limit</strong> &gt; 108 / 110 wiązanie &gt; 206 znacznik czasu dominują błędy</td></tr>
+</table>
+<p><small>Podstawa szacunku: źródła odniesienia + ekstrapolacja czasowa (oficjalne dok. 2026 Youdao / Baidu / Tencent / Alibaba / Google / DeepL); zmienia się wg polityki i wersji; wiążąca aktualna oficjalna konsola.</small></p>
+</section>
+<h2>Szybka diagnoza wg realnego scenariusza</h2>
+<ul class="scenes"><li>Działa lokalnie, ale dużo 206 w chmurze/kontenerze: zegar kontenera dryfuje i unieważnia curtime (podpis ~120s) → włącz NTP, zsynchronizuj zegar z hostem; nie buforuj starych curtime.</li><li>Angielski tłumaczy dobrze, długi chiński czasem 202: obcinanie pocięło wielobajt wg «bajtów» → input musi liczyć znaki Unicode (q&gt;20: 10 + długość + 10).</li><li>stały lub rosnący salt i 207 przy drugim wywołaniu: salt musi być losowy (UUID) za każdym razem i odświeżać curtime; przy ponowieniu podpisz ponownie.</li><li>Skoki współbieżności w teście obciążeniowym → dużo 411: bazowy QPS ~100 przekroczony → token bucket + backoff po stronie klienta, lub dokup QPS w konsoli.</li><li>Nowa aplikacja wywołuje wymowę i dostaje 110: instancja tłumaczenia powiązana, TTS nie → powiąż każdą instancję per usługa w konsoli.</li><li>Nagle wszystko 401: pakiet znaków / saldo wyczerpane → doładuj i ustaw alerty salda; miej kanał zapasowy na ścieżkach krytycznych.</li><li>Ta sama pułapka przy migracji z Baidu: q zakodowane URL przed podpisem → Youdao v3 podpisuje z input (reguła obcinania), nie z zakodowanym q; najpierw podpisz, zakoduj q przy wysyłce.</li></ul><div class="related"><h2>Powiązane</h2><ul><li><a href="https://yoidao.com/">Przewodnik integracji / kodów błędów Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">Generowanie podpisu v3 i diagnoza 202</a></li><li><a href="https://yoydao.com/">Narzędzia deweloperskie API Youdao (strona siostrzana)</a></li></ul></div></main>
+<footer>Kody błędów i algorytm podpisu v3 zebrane z oficjalnej dokumentacji otwartej platformy AI Youdao Zhiyun (ai.youdao.com); porównanie podpisu/kodów/limitu konkurencji na podstawie oficjalnych dok. Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation i DeepL. Limity/QPS/ceny 2026 to szacunki, nie wartości obiecane ani zmierzone bezpośrednio; tylko orientacyjnie, wiążąca jest aktualna oficjalna konsola każdego dostawcy. Strona polska: lokalizacja LLM z 母版 zh/en (nieoficjalna, oczekuje weryfikacji native).<br>Projekt open source · Licencja MIT</footer>
+</div>
+<script src="/pl/codes.js"></script><script src="/app.js"></script>
+</body></html>
