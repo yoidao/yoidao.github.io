@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="hi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Youdao Zhiyun API त्रुटि कोड खोज - अनुवाद API के 202/411/108 ठीक करें + v3 हस्ताक्षर और प्रतिस्पर्धी</title>
+<meta name="description" content="Youdao (Zhiyun) अनुवाद API errorCode लौटा रहा है? कोड खोजें (101 पैरामीटर गायब / 102 भाषा / 103 बहुत लंबा / 108 ऐप ID / 110 इंस्टेंस अनबाउंड / 202 हस्ताक्षर विफल / 203 IP / 206 टाइमस्टैम्प / 207 रीप्ले / 401 शेष / 411 दर सीमा) ताकि L1 आधिकारिक अर्थ और L2 मूल कारण देखें: v3 हस्ताक्षर sha256(appKey+input+salt+curtime+appSecret), input के काट/एन्कोडिंग/क्रम की भूलें, सेकंड में UTC curtime, रीप्ले-रोधी UUID salt, प्रति-सेवा इंस्टेंस बाइंडिंग और QPS बैकऑफ, साथ ही Youdao बनाम Baidu/Tencent/Alibaba/Google/DeepL तुलना और 2026 मुफ़्त कोटा व QPS अनुमान।">
+<link rel="canonical" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Youdao Zhiyun API त्रुटि कोड खोज",
+   "url": "https://yoidao.github.io/hi/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "hi",
+   "description": "Youdao (Zhiyun) अनुवाद API errorCode लौटा रहा है? कोड खोजें (101 पैरामीटर गायब / 102 भाषा / 103 बहुत लंबा / 108 ऐप ID / 110 इंस्टेंस अनबाउंड / 202 हस्ताक्षर विफल / 203 IP / 206 टाइमस्टैम्प / 207 रीप्ले / 401 शेष / 411 दर सीमा) ताकि L1 आधिकारिक अर्थ और L2 मूल कारण देखें: v3 हस्ताक्षर sha256(appKey+input+salt+curtime+appSecret), input के काट/एन्कोडिंग/क्रम की भूलें, सेकंड में UTC curtime, रीप्ले-रोधी UUID salt, प्रति-सेवा इंस्टेंस बाइंडिंग और QPS बैकऑफ, साथ ही Youdao बनाम Baidu/Tencent/Alibaba/Google/DeepL तुलना और 2026 मुफ़्त कोटा व QPS अनुमान।",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "hi",
+   "url": "https://yoidao.github.io/hi/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API त्रुटि 101 कैसे हल करें?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अनिवार्य पैरामीटर गायब। पहले अनिवार्य पूर्ण करें, फिर वर्तनी (केस) जाँचें। v3 को 8 चाहिए: q、from、to、appKey、salt、sign、signType、curtime। एक गायब या नाम गलत = 101; v1 में curtime / signType नहीं था (माइग्रेशन पर सबसे अधिक छूटता)। आधिकारिक पैरामीटर तालिका से मिलाएँ; signType=v3 और curtime (सेकंड टाइमस्टैम्प) मौजूद होना पुष्ट करें।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API त्रुटि 102 कैसे हल करें?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "असमर्थित भाषा प्रकार। Youdao zh-CHS / zh-CHT / en / ja / ko… उपयोग करता है; zh / zh-CN / cn पहचाने नहीं जाते; strict=true व असमर्थित दिशा पर भी विफल। आधिकारिक तालिका से सटीक कोड लें; संदेह में from=auto और strict डिफ़ॉल्ट (false)।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API त्रुटि 103 कैसे हल करें?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अनुवाद पाठ बहुत लंबा। प्रति अनुरोध वर्ण सीमा पार (मॉडल/दस्तावेज़ इंटरफ़ेस i ≤ 5000)। वाक्य / अनुच्छेद से विभाजित कर बैच में भेजें; लंबे दस्तावेज़ दस्तावेज़-अनुवाद इंटरफ़ेस से।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API त्रुटि 108 कैसे हल करें?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अमान्य ऐप ID। खाता पंजीकृत करें, कंसोल में ऐप बनाएँ और सेवा बाँधें ताकि appKey व appSecret मिले। appKey में खोए अक्षर / रिक्त स्थान; या सेवा इंस्टेंस बिना ऐप; कभी हस्ताक्षर समाप्त (curtime सर्वर समय से बहुत दूर, ~120s)। appKey सत्यापित करें (बिना रिक्त); बाउंड इंस्टेंस पुष्ट करें; curtime वर्तमान सेकंड।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API त्रुटि 110 कैसे हल करें?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "कोई वैध सेवा इंस्टेंस नहीं: ऐप ने इंस्टेंस नहीं बाँधा, बनाएँ और बाँधें। उच्चारण हेतु अलग TTS इंस्टेंस चाहिए। प्रत्येक ऐप प्रति सेवा एक इंस्टेंस बाँधता है - अनुवाद / TTS / OCR अलग; केवल अनुवाद बाँधकर voice माँगना → 110। कंसोल में प्रति सेवा प्रत्येक इंस्टेंस बाँधें (अनुवाद / TTS / OCR)।"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Youdao Zhiyun API त्रुटि 111 कैसे हल करें?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "अमान्य डेवलपर खाता। डेवलपर सत्यापन बिना खाता, असामान्य स्थिति या जोखिम नियंत्रण। कंसोल में स्थिति व वास्तविक / डेवलपर सत्यापन जाँचें; आवश्यकता पर टिकट।"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">भाषा: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <strong>हिन्दी</strong> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Youdao Zhiyun API त्रुटि कोड / अनुवाद API निदान</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_hi.webp"><img src="/img/cover_hi.png" alt="Youdao Zhiyun API त्रुटि कोड खोज उपकरण चित्रण" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>चित्र: Youdao Zhiyun API त्रुटि कोड खोज (L1 आधिकारिक + L2 मूल कारण + तुलना)</figcaption></figure>
+<p><strong>Youdao Zhiyun</strong> के अनुवाद / शब्दकोश / OCR / TTS इंटरफ़ेस ने <code>errorCode</code> लौटाया? पहले तीन बातें स्पष्ट करें: <strong>क्या यह क्लाइंट द्वारा जाँचने योग्य पैरामीटर/हस्ताक्षर समस्या है, या सर्वर/बिलिंग की</strong>, <strong>क्या हस्ताक्षर स्ट्रिंग का क्रम और एन्कोडिंग सही है</strong>, और <strong>क्या QPS पार हुआ</strong>। <strong>त्रुटि कोड या कीवर्ड</strong> दर्ज करें (जैसे <code>202</code>, <code>411</code>, <code>108</code>, <code>हस्ताक्षर</code>, <code>सीमा</code>, <code>टाइमस्टैम्प</code>): पहले <strong>L1 आधिकारिक अर्थ</strong>, फिर <strong>L2 मूल कारण और निदान</strong>, अंत में प्रतिस्पर्धी तुलना और वास्तविक मामले। आधिकारिक दस्तावेज़ <a href="https://yoidao.com/">Youdao Zhiyun API एकीकरण गाइड / त्रुटि कोड</a> पर।</p>
+<input id="q" placeholder="कोड या कीवर्ड दर्ज करें, जैसे 202 / 411 / 108 / हस्ताक्षर / टाइमस्टैम्प / सीमा" autocomplete="off">
+<button id="go">खोजें</button>
+<div id="out"></div>
+<h2>चरण 1: कोड परास के अनुसार वर्गीकृत करें (L1 - पहले किसकी गलती)</h2>
+<p>Youdao Zhiyun के <code>errorCode</code> मोटे तौर पर चार परास में बँटते हैं; अंधाधुंध आज़माने से पहले स्थान तय करें: ① <strong>1xx पैरामीटर</strong> (101 गायब / 102 भाषा / 103 लंबा / 113 q खाली / 116 strict) - क्लाइंट अनिवार्य व मान जाँचे; ② <strong>2xx प्रमाणीकरण व हस्ताक्षर</strong> (108 ID / 202 हस्ताक्षर / 203 IP / 205 प्लेटफ़ॉर्म / 206 टाइमस्टैम्प / 207 रीप्ले) - हस्ताक्षर स्ट्रिंग व क्रेडेंशियल जाँचें; ③ <strong>3xx/5xx सर्वर</strong> (303 / 500 / 902000) - <code>request_id</code> के साथ पुनः प्रयास या टिकट; ④ <strong>4xx खाता/बिलिंग/सीमा</strong> (401 शेष / 411 / 412) - शेष व QPS जाँचें। अधिक <a href="https://yoidao.com/sign">v3 हस्ताक्षर निर्माण और 202 निदान</a> पर।</p>
+<div class="cat"><div class="catbox"><b>पैरामीटर</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>क्लाइंट जाँच: अनिवार्य फ़ील्ड पूर्ण (q/from/to/appKey/sign/signType/curtime/salt), भाषा कोड zh-CHS / en / auto, q खाली/बहुत लंबा नहीं, strict true/false।</div></div><div class="catbox"><b>प्रमाणीकरण / हस्ताक्षर</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>appKey+input+salt+curtime+appSecret का SHA256; सेकंड में UTC curtime, रीप्ले-रोधी UUID salt; IP श्वेतसूची प्लेटफ़ॉर्म प्रकार से संरेखित।</div></div><div class="catbox"><b>सेवा / इंस्टेंस</b><span class="cs">110 · 310</span><div>प्रत्येक ऐप प्रति सेवा एक इंस्टेंस बाँधता है (अनुवाद / TTS / OCR अलग); डोमेन अनुवाद पहले कंसोल में सक्षम करें।</div></div><div class="catbox"><b>खाता / बिलिंग / सीमा</b><span class="cs">401 · 411 · 412</span><div>शेष / वर्ण पैकेज समाप्त न करें (401 सेवा रोकता है); QPS (आधार ~100) पार = 411: token bucket + एक्सपोनेंशियल बैकऑफ।</div></div><div class="catbox"><b>परिणाम / डिक्रिप्शन / अन्य</b><span class="cs">201 · 303 · 500 · 902000</span><div>सर्वर त्रुटियाँ: request_id के साथ पुनः प्रयास या टिकट; एन्क्रिप्टेड इंटरफ़ेस में DES / BASE64 / URLDecode क्रम जाँचें।</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API त्रुटि कोड निदान निर्णय आरेख" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">errorCode निदान प्रवाह (पहले परास से, फिर क्लाइंट / सर्वर)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">errorCode प्राप्त</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">परास से वर्गीकृत करें</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">क्लाइंट जाँच सकता है →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx पैरामीटर · 2xx प्रमाणन-हस्ताक्षर</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">सर्वर / बिलिंग →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx अपवाद · 4xx शेष/सीमा</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">पाँच श्रेणियाँ (आधिकारिक L1 / कारण L2 देखें)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① पैरामीटर</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② प्रमाणन / हस्ताक्षर</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ खाता / सीमा</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ सेवा / इंस्टेंस</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>चित्र 1: Youdao Zhiyun errorCode निदान प्रवाह - पहले परास से, फिर क्लाइंट / सर्वर</figcaption></figure>
+<h2>चरण 2: दो सबसे आम भूलें → मूल कारण (L2: हस्ताक्षर 202 और सीमा 411)</h2>
+<p>मुख्य बात: <strong>Youdao API की 90% त्रुटियाँ «हस्ताक्षर 202» और «सीमा 411» पर अटकती हैं</strong>। 202 शायद ही गलत कुंजी हो; प्रायः गलत बनी <strong>v3 हस्ताक्षर स्ट्रिंग</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, जहाँ q&gt;20 पर <code>input</code> «पहले 10 अक्षर + q की लंबाई + अंतिम 10 अक्षर» लेता है (बाइट नहीं, Unicode अक्षर के अनुसार), और ≤20 पर q। इसमें UTF-8 एन्कोडिंग, क्रम और रिक्त स्थान जुड़ते हैं। 411 योजना से अधिक QPS है: क्लाइंट पर दर सीमित करें + बैकऑफ। नीचे स्व-जाँच पैनल, फिर तुलना और 2026 अनुमान।</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Youdao Zhiyun API कॉल से पहले स्व-जाँच पैनल चित्रण" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">हस्ताक्षर / पैरामीटर स्व-जाँच पैनल (हरा = पुष्ट / लाल = आसानी से छूटता)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">मद</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">निर्णय</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">स्थिति</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">अनिवार्य फ़ील्ड पूर्ण (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 अनिवार्य</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">पुष्ट</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">भाषा कोड वैध (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">तालिका बनाम</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">पुष्ट</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">हस्ताक्षर क्रम appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·लोअर</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">पुष्ट</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">लंबे input का काट (10+लंबाई+10·अक्षर अनुसार)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">आम गलती</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">जाँचें</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC सेकंड + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">206/207 रोके</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">पुष्ट</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ योजना सीमा (आधार ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">411 उत्पन्न</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">जाँचें</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">नोट: लाल = दो सबसे अधिक छूटने वाले - लंबे input का काट (202 का कारण) और QPS सीमा (411); प्रोडक्शन से पहले वास्तविक समवर्ती के साथ लोड टेस्ट करें।</text></svg><figcaption>चित्र 2: कॉल से पहले हस्ताक्षर / पैरामीटर स्व-जाँच पैनल (हरा = पुष्ट / लाल = आसानी से छूटता)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_hi.webp"><img src="/img/board_hi.png" alt="Youdao Zhiyun API हस्ताक्षर/पैरामीटर स्व-जाँच पैनल चित्रण" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>चित्र: पहले curtime / salt के साथ हस्ताक्षर स्ट्रिंग जाँचें, फिर QPS और इंस्टेंस बाइंडिंग - 202 और 411 सबसे अधिक छूटते हैं</figcaption></figure>
+<h2>पूर्ण त्रुटि कोड तालिका (L1 आधिकारिक · L2 मूल कारण)</h2>
+<table id="tbl"></table>
+<h2>प्रतिस्पर्धी अनुवाद API तुलना (हस्ताक्षर / कोड / मुफ़्त कोटा · सार्वजनिक डेटा)</h2>
+<table class="cmp"><tr><th>सेवा</th><th>हस्ताक्षर / प्रमाणन</th><th>कोड शैली</th><th>मुफ़्त कोटा (अनुमान)</th><th>QPS / आवृत्ति (अनुमान)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 अंक (101 / 202 / 411)</td><td>प्रति सेवा परीक्षण कोटा</td><td>आधार ~100 QPS (बढ़ाने योग्य)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 लोअर (appid+q+salt+कुंजी)</td><td>5 अंक (52001 / 54001 / 54003 / 58001)</td><td>मानक मुफ़्त</td><td>मानक 1 / उन्नत 10 / प्रीमियम 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>स्ट्रिंग (RequestLimitExceeded / NoFreeAmount)</td><td>50 लाख वर्ण/माह</td><td>5 प्रति सेकंड डिफ़ॉल्ट</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (सामान्य RPC / ROA हस्ताक्षर)</td><td>स्ट्रिंग (जैसे InvalidApiKey)</td><td>मासिक मुफ़्त कोटा (संस्करण अनुसार)</td><td>QPS कोटा अनुसार</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP स्थिति + reason (403 / 429)</td><td>5 लाख वर्ण/माह (v2)</td><td>प्रोजेक्ट कोटा अनुसार</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key हेडर</td><td>HTTP (403 / 456 / 429)</td><td>Free 5 लाख वर्ण/माह</td><td>योजना अनुसार</td></tr></table><section class="i4data">
+<h2>अनुवाद API त्रुटि प्रबंधन और कोटा (2026 अनुमान)</h2>
+<p>प्लेटफ़ॉर्मों के आधिकारिक दस्तावेज़ों (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL) से <strong>2026</strong> अनुमान: वचनबद्ध या प्रत्यक्ष मापे मान नहीं, केवल संदर्भ; कोटा व QPS आधिकारिक नीति से बदलते हैं:</p>
+<table>
+<tr><th>आयाम</th><th>अनुमान / तुलना</th></tr>
+<tr><td>हस्ताक्षर एल्गोरिथम (प्रमाणन)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL Auth-Key हेडर</td></tr>
+<tr><td>मुफ़्त कोटा (माह · अनुमान)</td><td>Tencent <strong>50 लाख वर्ण</strong> &gt; Google / DeepL <strong>5 लाख</strong> &gt; Baidu मानक मुफ़्त (QPS=1); Youdao प्रति सेवा परीक्षण कोटा, कंसोल अनुसार</td></tr>
+<tr><td>QPS / आवृत्ति सीमा (अनुमान)</td><td>Youdao आधार ~<strong>100</strong> (बढ़ाने योग्य) · Baidu मानक 1 / उन्नत 10 / प्रीमियम 100 · Tencent <strong>5/से</strong></td></tr>
+<tr><td>प्रति पाठ अधिकतम लंबाई (अनुमान)</td><td>Youdao मॉडल / दस्तावेज़ <strong>i ≤ 5000</strong> · Tencent प्रति अनुरोध &lt; 6000 (अधिक हेतु दस्तावेज़ / बैच)</td></tr>
+<tr><td>सबसे आम कोड (समुदाय · अनुमान)</td><td><strong>202 हस्ताक्षर</strong> &gt; <strong>411 सीमा</strong> &gt; 108 / 110 बाइंडिंग &gt; 206 टाइमस्टैम्प त्रुटियों में अग्रणी</td></tr>
+</table>
+<p><small>अनुमान आधार: संदर्भ स्रोत + कालिक एक्सट्रापोलेशन (Youdao / Baidu / Tencent / Alibaba / Google / DeepL के 2026 आधिकारिक दस्तावेज़); नीति व संस्करण से बदलता; नवीनतम आधिकारिक कंसोल मान्य।</small></p>
+</section>
+<h2>वास्तविक परिदृश्य से त्वरित निदान</h2>
+<ul class="scenes"><li>लोकल पर चलता है, पर क्लाउड/कंटेनर पर बहुत 206: कंटेनर घड़ी खिसकने से curtime अमान्य (हस्ताक्षर ~120s) → NTP सक्षम करें, घड़ी होस्ट से सिंक; पुराना curtime कैश न करें।</li><li>अंग्रेज़ी ठीक अनुवाद, लंबी चीनी कभी-कभी 202: truncation ने मल्टीबाइट को «बाइट» से काटा → input को Unicode अक्षर गिनने चाहिए (q&gt;20: 10 + लंबाई + 10)।</li><li>स्थिर या बढ़ता salt और दूसरे कॉल पर 207: salt हर बार यादृच्छिक (UUID) हो और curtime ताज़ा करें; retry पर पुनः हस्ताक्षर करें।</li><li>लोड टेस्ट में समवर्ती शिखर → बहुत 411: आधार QPS ~100 पार → क्लाइंट पर token bucket + बैकऑफ, या कंसोल से QPS खरीदें।</li><li>नया ऐप उच्चारण कॉल कर 110 पाता है: अनुवाद इंस्टेंस बाउंड है, TTS नहीं → कंसोल में प्रति सेवा प्रत्येक इंस्टेंस बाँधें।</li><li>अचानक सब 401: वर्ण पैकेज / शेष समाप्त → रिचार्ज करें और शेष अलर्ट सेट करें; महत्वपूर्ण पथों पर बैकअप चैनल रखें।</li><li>Baidu से माइग्रेशन में वही भूल: हस्ताक्षर से पहले q को URL-encode किया → Youdao v3 input से हस्ताक्षर करता है (काट नियम), एन्कोडेड q से नहीं; पहले हस्ताक्षर, भेजते समय q एन्कोड।</li></ul><div class="related"><h2>संबंधित</h2><ul><li><a href="https://yoidao.com/">Youdao Zhiyun API एकीकरण गाइड / त्रुटि कोड</a></li><li><a href="https://yoidao.com/sign">v3 हस्ताक्षर निर्माण और 202 निदान</a></li><li><a href="https://yoydao.com/">Youdao API डेवलपर उपकरण (सहयोगी साइट)</a></li></ul></div></main>
+<footer>त्रुटि कोड और v3 हस्ताक्षर एल्गोरिथम Youdao Zhiyun AI ओपन प्लेटफ़ॉर्म के आधिकारिक दस्तावेज़ (ai.youdao.com) से संकलित; प्रतिस्पर्धी हस्ताक्षर/कोड/कोटा तुलना Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation और DeepL के आधिकारिक दस्तावेज़ों पर आधारित। 2026 कोटा/QPS/मूल्य अनुमान हैं, वचनबद्ध या प्रत्यक्ष मापा मान नहीं; केवल संदर्भ हेतु, प्रत्येक प्रदाता का नवीनतम आधिकारिक कंसोल मान्य। हिन्दी पृष्ठ: zh/en 母版 से LLM स्थानीयकरण (अनौपचारिक, देशी समीक्षा शेष)।<br>ओपन सोर्स परियोजना · MIT लाइसेंस</footer>
+</div>
+<script src="/hi/codes.js"></script><script src="/app.js"></script>
+</body></html>
