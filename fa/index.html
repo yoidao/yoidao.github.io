@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>جستجوی کد خطای Youdao Zhiyun API - رفع 202/411/108 رابط ترجمه + امضای v3 و رقبا</title>
+<meta name="description" content="آیا رابط ترجمه Youdao (Zhiyun) کد errorCode برگرداند؟ کد را جستجو کنید (101 پارامتر گمشده / 102 زبان / 103 خیلی بلند / 108 شناسه برنامه / 110 نمونه متصل‌نشده / 202 شکست امضا / 203 IP / 206 برچسب زمانی / 207 بازپخش / 401 موجودی / 411 محدودیت نرخ) تا معنای رسمی L1 و علت ریشه‌ای L2 را ببینید: امضای v3 sha256(appKey+input+salt+curtime+appSecret)، دام‌های برش/کدگذاری/ترتیب input، curtime به‌صورت UTC ثانیه، salt از نوع UUID ضدبازپخش، اتصال نمونه به‌ازای هر سرویس و backoff برای QPS، همراه با مقایسه Youdao با Baidu/Tencent/Alibaba/Google/DeepL و برآوردهای 2026 سهمیه رایگان و QPS.">
+<link rel="canonical" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "جستجوی کد خطای Youdao Zhiyun API",
+   "url": "https://yoidao.github.io/fa/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "fa",
+   "description": "آیا رابط ترجمه Youdao (Zhiyun) کد errorCode برگرداند؟ کد را جستجو کنید (101 پارامتر گمشده / 102 زبان / 103 خیلی بلند / 108 شناسه برنامه / 110 نمونه متصل‌نشده / 202 شکست امضا / 203 IP / 206 برچسب زمانی / 207 بازپخش / 401 موجودی / 411 محدودیت نرخ) تا معنای رسمی L1 و علت ریشه‌ای L2 را ببینید: امضای v3 sha256(appKey+input+salt+curtime+appSecret)، دام‌های برش/کدگذاری/ترتیب input، curtime به‌صورت UTC ثانیه، salt از نوع UUID ضدبازپخش، اتصال نمونه به‌ازای هر سرویس و backoff برای QPS، همراه با مقایسه Youdao با Baidu/Tencent/Alibaba/Google/DeepL و برآوردهای 2026 سهمیه رایگان و QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "fa",
+   "url": "https://yoidao.github.io/fa/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "چگونه خطای 101 در Youdao Zhiyun API را حل کنیم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "پارامتر الزامی گمشده. نخست الزامی‌ها را کامل کنید، سپس املا (بزرگی/کوچکی) را بررسی کنید. v3 به ۸ مورد نیاز دارد: q، from، to، appKey، salt، sign، signType، curtime. یکی گمشده یا نام اشتباه = 101؛ v1 curtime / signType نداشت (پرتکرارترین فراموشی در مهاجرت). با جدول رسمی پارامترها مقایسه کنید؛ وجود signType=v3 و curtime (برچسب ثانیه) را تأیید کنید."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "چگونه خطای 102 در Youdao Zhiyun API را حل کنیم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نوع زبان پشتیبانی‌نشده. Youdao از zh-CHS / zh-CHT / en / ja / ko… استفاده می‌کند؛ zh / zh-CN / cn شناخته نمی‌شوند؛ با strict=true و جهت پشتیبانی‌نشده نیز شکست. کد دقیق را از جدول رسمی بگیرید؛ در تردید from=auto و strict پیش‌فرض (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "چگونه خطای 103 در Youdao Zhiyun API را حل کنیم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "متن ترجمه خیلی بلند. عبور از سقف نویسه در هر درخواست (رابط‌های مدل/سند i ≤ 5000). بر اساس جمله / بند تقسیم و دسته‌ای بفرستید؛ اسناد بلند از رابط ترجمه سند."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "چگونه خطای 108 در Youdao Zhiyun API را حل کنیم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "شناسه برنامه نامعتبر. حساب بسازید، در کنسول برنامه ایجاد و سرویس را متصل کنید تا appKey و appSecret بگیرید. appKey با نویسه‌های ازدست‌رفته / فاصله؛ یا برنامه بدون نمونه سرویس؛ گاهی امضای منقضی (curtime دور از زمان سرور، ~120s). appKey را بررسی کنید (بدون فاصله)؛ نمونه متصل را تأیید کنید؛ curtime جاری به ثانیه."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "چگونه خطای 110 در Youdao Zhiyun API را حل کنیم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "نمونه معتبر سرویس نیست: برنامه نمونه‌ای متصل نکرده، بسازید و متصل کنید. تلفظ به نمونه TTS جدا نیاز دارد. هر برنامه به‌ازای هر سرویس یک نمونه متصل می‌کند - ترجمه / TTS / OCR جدا؛ اتصال فقط ترجمه و درخواست voice → 110. در کنسول هر نمونه را به‌ازای سرویس متصل کنید (ترجمه / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "چگونه خطای 111 در Youdao Zhiyun API را حل کنیم؟",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "حساب توسعه‌دهنده نامعتبر. حساب بدون احراز توسعه‌دهنده، وضعیت غیرعادی یا کنترل ریسک. وضعیت و احراز واقعی / توسعه‌دهنده را در کنسول بررسی کنید؛ در صورت نیاز تیکت."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">زبان: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <strong>فارسی</strong> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>کدهای خطای Youdao Zhiyun API / عیب‌یابی رابط ترجمه</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_fa.webp"><img src="/img/cover_fa.png" alt="تصویرسازی ابزار جستجوی کد خطای Youdao Zhiyun API" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>شکل: جستجوی کد خطای Youdao Zhiyun API (L1 رسمی + L2 علت ریشه‌ای + مقایسه)</figcaption></figure>
+<p>آیا رابط ترجمه / فرهنگ‌لغت / OCR / TTS از <strong>Youdao Zhiyun</strong> کد <code>errorCode</code> برگرداند؟ ابتدا سه چیز را روشن کنید: <strong>آیا مشکل پارامتر/امضا است که سمت کلاینت بررسی‌شدنی است یا مشکل سرور/صورت‌حساب</strong>، <strong>آیا ترتیب و کدگذاری رشته امضا درست است</strong>، و <strong>آیا QPS فراتر رفته است</strong>. <strong>کد خطا یا کلیدواژه</strong> را وارد کنید (مثل <code>202</code>، <code>411</code>، <code>108</code>، <code>امضا</code>، <code>محدودیت</code>، <code>برچسب زمانی</code>): نخست <strong>معنای رسمی L1</strong>، سپس <strong>علت ریشه‌ای و عیب‌یابی L2</strong>، و در پایان مقایسه رقبا و موارد واقعی. مستندات رسمی در <a href="https://yoidao.com/">راهنمای یکپارچه‌سازی / کدهای خطای Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="کد یا کلیدواژه را وارد کنید، مثل 202 / 411 / 108 / امضا / برچسب زمانی / محدودیت" autocomplete="off">
+<button id="go">جستجو</button>
+<div id="out"></div>
+<h2>گام ۱: بر اساس بازه کد دسته‌بندی کنید (L1 - نخست تقصیر کیست)</h2>
+<p><code>errorCode</code> در Youdao Zhiyun تقریباً به چهار بازه تقسیم می‌شود؛ پیش از آزمون‌وخطا موقعیت را بیابید: ① <strong>1xx پارامتر</strong> (101 گمشده / 102 زبان / 103 بلند / 113 q خالی / 116 strict) - کلاینت موارد الزامی و مقادیر را بررسی می‌کند؛ ② <strong>2xx احراز و امضا</strong> (108 شناسه / 202 امضا / 203 IP / 205 پلتفرم / 206 برچسب زمانی / 207 بازپخش) - رشته امضا و اعتبارنامه را بررسی کنید؛ ③ <strong>3xx/5xx سرور</strong> (303 / 500 / 902000) - با <code>request_id</code> دوباره تلاش یا تیکت؛ ④ <strong>4xx حساب/صورت‌حساب/محدودیت</strong> (401 موجودی / 411 / 412) - موجودی و QPS را بررسی کنید. بیشتر در <a href="https://yoidao.com/sign">تولید امضای v3 و عیب‌یابی 202</a>.</p>
+<div class="cat"><div class="catbox"><b>پارامتر</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>بررسی کلاینت: فیلدهای الزامی کامل (q/from/to/appKey/sign/signType/curtime/salt)، کد زبان zh-CHS / en / auto، q ناخالی/نه‌خیلی‌بلند، strict true/false.</div></div><div class="catbox"><b>احراز / امضا</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 از appKey+input+salt+curtime+appSecret؛ curtime به‌صورت UTC ثانیه، salt از UUID ضدبازپخش؛ فهرست سفید IP هم‌راستا با نوع پلتفرم.</div></div><div class="catbox"><b>سرویس / نمونه</b><span class="cs">110 · 310</span><div>هر برنامه به‌ازای هر سرویس یک نمونه متصل می‌کند (ترجمه / TTS / OCR جدا)؛ ترجمه دامنه‌ای ابتدا در کنسول فعال می‌شود.</div></div><div class="catbox"><b>حساب / صورت‌حساب / محدودیت</b><span class="cs">401 · 411 · 412</span><div>موجودی / بسته نویسه را تمام نکنید (401 سرویس را متوقف می‌کند)؛ عبور از QPS (پایه ~100) = 411: token bucket + backoff نمایی.</div></div><div class="catbox"><b>نتیجه / رمزگشایی / دیگر</b><span class="cs">201 · 303 · 500 · 902000</span><div>خطاهای سرور: با request_id دوباره یا تیکت؛ در رابط رمزگذاری‌شده ترتیب DES / BASE64 / URLDecode را بررسی کنید.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="نمودار تصمیم عیب‌یابی کد خطای Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">جریان عیب‌یابی errorCode (نخست بر اساس بازه، سپس کلاینت / سرور)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">دریافت errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">بر اساس بازه دسته‌بندی</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">کلاینت می‌تواند بررسی کند ←</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx پارامتر · 2xx احراز-امضا</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">سرور / صورت‌حساب ←</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx استثنا · 4xx موجودی/محدودیت</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">پنج دسته (رسمی L1 / علت L2 را ببینید)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① پارامتر</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② احراز / امضا</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ حساب / محدودیت</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ سرویس / نمونه</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>شکل ۱: جریان عیب‌یابی errorCode در Youdao Zhiyun - نخست بر اساس بازه، سپس کلاینت / سرور</figcaption></figure>
+<h2>گام ۲: دو دام پرتکرارترین → علت ریشه‌ای (L2: امضا 202 و محدودیت 411)</h2>
+<p>نکته کلیدی: <strong>۹۰٪ خطاهای Youdao API روی «امضا 202» و «محدودیت 411» گیر می‌کنند</strong>. 202 به‌ندرت کلید اشتباه است؛ معمولاً <strong>رشته امضای v3</strong> بدساخت است - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code> که در آن <code>input</code> هنگام q&gt;20 «۱۰ نویسه نخست + طول q + ۱۰ نویسه پایانی» را می‌گیرد (بر اساس نویسه‌های Unicode نه بایت)، و در ≤20 خود q. کدگذاری UTF-8، ترتیب و فاصله‌ها افزوده می‌شوند. 411 یعنی QPS بالاتر از طرح: نرخ را در کلاینت محدود کنید + backoff. پایین‌تر پنل خودبررسی، سپس مقایسه و برآوردهای 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="تصویرسازی پنل خودبررسی پیش از فراخوانی Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">پنل خودبررسی امضا / پارامتر (سبز = تأییدشده / قرمز = به‌سادگی نادیده می‌ماند)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">مورد</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">داوری</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">وضعیت</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">فیلدهای الزامی کامل (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 الزامی</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">تأییدشده</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">کد زبان معتبر (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">در برابر جدول</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">تأییدشده</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ترتیب امضا appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·کوچک</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">تأییدشده</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">برش input بلند (10+طول+10·بر اساس نویسه)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">خطای رایج</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">بررسی</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC ثانیه + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">از 206/207 جلوگیری</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">تأییدشده</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ سقف طرح (پایه ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">موجب 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">بررسی</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">یادداشت: قرمز = دو مورد بیش از همه نادیده‌مانده - برش input بلند (علت 202) و سقف QPS (411)؛ پیش از تولید با هم‌زمانی واقعی آزمون بار بگیرید.</text></svg><figcaption>شکل ۲: پنل خودبررسی امضا / پارامتر پیش از فراخوانی (سبز = تأییدشده / قرمز = به‌سادگی نادیده می‌ماند)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_fa.webp"><img src="/img/board_fa.png" alt="تصویرسازی پنل خودبررسی امضا/پارامتر در Youdao Zhiyun API" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>شکل: نخست رشته امضا را با curtime / salt بررسی کنید، سپس QPS و اتصال نمونه - 202 و 411 بیش از همه نادیده می‌مانند</figcaption></figure>
+<h2>جدول کامل کدهای خطا (L1 رسمی · L2 علت ریشه‌ای)</h2>
+<table id="tbl"></table>
+<h2>مقایسه رابط‌های ترجمه رقیب (امضا / کدها / سهمیه رایگان · داده‌های عمومی)</h2>
+<table class="cmp"><tr><th>سرویس</th><th>امضا / احراز</th><th>سبک کد</th><th>سهمیه رایگان (برآورد)</th><th>QPS / بسامد (برآورد)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>۳ رقم (101 / 202 / 411)</td><td>سهمیه آزمایشی برای هر سرویس</td><td>پایه ~100 QPS (افزایش‌پذیر)</td></tr><tr><td>Baidu Translate</td><td>MD5 ۳۲ کوچک (appid+q+salt+کلید)</td><td>۵ رقم (52001 / 54001 / 54003 / 58001)</td><td>استاندارد رایگان</td><td>استاندارد 1 / پیشرفته 10 / پریمیوم 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>رشته (RequestLimitExceeded / NoFreeAmount)</td><td>۵ میلیون نویسه/ماه</td><td>۵ در ثانیه پیش‌فرض</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (امضای عمومی RPC / ROA)</td><td>رشته (مثل InvalidApiKey)</td><td>سهمیه رایگان ماهانه (بر حسب نسخه)</td><td>بر اساس سهمیه QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>وضعیت HTTP + reason (403 / 429)</td><td>۵۰۰ هزار نویسه/ماه (v2)</td><td>بر اساس سهمیه پروژه</td></tr><tr><td>DeepL API</td><td>سربرگ DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free ۵۰۰ هزار نویسه/ماه</td><td>بر اساس طرح</td></tr></table><section class="i4data">
+<h2>مدیریت خطا و سهمیه رابط‌های ترجمه (برآورد 2026)</h2>
+<p>برآورد <strong>2026</strong> از مستندات رسمی پلتفرم‌ها (Youdao Zhiyun، Baidu، Tencent Cloud، Alibaba Cloud، Google، DeepL): نه مقادیر تضمینی یا اندازه‌گیری‌شده مستقیم، صرفاً مرجع؛ سهمیه و QPS بر اساس سیاست رسمی تغییر می‌کنند:</p>
+<table>
+<tr><th>بُعد</th><th>برآورد / مقایسه</th></tr>
+<tr><td>الگوریتم امضا (احراز)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL سربرگ Auth-Key</td></tr>
+<tr><td>سهمیه رایگان (ماه · برآورد)</td><td>Tencent <strong>۵ میلیون نویسه</strong> &gt; Google / DeepL <strong>۵۰۰ هزار</strong> &gt; Baidu استاندارد رایگان (QPS=1)؛ Youdao سهمیه آزمایشی برای هر سرویس، بر اساس کنسول</td></tr>
+<tr><td>سقف QPS / بسامد (برآورد)</td><td>Youdao پایه ~<strong>100</strong> (افزایش‌پذیر) · Baidu استاندارد 1 / پیشرفته 10 / پریمیوم 100 · Tencent <strong>۵/ث</strong></td></tr>
+<tr><td>بیشینه طول هر متن (برآورد)</td><td>Youdao مدل / سند <strong>i ≤ 5000</strong> · Tencent در هر درخواست &lt; 6000 (بلندتر از سند / دسته)</td></tr>
+<tr><td>پرتکرارترین کدها (جامعه · برآورد)</td><td><strong>202 امضا</strong> &gt; <strong>411 محدودیت</strong> &gt; 108 / 110 اتصال &gt; 206 برچسب زمانی بر خطاها چیره‌اند</td></tr>
+</table>
+<p><small>پایه برآورد: منابع مرجع + برون‌یابی زمانی (مستندات رسمی 2026 از Youdao / Baidu / Tencent / Alibaba / Google / DeepL)؛ بر اساس سیاست و نسخه تغییر می‌کند؛ کنسول رسمی روزآمد ملاک است.</small></p>
+</section>
+<h2>عیب‌یابی سریع بر اساس سناریوی واقعی</h2>
+<ul class="scenes"><li>محلی کار می‌کند اما روی ابر/کانتینر 206 فراوان: انحراف ساعت کانتینر curtime را بی‌اعتبار می‌کند (امضا ~120s) → NTP را فعال کنید، ساعت را با میزبان همگام کنید؛ curtime قدیمی را کش نکنید.</li><li>انگلیسی خوب ترجمه می‌شود، چینی بلند گاهی 202: برش، چندبایتی را بر اساس «بایت» برید → input باید نویسه‌های Unicode را بشمارد (q&gt;20: 10 + طول + 10).</li><li>salt ثابت یا فزاینده و 207 در فراخوان دوم: salt باید هر بار تصادفی (UUID) باشد و curtime تازه شود؛ هنگام retry دوباره امضا کنید.</li><li>اوج هم‌زمانی در آزمون بار → 411 فراوان: عبور از QPS پایه ~100 → token bucket + backoff در کلاینت، یا خرید QPS در کنسول.</li><li>برنامه جدید تلفظ را فرا می‌خواند و 110 می‌گیرد: نمونه ترجمه متصل است اما TTS نه → هر نمونه را به‌ازای سرویس در کنسول متصل کنید.</li><li>ناگهان همه 401: بسته نویسه / موجودی تمام شد → شارژ کنید و هشدار موجودی بگذارید؛ در مسیرهای حیاتی کانال پشتیبان داشته باشید.</li><li>همان دام در مهاجرت از Baidu: q پیش از امضا URL-encode شد → Youdao v3 با input امضا می‌کند (قاعده برش)، نه با q کدشده؛ نخست امضا، هنگام ارسال q را کد کنید.</li></ul><div class="related"><h2>مرتبط</h2><ul><li><a href="https://yoidao.com/">راهنمای یکپارچه‌سازی / کدهای خطای Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">تولید امضای v3 و عیب‌یابی 202</a></li><li><a href="https://yoydao.com/">ابزارهای توسعه‌دهنده Youdao API (سایت خواهر)</a></li></ul></div></main>
+<footer>کدهای خطا و الگوریتم امضای v3 از مستندات رسمی پلتفرم باز هوش مصنوعی Youdao Zhiyun (ai.youdao.com) گردآوری شده‌اند؛ مقایسه امضا/کد/سهمیه رقبا بر پایه مستندات رسمی Baidu Translate، Tencent Cloud MT، Alibaba Cloud، Google Cloud Translation و DeepL است. سهمیه/QPS/قیمت‌های 2026 برآوردند، نه مقادیر تضمینی یا اندازه‌گیری‌شده مستقیم؛ صرفاً مرجع، و کنسول رسمی روزآمد هر ارائه‌دهنده ملاک است. صفحه فارسی: بومی‌سازی LLM از 母版 zh/en (غیررسمی، در انتظار بازبینی بومی).<br>پروژه متن‌باز · مجوز MIT</footer>
+</div>
+<script src="/fa/codes.js"></script><script src="/app.js"></script>
+</body></html>
