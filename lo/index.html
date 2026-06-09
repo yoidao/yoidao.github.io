@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="lo"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ຄົ້ນຫາລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun API - ແກ້ໄຂ 202/411/108 ຂອງ API ແປພາສາ + ລາຍເຊັນ v3 ແລະ ຄູ່ແຂ່ງ</title>
+<meta name="description" content="API ແປພາສາ Youdao (Zhiyun) ສົ່ງຄືນ errorCode ບໍ? ຄົ້ນຫາລະຫັດ (101 ຂາດພາລາມິເຕີ / 102 ພາສາ / 103 ຍາວເກີນ / 108 ID ແອັບ / 110 ບໍ່ໄດ້ຜູກ instance / 202 ລາຍເຊັນລົ້ມເຫລວ / 203 IP / 206 timestamp / 207 ຫຼິ້ນຄືນ / 401 ຍອດເງິນ / 411 ຈຳກັດອັດຕາ) ເພື່ອເບິ່ງຄວາມໝາຍທາງການ L1 ແລະ ສາເຫດຫຼັກ L2: ລາຍເຊັນ v3 sha256(appKey+input+salt+curtime+appSecret), ກັບດັກການຕັດ/ການເຂົ້າລະຫັດ/ລຳດັບຂອງ input, curtime ເປັນ UTC ວິນາທີ, salt ແບບ UUID ກັນຫຼິ້ນຄືນ, ການຜູກ instance ຕໍ່ບໍລິການ ແລະ QPS backoff ພ້ອມການປຽບທຽບ Youdao ກັບ Baidu/Tencent/Alibaba/Google/DeepL ແລະ ການຄາດຄະເນ 2026 ໂຄຕ້າຟຣີ ແລະ QPS.">
+<link rel="canonical" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "ຄົ້ນຫາລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun API",
+   "url": "https://yoidao.github.io/lo/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "lo",
+   "description": "API ແປພາສາ Youdao (Zhiyun) ສົ່ງຄືນ errorCode ບໍ? ຄົ້ນຫາລະຫັດ (101 ຂາດພາລາມິເຕີ / 102 ພາສາ / 103 ຍາວເກີນ / 108 ID ແອັບ / 110 ບໍ່ໄດ້ຜູກ instance / 202 ລາຍເຊັນລົ້ມເຫລວ / 203 IP / 206 timestamp / 207 ຫຼິ້ນຄືນ / 401 ຍອດເງິນ / 411 ຈຳກັດອັດຕາ) ເພື່ອເບິ່ງຄວາມໝາຍທາງການ L1 ແລະ ສາເຫດຫຼັກ L2: ລາຍເຊັນ v3 sha256(appKey+input+salt+curtime+appSecret), ກັບດັກການຕັດ/ການເຂົ້າລະຫັດ/ລຳດັບຂອງ input, curtime ເປັນ UTC ວິນາທີ, salt ແບບ UUID ກັນຫຼິ້ນຄືນ, ການຜູກ instance ຕໍ່ບໍລິການ ແລະ QPS backoff ພ້ອມການປຽບທຽບ Youdao ກັບ Baidu/Tencent/Alibaba/Google/DeepL ແລະ ການຄາດຄະເນ 2026 ໂຄຕ້າຟຣີ ແລະ QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "lo",
+   "url": "https://yoidao.github.io/lo/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "ຈະແກ້ໄຂຂໍ້ຜິດພາດ 101 ຂອງ Youdao Zhiyun API ແນວໃດ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ຂາດພາລາມິເຕີບັງຄັບ. ເຮັດໃຫ້ບັງຄັບຄົບກ່ອນ, ຈາກນັ້ນກວດການສະກົດ (ໂຕໃຫຍ່/ນ້ອຍ). v3 ຕ້ອງການ 8: q、from、to、appKey、salt、sign、signType、curtime. ຂາດໜຶ່ງ ຫຼື ຊື່ຜິດ = 101; v1 ບໍ່ມີ curtime / signType (ພາດເລື້ອຍທີ່ສຸດເມື່ອຍ້າຍ). ທຽບກັບຕາຕະລາງພາລາມິເຕີທາງການ; ຢືນຢັນ signType=v3 ແລະ curtime (timestamp ວິນາທີ)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ຈະແກ້ໄຂຂໍ້ຜິດພາດ 102 ຂອງ Youdao Zhiyun API ແນວໃດ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ປະເພດພາສາທີ່ບໍ່ຮອງຮັບ. Youdao ໃຊ້ zh-CHS / zh-CHT / en / ja / ko…; zh / zh-CN / cn ບໍ່ຮັບຮູ້; strict=true ແລະ ທິດທາງບໍ່ຮອງຮັບ ກໍ່ລົ້ມເຫລວ. ໃຊ້ລະຫັດທີ່ຖືກຕ້ອງຈາກຕາຕະລາງທາງການ; ຖ້າສົງໄສ from=auto ແລະ strict ຄ່າເລີ່ມຕົ້ນ (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ຈະແກ້ໄຂຂໍ້ຜິດພາດ 103 ຂອງ Youdao Zhiyun API ແນວໃດ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ຂໍ້ຄວາມແປຍາວເກີນ. ເກີນຂີດຈຳກັດຕົວອັກສອນຕໍ່ການຮ້ອງຂໍ (ອິນເຕີເຟດໂມເດລ/ເອກະສານ i ≤ 5000). ແບ່ງຕາມປະໂຫຍກ / ວັກ ແລ້ວສົ່ງເປັນຊຸດ; ເອກະສານຍາວຜ່ານອິນເຕີເຟດແປເອກະສານ."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ຈະແກ້ໄຂຂໍ້ຜິດພາດ 108 ຂອງ Youdao Zhiyun API ແນວໃດ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ID ແອັບບໍ່ຖືກຕ້ອງ. ລົງທະບຽນບັນຊີ, ສ້າງແອັບໃນຄອນໂຊລ ແລະ ຜູກບໍລິການ ເພື່ອໄດ້ appKey ແລະ appSecret. appKey ມີຕົວອັກສອນຫາຍ / ຊ່ອງຫວ່າງ; ຫຼື ແອັບບໍ່ມີ instance ບໍລິການ; ບາງເທື່ອລາຍເຊັນໝົດອາຍຸ (curtime ໄກຈາກເວລາ server, ~120s). ກວດ appKey (ບໍ່ມີຊ່ອງຫວ່າງ); ຢືນຢັນ instance ທີ່ຜູກ; curtime ປັດຈຸບັນເປັນວິນາທີ."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ຈະແກ້ໄຂຂໍ້ຜິດພາດ 110 ຂອງ Youdao Zhiyun API ແນວໃດ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ບໍ່ມີ instance ບໍລິການທີ່ໃຊ້ໄດ້: ແອັບບໍ່ໄດ້ຜູກ instance, ສ້າງ ແລະ ຜູກ. ການອອກສຽງຕ້ອງ instance TTS ແຍກ. ແຕ່ລະແອັບຜູກ instance ໜຶ່ງຕໍ່ບໍລິການ - ແປ / TTS / OCR ແຍກ; ຜູກແຕ່ແປແລ້ວຂໍ voice → 110. ຜູກໃນຄອນໂຊລແຕ່ລະ instance ຕໍ່ບໍລິການ (ແປ / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "ຈະແກ້ໄຂຂໍ້ຜິດພາດ 111 ຂອງ Youdao Zhiyun API ແນວໃດ?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ບັນຊີຜູ້ພັດທະນາບໍ່ຖືກຕ້ອງ. ບັນຊີບໍ່ໄດ້ຢືນຢັນຜູ້ພັດທະນາ, ສະຖານະຜິດປົກກະຕິ ຫຼື ຄວບຄຸມຄວາມສ່ຽງ. ກວດສະຖານະ ແລະ ການຢືນຢັນຈິງ / ຜູ້ພັດທະນາໃນຄອນໂຊລ; ticket ຖ້າຈຳເປັນ."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">ພາສາ: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <a href="/fil/">Filipino</a> · <a href="/ur/">اردو</a> · <strong>ພາສາລາວ</strong> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>ລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun API / ການວິນິດໄສ API ແປພາສາ</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_lo.webp"><img src="/img/cover_lo.png" alt="ຮູບປະກອບເຄື່ອງມືຄົ້ນຫາລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun API" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>ຮູບ: ຄົ້ນຫາລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun API (L1 ທາງການ + L2 ສາເຫດຫຼັກ + ການປຽບທຽບ)</figcaption></figure>
+<p>ອິນເຕີເຟດແປ / ວັດຈະນານຸກົມ / OCR / TTS ຂອງ <strong>Youdao Zhiyun</strong> ສົ່ງຄືນ <code>errorCode</code> ບໍ? ກ່ອນອື່ນ ໃຫ້ຊັດເຈນສາມຢ່າງ: <strong>ເປັນບັນຫາພາລາມິເຕີ/ລາຍເຊັນທີ່ client ກວດໄດ້ ຫຼື server/ການເກັບເງິນ</strong>, <strong>ລຳດັບ ແລະ ການເຂົ້າລະຫັດຂອງສະຕຣິງລາຍເຊັນຖືກຕ້ອງບໍ</strong>, ແລະ <strong>QPS ເກີນບໍ</strong>. ໃສ່ <strong>ລະຫັດຂໍ້ຜິດພາດ ຫຼື ຄຳສຳຄັນ</strong> (ເຊັ່ນ <code>202</code>, <code>411</code>, <code>108</code>, <code>ລາຍເຊັນ</code>, <code>ຈຳກັດ</code>, <code>timestamp</code>): ກ່ອນແມ່ນ <strong>ຄວາມໝາຍທາງການ L1</strong>, ຈາກນັ້ນ <strong>ສາເຫດຫຼັກ ແລະ ການວິນິດໄສ L2</strong>, ສຸດທ້າຍ ການປຽບທຽບຄູ່ແຂ່ງ ແລະ ກໍລະນີຈິງ. ເອກະສານທາງການຢູ່ <a href="https://yoidao.com/">ຄູ່ມືເຊື່ອມຕໍ່ / ລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="ໃສ່ລະຫັດ ຫຼື ຄຳສຳຄັນ ເຊັ່ນ 202 / 411 / 108 / ລາຍເຊັນ / timestamp / ຈຳກັດ" autocomplete="off">
+<button id="go">ຄົ້ນຫາ</button>
+<div id="out"></div>
+<h2>ຂັ້ນຕອນ 1: ຈັດປະເພດຕາມຊ່ວງລະຫັດ (L1 - ກ່ອນອື່ນເປັນຄວາມຜິດຂອງໃຜ)</h2>
+<p><code>errorCode</code> ຂອງ Youdao Zhiyun ແບ່ງປະມານສີ່ຊ່ວງ; ກຳນົດຕຳແໜ່ງກ່ອນລອງມົ່ວ: ① <strong>1xx ພາລາມິເຕີ</strong> (101 ຂາດ / 102 ພາສາ / 103 ຍາວ / 113 q ຫວ່າງ / 116 strict) - client ກວດສິ່ງບັງຄັບ ແລະ ຄ່າ; ② <strong>2xx ການຢືນຢັນ ແລະ ລາຍເຊັນ</strong> (108 ID / 202 ລາຍເຊັນ / 203 IP / 205 ແພລດຟອມ / 206 timestamp / 207 ຫຼິ້ນຄືນ) - ກວດສະຕຣິງລາຍເຊັນ ແລະ ຂໍ້ມູນຢືນຢັນ; ③ <strong>3xx/5xx server</strong> (303 / 500 / 902000) - ລອງໃໝ່ດ້ວຍ <code>request_id</code> ຫຼື ຕັ້ງ ticket; ④ <strong>4xx ບັນຊີ/ການເກັບເງິນ/ຈຳກັດ</strong> (401 ຍອດເງິນ / 411 / 412) - ກວດຍອດເງິນ ແລະ QPS. ເພີ່ມເຕີມຢູ່ <a href="https://yoidao.com/sign">ການສ້າງລາຍເຊັນ v3 ແລະ ການວິນິດໄສ 202</a>.</p>
+<div class="cat"><div class="catbox"><b>ພາລາມິເຕີ</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>ກວດ client: ຊ່ອງບັງຄັບຄົບ (q/from/to/appKey/sign/signType/curtime/salt), ລະຫັດພາສາ zh-CHS / en / auto, q ບໍ່ຫວ່າງ/ບໍ່ຍາວເກີນ, strict true/false.</div></div><div class="catbox"><b>ການຢືນຢັນ / ລາຍເຊັນ</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 ຂອງ appKey+input+salt+curtime+appSecret; curtime UTC ວິນາທີ, salt UUID ກັນຫຼິ້ນຄືນ; whitelist IP ສອດຄ່ອງກັບປະເພດແພລດຟອມ.</div></div><div class="catbox"><b>ບໍລິການ / instance</b><span class="cs">110 · 310</span><div>ແຕ່ລະແອັບຜູກ instance ໜຶ່ງຕໍ່ບໍລິການ (ແປ / TTS / OCR ແຍກກັນ); ການແປໂດເມນເປີດໃຊ້ໃນຄອນໂຊລກ່ອນ.</div></div><div class="catbox"><b>ບັນຊີ / ການເກັບເງິນ / ຈຳກັດ</b><span class="cs">401 · 411 · 412</span><div>ຢ່າໃຊ້ຍອດເງິນ / ແພັກຕົວອັກສອນໝົດ (401 ຢຸດບໍລິການ); QPS (ພື້ນຖານ ~100) ເກີນ = 411: token bucket + backoff ແບບເລກກຳລັງ.</div></div><div class="catbox"><b>ຜົນ / ການຖອດລະຫັດ / ອື່ນ</b><span class="cs">201 · 303 · 500 · 902000</span><div>ຂໍ້ຜິດພາດ server: ລອງໃໝ່ດ້ວຍ request_id ຫຼື ticket; ໃນອິນເຕີເຟດເຂົ້າລະຫັດ ກວດລຳດັບ DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ແຜນວາດການຕັດສິນໃຈວິນິດໄສລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">ຂັ້ນຕອນວິນິດໄສ errorCode (ກ່ອນຕາມຊ່ວງ, ຈາກນັ້ນ client / server)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">ໄດ້ຮັບ errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">ຈັດປະເພດຕາມຊ່ວງ</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">client ກວດໄດ້ →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx ພາລາມິເຕີ · 2xx ຢືນຢັນ-ລາຍເຊັນ</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">server / ການເກັບເງິນ →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx ຂໍ້ຍົກເວັ້ນ · 4xx ຍອດເງິນ/ຈຳກັດ</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">ຫ້າປະເພດ (ເບິ່ງທາງການ L1 / ສາເຫດ L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① ພາລາມິເຕີ</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② ຢືນຢັນ / ລາຍເຊັນ</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ ບັນຊີ / ຈຳກັດ</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ ບໍລິການ / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>ຮູບ 1: ຂັ້ນຕອນວິນິດໄສ errorCode ຂອງ Youdao Zhiyun - ກ່ອນຕາມຊ່ວງ, ຈາກນັ້ນ client / server</figcaption></figure>
+<h2>ຂັ້ນຕອນ 2: ສອງກັບດັກທີ່ພົບເລື້ອຍທີ່ສຸດ → ສາເຫດຫຼັກ (L2: ລາຍເຊັນ 202 ແລະ ຈຳກັດ 411)</h2>
+<p>ຫົວໃຈ: <strong>90% ຂອງຂໍ້ຜິດພາດ Youdao API ຕິດຢູ່ທີ່ «ລາຍເຊັນ 202» ແລະ «ຈຳກັດ 411»</strong>. 202 ບໍ່ຄ່ອຍແມ່ນກະແຈຜິດ; ສ່ວນຫຼາຍແມ່ນ <strong>ສະຕຣິງລາຍເຊັນ v3</strong> ທີ່ປະກອບຜິດ - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, ເຊິ່ງເມື່ອ q&gt;20 <code>input</code> ເອົາ «10 ຕົວອັກສອນທຳອິດ + ຄວາມຍາວ q + 10 ຕົວອັກສອນສຸດທ້າຍ» (ຕາມຕົວອັກສອນ Unicode ບໍ່ແມ່ນໄບຕ໌), ແລະ q ເມື່ອ ≤20. ບວກການເຂົ້າລະຫັດ UTF-8, ລຳດັບ ແລະ ຊ່ອງຫວ່າງ. 411 ແມ່ນ QPS ເກີນແພັກເກດ: ຈຳກັດອັດຕາ + backoff ທີ່ client. ດ້ານລຸ່ມແມ່ນແຜງກວດສອບຕົນເອງ, ຈາກນັ້ນການປຽບທຽບ ແລະ ການຄາດຄະເນ 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ຮູບປະກອບແຜງກວດສອບຕົນເອງກ່ອນເອີ້ນ Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">ແຜງກວດສອບຕົນເອງລາຍເຊັນ / ພາລາມິເຕີ (ຂຽວ = ຢືນຢັນແລ້ວ / ແດງ = ພາດງ່າຍ)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">ລາຍການ</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">ການຕັດສິນ</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">ສະຖານະ</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ຊ່ອງບັງຄັບຄົບ (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 ບັງຄັບ</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ຢືນຢັນແລ້ວ</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ລະຫັດພາສາຖືກຕ້ອງ (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">ທຽບກັບຕາຕະລາງ</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ຢືນຢັນແລ້ວ</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ລຳດັບລາຍເຊັນ appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·ນ້ອຍ</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ຢືນຢັນແລ້ວ</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">ການຕັດ input ຍາວ (10+ຄວາມຍາວ+10·ຕາມຕົວອັກສອນ)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">ຜິດເລື້ອຍ</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">ກວດ</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC ວິນາທີ + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">ກັນ 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">ຢືນຢັນແລ້ວ</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ ຂີດຈຳກັດແພັກເກດ (ພື້ນຖານ ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">ເຮັດໃຫ້ເກີດ 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">ກວດ</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">ໝາຍເຫດ: ສີແດງ = ສອງສິ່ງທີ່ພາດເລື້ອຍທີ່ສຸດ - ການຕັດ input ຍາວ (ສາເຫດ 202) ແລະ ຂີດຈຳກັດ QPS (411); ກ່ອນຂຶ້ນ production ໃຫ້ທົດສອບໂຫຼດດ້ວຍການເຮັດວຽກພ້ອມກັນຈິງ.</text></svg><figcaption>ຮູບ 2: ແຜງກວດສອບຕົນເອງລາຍເຊັນ / ພາລາມິເຕີກ່ອນເອີ້ນ (ຂຽວ = ຢືນຢັນແລ້ວ / ແດງ = ພາດງ່າຍ)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_lo.webp"><img src="/img/board_lo.png" alt="ຮູບປະກອບແຜງກວດສອບຕົນເອງລາຍເຊັນ/ພາລາມິເຕີ Youdao Zhiyun API" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>ຮູບ: ກວດສະຕຣິງລາຍເຊັນດ້ວຍ curtime / salt ກ່ອນ, ຈາກນັ້ນ QPS ແລະ ການຜູກ instance - 202 ແລະ 411 ພາດເລື້ອຍທີ່ສຸດ</figcaption></figure>
+<h2>ຕາຕະລາງລະຫັດຂໍ້ຜິດພາດເຕັມ (L1 ທາງການ · L2 ສາເຫດຫຼັກ)</h2>
+<table id="tbl"></table>
+<h2>ການປຽບທຽບ API ແປພາສາຄູ່ແຂ່ງ (ລາຍເຊັນ / ລະຫັດ / ໂຄຕ້າຟຣີ · ຂໍ້ມູນສາທາລະນະ)</h2>
+<table class="cmp"><tr><th>ບໍລິການ</th><th>ລາຍເຊັນ / ຢືນຢັນ</th><th>ຮູບແບບລະຫັດ</th><th>ໂຄຕ້າຟຣີ (ປະມານ)</th><th>QPS / ຄວາມຖີ່ (ປະມານ)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 ຕົວເລກ (101 / 202 / 411)</td><td>ໂຄຕ້າທົດລອງຕໍ່ບໍລິການ</td><td>ພື້ນຖານ ~100 QPS (ເພີ່ມໄດ້)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 ນ້ອຍ (appid+q+salt+ກະແຈ)</td><td>5 ຕົວເລກ (52001 / 54001 / 54003 / 58001)</td><td>ມາດຕະຖານຟຣີ</td><td>ມາດຕະຖານ 1 / ສູງ 10 / ພຣີມຽມ 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>ສະຕຣິງ (RequestLimitExceeded / NoFreeAmount)</td><td>5 ລ້ານຕົວອັກສອນ/ເດືອນ</td><td>ຄ່າເລີ່ມຕົ້ນ 5 ຕໍ່ວິນາທີ</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (ລາຍເຊັນທົ່ວໄປ RPC / ROA)</td><td>ສະຕຣິງ (ເຊັ່ນ InvalidApiKey)</td><td>ໂຄຕ້າຟຣີລາຍເດືອນ (ຕາມເວີຊັນ)</td><td>ຕາມໂຄຕ້າ QPS</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>ສະຖານະ HTTP + reason (403 / 429)</td><td>5 ແສນຕົວອັກສອນ/ເດືອນ (v2)</td><td>ຕາມໂຄຕ້າໂປຣເຈັກ</td></tr><tr><td>DeepL API</td><td>ສ່ວນຫົວ DeepL-Auth-Key</td><td>HTTP (403 / 456 / 429)</td><td>Free 5 ແສນຕົວອັກສອນ/ເດືອນ</td><td>ຕາມແພລນ</td></tr></table><section class="i4data">
+<h2>ການຈັດການຂໍ້ຜິດພາດ ແລະ ໂຄຕ້າຂອງ API ແປພາສາ (ປະມານ 2026)</h2>
+<p>ປະມານ <strong>2026</strong> ຈາກເອກະສານທາງການຂອງແພລດຟອມ (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): ບໍ່ແມ່ນຄ່າທີ່ສັນຍາ ຫຼື ວັດແທກໂດຍກົງ, ສຳລັບອ້າງອີງເທົ່ານັ້ນ; ໂຄຕ້າ ແລະ QPS ປ່ຽນຕາມນະໂຍບາຍທາງການ:</p>
+<table>
+<tr><th>ມິຕິ</th><th>ປະມານ / ປຽບທຽບ</th></tr>
+<tr><td>ອັລກໍຣິທຶມລາຍເຊັນ (ຢືນຢັນ)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL ສ່ວນຫົວ Auth-Key</td></tr>
+<tr><td>ໂຄຕ້າຟຣີ (ເດືອນ · ປະມານ)</td><td>Tencent <strong>5 ລ້ານຕົວອັກສອນ</strong> &gt; Google / DeepL <strong>5 ແສນ</strong> &gt; Baidu ມາດຕະຖານຟຣີ (QPS=1); Youdao ໂຄຕ້າທົດລອງຕໍ່ບໍລິການ, ຕາມຄອນໂຊລ</td></tr>
+<tr><td>ຂີດຈຳກັດ QPS / ຄວາມຖີ່ (ປະມານ)</td><td>Youdao ພື້ນຖານ ~<strong>100</strong> (ເພີ່ມໄດ້) · Baidu ມາດຕະຖານ 1 / ສູງ 10 / ພຣີມຽມ 100 · Tencent <strong>5/ວິ</strong></td></tr>
+<tr><td>ຄວາມຍາວສູງສຸດຕໍ່ຂໍ້ຄວາມ (ປະມານ)</td><td>Youdao ໂມເດລ / ເອກະສານ <strong>i ≤ 5000</strong> · Tencent ຕໍ່ການຮ້ອງຂໍ &lt; 6000 (ຍາວກວ່າຜ່ານເອກະສານ / ຊຸດ)</td></tr>
+<tr><td>ລະຫັດທີ່ພົບເລື້ອຍທີ່ສຸດ (ຊຸມຊົນ · ປະມານ)</td><td><strong>202 ລາຍເຊັນ</strong> &gt; <strong>411 ຈຳກັດ</strong> &gt; 108 / 110 ການຜູກ &gt; 206 timestamp ນຳໜ້າຂໍ້ຜິດພາດ</td></tr>
+</table>
+<p><small>ພື້ນຖານປະມານ: ແຫຼ່ງອ້າງອີງ + ການຄາດຄະເນຕາມເວລາ (ເອກະສານທາງການ 2026 ຂອງ Youdao / Baidu / Tencent / Alibaba / Google / DeepL); ປ່ຽນຕາມນະໂຍບາຍ ແລະ ເວີຊັນ; ຄອນໂຊລທາງການລ່າສຸດເປັນຫຼັກ.</small></p>
+</section>
+<h2>ການວິນິດໄສໄວຕາມສະຖານະການຈິງ</h2>
+<ul class="scenes"><li>ເຮັດວຽກໃນ local ໄດ້, ແຕ່ຢູ່ cloud/container ມີ 206 ຫຼາຍ: ໂມງ container ເລື່ອນເຮັດໃຫ້ curtime ໃຊ້ບໍ່ໄດ້ (ລາຍເຊັນ ~120s) → ເປີດ NTP, ຊິງໂມງກັບ host; ຢ່າແຄຊ curtime ເກົ່າ.</li><li>ອັງກິດແປດີ, ຈີນຍາວບາງເທື່ອ 202: truncation ຕັດ multibyte ຕາມ «ໄບຕ໌» → input ຕ້ອງນັບຕົວອັກສອນ Unicode (q&gt;20: 10 + ຄວາມຍາວ + 10).</li><li>salt ຄົງທີ່ ຫຼື ເພີ່ມຂຶ້ນ ແລະ 207 ໃນການເອີ້ນຄັ້ງສອງ: salt ຕ້ອງສຸ່ມ (UUID) ທຸກຄັ້ງ ແລະ ໃໝ່ curtime; ເມື່ອ retry ໃຫ້ເຊັນໃໝ່.</li><li>ຈຸດສູງສຸດການເຮັດວຽກພ້ອມກັນໃນການທົດສອບໂຫຼດ → 411 ຫຼາຍ: QPS ພື້ນຖານ ~100 ເກີນ → token bucket + backoff ທີ່ client, ຫຼື ຊື້ QPS ໃນຄອນໂຊລ.</li><li>ແອັບໃໝ່ເອີ້ນການອອກສຽງແລ້ວໄດ້ 110: instance ແປໄດ້ຜູກ, TTS ບໍ່ → ຜູກແຕ່ລະ instance ຕໍ່ບໍລິການໃນຄອນໂຊລ.</li><li>ທັນໃດທັງໝົດ 401: ແພັກຕົວອັກສອນ / ຍອດເງິນໝົດ → ເຕີມ ແລະ ຕັ້ງການເຕືອນຍອດເງິນ; ມີຊ່ອງສຳຮອງໃນເສັ້ນທາງສຳຄັນ.</li><li>ກັບດັກດຽວກັນເມື່ອຍ້າຍຈາກ Baidu: q ຖືກ URL-encode ກ່ອນເຊັນ → Youdao v3 ເຊັນດ້ວຍ input (ກົດການຕັດ), ບໍ່ແມ່ນ q ທີ່ເຂົ້າລະຫັດ; ເຊັນກ່ອນ, ເຂົ້າລະຫັດ q ເມື່ອສົ່ງ.</li></ul><div class="related"><h2>ກ່ຽວຂ້ອງ</h2><ul><li><a href="https://yoidao.com/">ຄູ່ມືເຊື່ອມຕໍ່ / ລະຫັດຂໍ້ຜິດພາດ Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">ການສ້າງລາຍເຊັນ v3 ແລະ ການວິນິດໄສ 202</a></li><li><a href="https://yoydao.com/">ເຄື່ອງມືນັກພັດທະນາ Youdao API (ເວັບໄຊພີ່ນ້ອງ)</a></li></ul></div></main>
+<footer>ລະຫັດຂໍ້ຜິດພາດ ແລະ ອັລກໍຣິທຶມລາຍເຊັນ v3 ລວບລວມຈາກເອກະສານທາງການຂອງແພລດຟອມເປີດ AI Youdao Zhiyun (ai.youdao.com); ການປຽບທຽບລາຍເຊັນ/ລະຫັດ/ໂຄຕ້າຄູ່ແຂ່ງອີງໃສ່ເອກະສານທາງການຂອງ Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation ແລະ DeepL. ໂຄຕ້າ/QPS/ລາຄາ 2026 ແມ່ນການຄາດຄະເນ, ບໍ່ແມ່ນຄ່າທີ່ສັນຍາ ຫຼື ວັດແທກໂດຍກົງ; ສຳລັບອ້າງອີງເທົ່ານັ້ນ, ຄອນໂຊລທາງການລ່າສຸດຂອງແຕ່ລະຜູ້ໃຫ້ບໍລິການເປັນຫຼັກ. ໜ້າພາສາລາວ: ການແປ LLM ຈາກ 母版 zh/en (ບໍ່ເປັນທາງການ, ລໍຖ້າການກວດໂດຍເຈົ້າຂອງພາສາ).<br>ໂຄງການໂອເພນຊອດ · ໃບອະນຸຍາດ MIT</footer>
+</div>
+<script src="/lo/codes.js"></script><script src="/app.js"></script>
+</body></html>
