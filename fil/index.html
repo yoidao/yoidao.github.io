@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="fil"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paghahanap ng error code ng Youdao Zhiyun API - ayusin ang 202/411/108 ng translation API + v3 signature at mga kakumpetensya</title>
+<meta name="description" content="Nagbalik ng errorCode ang Youdao (Zhiyun) translation API? Hanapin ang code (101 kulang na parameter / 102 wika / 103 sobrang haba / 108 app ID / 110 hindi naka-bind na instance / 202 bigong signature / 203 IP / 206 timestamp / 207 replay / 401 balanse / 411 rate limit) para sa opisyal na kahulugan L1 at ugat na sanhi L2: v3 signature sha256(appKey+input+salt+curtime+appSecret), mga bitag sa truncation/encoding/pagkakasunod ng input, curtime UTC sa segundo, UUID salt laban sa replay, pag-bind ng instance kada serbisyo, at QPS backoff, kasama ang paghahambing ng Youdao vs Baidu/Tencent/Alibaba/Google/DeepL at mga tantya 2026 sa libreng kota at QPS.">
+<link rel="canonical" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="zh-Hans" href="https://yoidao.github.io/">
+<link rel="alternate" hreflang="en" href="https://yoidao.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://yoidao.github.io/ja/">
+<link rel="alternate" hreflang="zh-Hant" href="https://yoidao.github.io/zh-tw/">
+<link rel="alternate" hreflang="ko" href="https://yoidao.github.io/ko/">
+<link rel="alternate" hreflang="id" href="https://yoidao.github.io/id/">
+<link rel="alternate" hreflang="vi" href="https://yoidao.github.io/vi/">
+<link rel="alternate" hreflang="th" href="https://yoidao.github.io/th/">
+<link rel="alternate" hreflang="es" href="https://yoidao.github.io/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://yoidao.github.io/pt-br/">
+<link rel="alternate" hreflang="de" href="https://yoidao.github.io/de/">
+<link rel="alternate" hreflang="fr" href="https://yoidao.github.io/fr/">
+<link rel="alternate" hreflang="ru" href="https://yoidao.github.io/ru/">
+<link rel="alternate" hreflang="it" href="https://yoidao.github.io/it/">
+<link rel="alternate" hreflang="pl" href="https://yoidao.github.io/pl/">
+<link rel="alternate" hreflang="nl" href="https://yoidao.github.io/nl/">
+<link rel="alternate" hreflang="tr" href="https://yoidao.github.io/tr/">
+<link rel="alternate" hreflang="ar" href="https://yoidao.github.io/ar/">
+<link rel="alternate" hreflang="hi" href="https://yoidao.github.io/hi/">
+<link rel="alternate" hreflang="ms" href="https://yoidao.github.io/ms/">
+<link rel="alternate" hreflang="fa" href="https://yoidao.github.io/fa/">
+<link rel="alternate" hreflang="bn" href="https://yoidao.github.io/bn/">
+<link rel="alternate" hreflang="ta" href="https://yoidao.github.io/ta/">
+<link rel="alternate" hreflang="te" href="https://yoidao.github.io/te/">
+<link rel="alternate" hreflang="fil" href="https://yoidao.github.io/fil/">
+<link rel="alternate" hreflang="ur" href="https://yoidao.github.io/ur/">
+<link rel="alternate" hreflang="lo" href="https://yoidao.github.io/lo/">
+<link rel="alternate" hreflang="km" href="https://yoidao.github.io/km/">
+<link rel="alternate" hreflang="my" href="https://yoidao.github.io/my/">
+<link rel="alternate" hreflang="x-default" href="https://yoidao.github.io/">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Paghahanap ng error code ng Youdao Zhiyun API",
+   "url": "https://yoidao.github.io/fil/",
+   "applicationCategory": "UtilitiesApplication",
+   "operatingSystem": "Web browser",
+   "inLanguage": "fil",
+   "description": "Nagbalik ng errorCode ang Youdao (Zhiyun) translation API? Hanapin ang code (101 kulang na parameter / 102 wika / 103 sobrang haba / 108 app ID / 110 hindi naka-bind na instance / 202 bigong signature / 203 IP / 206 timestamp / 207 replay / 401 balanse / 411 rate limit) para sa opisyal na kahulugan L1 at ugat na sanhi L2: v3 signature sha256(appKey+input+salt+curtime+appSecret), mga bitag sa truncation/encoding/pagkakasunod ng input, curtime UTC sa segundo, UUID salt laban sa replay, pag-bind ng instance kada serbisyo, at QPS backoff, kasama ang paghahambing ng Youdao vs Baidu/Tencent/Alibaba/Google/DeepL at mga tantya 2026 sa libreng kota at QPS.",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "inLanguage": "fil",
+   "url": "https://yoidao.github.io/fil/",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Paano ayusin ang error 101 ng Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Kulang ang required na parameter. Tiyakin muna ang mga required, tapos suriin ang baybay (laki ng titik). Kailangan ng v3 ang 8: q、from、to、appKey、salt、sign、signType、curtime. Isang kulang o maling pangalan = 101; walang curtime / signType ang v1 (pinakamadalas makaligtaan sa paglipat). Itugma sa opisyal na talahanayan ng parameter; tiyakin ang signType=v3 at curtime (timestamp sa segundo)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Paano ayusin ang error 102 ng Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hindi suportadong uri ng wika. Gumagamit ang Youdao ng zh-CHS / zh-CHT / en / ja / ko…; hindi kilala ang zh / zh-CN / cn; sa strict=true at di-suportadong direksyon din nagka-error. Gamitin ang tamang code mula opisyal na talahanayan; kung di-sigurado, from=auto at strict default (false)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Paano ayusin ang error 103 ng Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sobrang haba ng teksto na isasalin. Lumampas sa limit ng karakter kada kahilingan (model/document interface i ≤ 5000). Hatiin ayon sa pangungusap / talata at ipadala nang batch; mahahabang dokumento sa document translation interface."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Paano ayusin ang error 108 ng Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Di-wastong app ID. Magrehistro, gumawa ng app sa console at i-bind ang serbisyo para makuha ang appKey at appSecret. appKey na may nawalang karakter / espasyo; o app na walang service instance; minsan paso ang signature (malayo ang curtime sa oras ng server, ~120s). I-verify ang appKey (walang espasyo); kumpirmahin ang naka-bind na instance; curtime na kasalukuyan sa segundo."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Paano ayusin ang error 110 ng Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Walang wastong service instance: walang naka-bind na instance ang app, gumawa at i-bind. Kailangan ng pronunciation ng hiwalay na TTS instance. Bawat app ay nag-bind ng isang instance kada serbisyo - translation / TTS / OCR magkahiwalay; nag-bind lang ng translation tapos humingi ng voice → 110. I-bind sa console ang bawat instance kada serbisyo (translation / TTS / OCR)."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Paano ayusin ang error 111 ng Youdao Zhiyun API?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Di-wastong developer account. Account na walang developer verification, abnormal na status, o nasa risk control. Suriin ang status at totoong / developer verification sa console; mag-ticket kung kailangan."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body><div class="wrap"><main>
+<nav class="lang">Wika: <a href="/">简体中文</a> · <a href="/en/">English</a> · <a href="/ja/">日本語</a> · <a href="/zh-tw/">繁體中文</a> · <a href="/ko/">한국어</a> · <a href="/id/">Bahasa Indonesia</a> · <a href="/vi/">Tiếng Việt</a> · <a href="/th/">ไทย</a> · <a href="/es/">Español</a> · <a href="/pt-br/">Português (BR)</a> · <a href="/de/">Deutsch</a> · <a href="/fr/">Français</a> · <a href="/ru/">Русский</a> · <a href="/it/">Italiano</a> · <a href="/pl/">Polski</a> · <a href="/nl/">Nederlands</a> · <a href="/tr/">Türkçe</a> · <a href="/ar/">العربية</a> · <a href="/hi/">हिन्दी</a> · <a href="/ms/">Bahasa Melayu</a> · <a href="/fa/">فارسی</a> · <a href="/bn/">বাংলা</a> · <a href="/ta/">தமிழ்</a> · <a href="/te/">తెలుగు</a> · <strong>Filipino</strong> · <a href="/ur/">اردو</a> · <a href="/lo/">ພາສາລາວ</a> · <a href="/km/">ភាសាខ្មែរ</a> · <a href="/my/">မြန်မာ</a></nav>
+<h1>Mga error code ng Youdao Zhiyun API / diagnosis ng translation API</h1>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/cover_fil.webp"><img src="/img/cover_fil.png" alt="ilustrasyon ng tool sa paghahanap ng error code ng Youdao Zhiyun API" fetchpriority="high" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Larawan: paghahanap ng error code ng Youdao Zhiyun API (L1 opisyal + L2 ugat na sanhi + paghahambing)</figcaption></figure>
+<p>Nagbalik ba ng <code>errorCode</code> ang translation / diksyunaryo / OCR / TTS na interface ng <strong>Youdao Zhiyun</strong>? Linawin muna ang tatlong bagay: <strong>problema ba ng parameter/signature na kayang i-check ng client, o server/billing</strong>, <strong>tama ba ang pagkakasunod at encoding ng signature string</strong>, at <strong>lumampas ba sa QPS</strong>. Ilagay ang <strong>error code o keyword</strong> (hal. <code>202</code>, <code>411</code>, <code>108</code>, <code>signature</code>, <code>limit</code>, <code>timestamp</code>): una ang <strong>opisyal na kahulugan L1</strong>, tapos ang <strong>ugat na sanhi at diagnosis L2</strong>, at sa huli ang paghahambing sa kakumpetensya at totoong kaso. Opisyal na dok sa <a href="https://yoidao.com/">gabay sa integrasyon / mga error code ng Youdao Zhiyun</a>.</p>
+<input id="q" placeholder="Maglagay ng code o keyword, hal. 202 / 411 / 108 / signature / timestamp / limit" autocomplete="off">
+<button id="go">Hanapin</button>
+<div id="out"></div>
+<h2>Hakbang 1: iuri ayon sa saklaw ng code (L1 - una, kanino ang kasalanan)</h2>
+<p>Ang <code>errorCode</code> ng Youdao Zhiyun ay mga apat na saklaw; ilugar muna bago mag-trial-and-error: ① <strong>1xx parameter</strong> (101 kulang / 102 wika / 103 haba / 113 q walang laman / 116 strict) - sinusuri ng client ang required at mga halaga; ② <strong>2xx auth at signature</strong> (108 ID / 202 signature / 203 IP / 205 platform / 206 timestamp / 207 replay) - suriin ang signature string at credentials; ③ <strong>3xx/5xx server</strong> (303 / 500 / 902000) - subukan ulit gamit ang <code>request_id</code> o mag-ticket; ④ <strong>4xx account/billing/limit</strong> (401 balanse / 411 / 412) - suriin ang balanse at QPS. Higit pa sa <a href="https://yoidao.com/sign">paggawa ng v3 signature at diagnosis ng 202</a>.</p>
+<div class="cat"><div class="catbox"><b>Parameter</b><span class="cs">101 · 102 · 103 · 113 · 116</span><div>Pagsusuri ng client: kompleto ang required na field (q/from/to/appKey/sign/signType/curtime/salt), language code zh-CHS / en / auto, q hindi walang laman/sobrang haba, strict true/false.</div></div><div class="catbox"><b>Auth / signature</b><span class="cs">108 · 111 · 202 · 203 · 205 · 206 · 207</span><div>SHA256 ng appKey+input+salt+curtime+appSecret; curtime UTC sa segundo, UUID salt laban sa replay; IP whitelist akma sa uri ng platform.</div></div><div class="catbox"><b>Serbisyo / instance</b><span class="cs">110 · 310</span><div>Bawat app ay nag-bind ng isang instance kada serbisyo (translation / TTS / OCR magkahiwalay); ang domain translation ay i-enable muna sa console.</div></div><div class="catbox"><b>Account / billing / limit</b><span class="cs">401 · 411 · 412</span><div>Huwag ubusin ang balanse / character pack (huminto ang serbisyo sa 401); lampas sa QPS (base ~100) = 411: token bucket + exponential backoff.</div></div><div class="catbox"><b>Resulta / decryption / iba pa</b><span class="cs">201 · 303 · 500 · 902000</span><div>Error ng server: subukan ulit gamit ang request_id o ticket; sa naka-encrypt na interface suriin ang pagkakasunod DES / BASE64 / URLDecode.</div></div></div><figure><svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="decision diagram ng diagnosis ng error code ng Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Daloy ng diagnosis ng errorCode (una ayon sa saklaw, tapos client / server)</text><rect x="20" y="46" width="150" height="46" rx="10" fill="#111"/><text x="95" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#fff">Natanggap ang errorCode</text><path d="M170 69 H206" stroke="#999" stroke-width="2" fill="none" marker-end="url(#a)"/><rect x="206" y="46" width="172" height="46" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="292" y="74" text-anchor="middle" font-family="system-ui,Arial" font-size="13" fill="#b91c1c">iuri ayon sa saklaw</text><rect x="440" y="20" width="262" height="56" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="455" y="42" font-family="system-ui,Arial" font-size="12.5" fill="#1d4ed8">Kayang i-check ng client →</text><text x="455" y="62" font-family="system-ui,Arial" font-size="11.5" fill="#1e3a8a">1xx parameter · 2xx auth-signature</text><rect x="440" y="86" width="262" height="56" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="455" y="108" font-family="system-ui,Arial" font-size="12.5" fill="#b45309">Server / billing →</text><text x="455" y="128" font-family="system-ui,Arial" font-size="11.5" fill="#92400e">3xx/5xx exception · 4xx balanse/limit</text><path d="M378 60 H410 V48 H440" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a)"/><path d="M378 78 H410 V114 H440" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#a)"/><text x="20" y="178" font-family="system-ui,Arial" font-size="13" font-weight="700" fill="#1d1d1f">Limang kategorya (tingnan opisyal L1 / sanhi L2)</text><g font-family="system-ui,Arial" font-size="12"><rect x="20" y="190" width="162" height="92" rx="10" fill="#eef4ff" stroke="#cfe0ff"/><text x="32" y="212" font-weight="700" fill="#1d4ed8">① Parameter</text><text x="32" y="234" fill="#555" font-size="11">101 · 102 · 103 · 116</text><rect x="194" y="190" width="162" height="92" rx="10" fill="#fff1f1" stroke="#ffd5d5"/><text x="206" y="212" font-weight="700" fill="#b91c1c">② Auth / signature</text><text x="206" y="234" fill="#555" font-size="11">108 · 202 · 206 · 207</text><rect x="368" y="190" width="162" height="92" rx="10" fill="#fffbeb" stroke="#fde68a"/><text x="380" y="212" font-weight="700" fill="#b45309">③ Account / limit</text><text x="380" y="234" fill="#555" font-size="11">401 · 411 · 412</text><rect x="542" y="190" width="160" height="92" rx="10" fill="#ecfdf5" stroke="#bbf7e0"/><text x="554" y="212" font-weight="700" fill="#047857">④ Serbisyo / instance</text><text x="554" y="234" fill="#555" font-size="11">110 · 303 · 500</text></g><defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#999"/></marker></defs></svg><figcaption>Larawan 1: daloy ng diagnosis ng errorCode ng Youdao Zhiyun - una ayon sa saklaw, tapos client / server</figcaption></figure>
+<h2>Hakbang 2: dalawang pinakamadalas na bitag → ugat na sanhi (L2: signature 202 at limit 411)</h2>
+<p>Susi: <strong>90% ng error ng Youdao API ay naiipit sa «signature 202» at «limit 411»</strong>. Ang 202 ay bihirang maling key; kadalasan ay maling pagkakabuo ng <strong>v3 signature string</strong> - <code>sign = sha256(appKey + input + salt + curtime + appSecret)</code>, kung saan ang <code>input</code> kapag q&gt;20 ay kumukuha ng «unang 10 karakter + haba ng q + huling 10 karakter» (ayon sa Unicode na karakter, hindi byte), at q kung ≤20. Idagdag ang UTF-8 encoding, pagkakasunod, at espasyo. Ang 411 ay QPS na lampas sa plano: i-limit ang rate + backoff sa client. Sa ibaba ang self-check panel, tapos ang paghahambing at mga tantya 2026.</p>
+<figure><svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ilustrasyon ng self-check panel bago tumawag sa Youdao Zhiyun API" style="width:100%;height:auto;border:1px solid #eee;border-radius:12px;background:#fff"><text x="20" y="28" font-family="system-ui,Arial" font-size="15.5" font-weight="700" fill="#1d1d1f">Self-check panel ng signature / parameter (berde = nakumpirma / pula = madaling makaligtaan)</text><rect x="20" y="42" width="680" height="226" rx="14" fill="#f8fafc" stroke="#e2e8f0"/><text x="38" y="66" font-family="system-ui,Arial" font-size="12.5" font-weight="700" fill="#475569">Item</text><text x="300" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Hatol</text><text x="610" y="66" font-family="system-ui,Arial" font-size="12" fill="#94a3b8">Status</text><line x1="38" y1="74" x2="682" y2="74" stroke="#e2e8f0" stroke-width="1"/><text x="38" y="98" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Kompleto ang required na field (signType=v3, curtime)</text><text x="300" y="98" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">8 required</text><circle cx="612" cy="94" r="6" fill="#16a34a"/><text x="628" y="98" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Nakumpirma</text><text x="38" y="128" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Wastong language code (zh-CHS / en / auto)</text><text x="300" y="128" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">vs talahanayan</text><circle cx="612" cy="124" r="6" fill="#16a34a"/><text x="628" y="128" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Nakumpirma</text><text x="38" y="158" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Pagkakasunod ng signature appKey+input+salt+curtime+secret</text><text x="300" y="158" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">SHA256·maliit</text><circle cx="612" cy="154" r="6" fill="#16a34a"/><text x="628" y="158" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Nakumpirma</text><text x="38" y="188" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">Truncation ng mahabang input (10+haba+10·kada karakter)</text><text x="300" y="188" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">madalas na mali</text><circle cx="612" cy="184" r="6" fill="#ef4444"/><text x="628" y="188" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Suriin</text><text x="38" y="218" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">curtime UTC sa segundo + salt UUID</text><text x="300" y="218" font-family="system-ui,Arial" font-size="12.5" fill="#16a34a">iwas 206/207</text><circle cx="612" cy="214" r="6" fill="#16a34a"/><text x="628" y="218" font-family="system-ui,Arial" font-size="12" fill="#16a34a">Nakumpirma</text><text x="38" y="248" font-family="system-ui,Arial" font-size="13" fill="#1d1d1f">QPS ≤ limit ng plano (base ~100)</text><text x="300" y="248" font-family="system-ui,Arial" font-size="12.5" fill="#ef4444">nagdudulot ng 411</text><circle cx="612" cy="244" r="6" fill="#ef4444"/><text x="628" y="248" font-family="system-ui,Arial" font-size="12" fill="#ef4444">Suriin</text><text x="20" y="296" font-family="system-ui,Arial" font-size="11.5" fill="#94a3b8">Tala: sa pula ang dalawang pinakamadaling makaligtaan - truncation ng mahabang input (sanhi ng 202) at QPS limit (411); bago mag-production, mag-load test na may totoong concurrency.</text></svg><figcaption>Larawan 2: self-check panel ng signature / parameter bago tumawag (berde = nakumpirma / pula = madaling makaligtaan)</figcaption></figure>
+<figure class="i4png"><picture><source type="image/webp" srcset="/img/board_fil.webp"><img src="/img/board_fil.png" alt="ilustrasyon ng self-check panel ng signature/parameter ng Youdao Zhiyun API" loading="lazy" width="1120" height="746" style="width:100%;height:auto;border-radius:12px;border:1px solid #eee"></picture><figcaption>Larawan: suriin muna ang signature string gamit ang curtime / salt, tapos ang QPS at pag-bind ng instance - 202 at 411 ang pinakamadaling makaligtaan</figcaption></figure>
+<h2>Buong talahanayan ng error code (L1 opisyal · L2 ugat na sanhi)</h2>
+<table id="tbl"></table>
+<h2>Paghahambing ng kakumpetensyang translation API (signature / code / libreng kota · pampublikong datos)</h2>
+<table class="cmp"><tr><th>Serbisyo</th><th>Signature / auth</th><th>Estilo ng code</th><th>Libreng kota (tantya)</th><th>QPS / dalas (tantya)</th></tr><tr><td>Youdao Zhiyun</td><td>SHA256 · v3(appKey+input+salt+curtime+secret)</td><td>3 digit (101 / 202 / 411)</td><td>Trial na kota kada serbisyo</td><td>Base ~100 QPS (madaragdagan)</td></tr><tr><td>Baidu Translate</td><td>MD5 32 maliit (appid+q+salt+key)</td><td>5 digit (52001 / 54001 / 54003 / 58001)</td><td>Standard libre</td><td>Standard 1 / Advanced 10 / Premium 100</td></tr><tr><td>Tencent Cloud TMT</td><td>TC3-HMAC-SHA256</td><td>String (RequestLimitExceeded / NoFreeAmount)</td><td>5M karakter/buwan</td><td>5 kada segundo default</td></tr><tr><td>Alibaba Cloud MT</td><td>HMAC (karaniwang RPC / ROA signature)</td><td>String (hal. InvalidApiKey)</td><td>Buwanang libreng kota (kada bersyon)</td><td>Ayon sa QPS quota</td></tr><tr><td>Google Cloud Translation</td><td>API Key / OAuth2</td><td>HTTP status + reason (403 / 429)</td><td>500k karakter/buwan (v2)</td><td>Ayon sa project quota</td></tr><tr><td>DeepL API</td><td>DeepL-Auth-Key header</td><td>HTTP (403 / 456 / 429)</td><td>Free 500k karakter/buwan</td><td>Ayon sa plano</td></tr></table><section class="i4data">
+<h2>Pamamahala ng error at kota ng translation API (tantya 2026)</h2>
+<p>Tantya <strong>2026</strong> mula sa opisyal na dokumentasyon ng mga platform (Youdao Zhiyun, Baidu, Tencent Cloud, Alibaba Cloud, Google, DeepL): hindi ipinangakong o tuwirang sinukat na halaga, pang-sanggunian lamang; nagbabago ang kota at QPS ayon sa opisyal na patakaran:</p>
+<table>
+<tr><th>Dimensyon</th><th>Tantya / paghahambing</th></tr>
+<tr><td>Signature algorithm (auth)</td><td>Youdao <strong>SHA256(v3)</strong> · Baidu <strong>MD5</strong> · Tencent <strong>TC3-HMAC-SHA256</strong> · Alibaba HMAC · Google API Key · DeepL Auth-Key header</td></tr>
+<tr><td>Libreng kota (buwan · tantya)</td><td>Tencent <strong>5M karakter</strong> &gt; Google / DeepL <strong>500k</strong> &gt; Baidu standard libre (QPS=1); Youdao trial na kota kada serbisyo, ayon sa console</td></tr>
+<tr><td>Limit ng QPS / dalas (tantya)</td><td>Youdao base ~<strong>100</strong> (madaragdagan) · Baidu standard 1 / advanced 10 / premium 100 · Tencent <strong>5/s</strong></td></tr>
+<tr><td>Max na haba kada teksto (tantya)</td><td>Youdao model / document <strong>i ≤ 5000</strong> · Tencent &lt; 6000 kada request (mas mahaba sa document / batch)</td></tr>
+<tr><td>Pinakamadalas na code (komunidad · tantya)</td><td><strong>202 signature</strong> &gt; <strong>411 limit</strong> &gt; 108 / 110 binding &gt; 206 timestamp ang nananaig na error</td></tr>
+</table>
+<p><small>Batayan ng tantya: mga reference source + temporal extrapolation (opisyal na dok 2026 ng Youdao / Baidu / Tencent / Alibaba / Google / DeepL); nagbabago ayon sa patakaran at bersyon; ang kasalukuyang opisyal na console ang batayan.</small></p>
+</section>
+<h2>Mabilis na diagnosis ayon sa totoong senaryo</h2>
+<ul class="scenes"><li>Gumagana sa local, pero maraming 206 sa cloud/container: lumilihis ang orasan ng container at nagiging invalid ang curtime (signature ~120s) → i-enable ang NTP, i-sync ang orasan sa host; huwag i-cache ang lumang curtime.</li><li>Maayos ang Ingles, pero minsan 202 ang mahabang Chinese: pinutol ng truncation ang multibyte ayon sa «byte» → dapat magbilang ng Unicode na karakter ang input (q&gt;20: 10 + haba + 10).</li><li>fixed o tumataas na salt at 207 sa pangalawang tawag: dapat random (UUID) ang salt sa bawat tawag at i-refresh ang curtime; sa retry, mag-sign muli.</li><li>Mga peak ng concurrency sa load test → maraming 411: lumampas sa base QPS ~100 → token bucket + backoff sa client, o bumili ng QPS sa console.</li><li>Bagong app na tumatawag ng pronunciation at nakakuha ng 110: naka-bind ang translation instance, hindi ang TTS → i-bind ang bawat instance kada serbisyo sa console.</li><li>Biglang lahat 401: naubos ang character pack / balanse → mag-load at mag-set ng balance alert; magkaroon ng backup channel sa kritikal na daan.</li><li>Parehong bitag sa paglipat mula Baidu: naka-URL-encode ang q bago mag-sign → nag-sign ang Youdao v3 gamit ang input (truncation rule), hindi ang naka-encode na q; mag-sign muna, i-encode ang q sa pagpapadala.</li></ul><div class="related"><h2>Kaugnay</h2><ul><li><a href="https://yoidao.com/">Gabay sa integrasyon / mga error code ng Youdao Zhiyun</a></li><li><a href="https://yoidao.com/sign">Paggawa ng v3 signature at diagnosis ng 202</a></li><li><a href="https://yoydao.com/">Mga developer tool ng Youdao API (kapatid na site)</a></li></ul></div></main>
+<footer>Ang mga error code at v3 signature algorithm ay tinipon mula sa opisyal na dokumentasyon ng Youdao Zhiyun AI open platform (ai.youdao.com); ang paghahambing ng signature/code/kota ng kakumpetensya ay batay sa opisyal na dok ng Baidu Translate, Tencent Cloud MT, Alibaba Cloud, Google Cloud Translation at DeepL. Ang mga kota/QPS/presyo 2026 ay tantya, hindi ipinangakong o tuwirang sinukat na halaga; pang-sanggunian lamang, ang kasalukuyang opisyal na console ng bawat provider ang batayan. Pahinang Filipino: LLM localization mula sa zh/en 母版 (di-opisyal, naghihintay ng review ng katutubong nagsasalita).<br>Open source na proyekto · MIT License</footer>
+</div>
+<script src="/fil/codes.js"></script><script src="/app.js"></script>
+</body></html>
